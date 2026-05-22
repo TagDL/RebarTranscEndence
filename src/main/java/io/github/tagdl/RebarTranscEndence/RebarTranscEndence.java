@@ -1,4 +1,4 @@
-package io.github.username.exampleaddon;
+package io.github.tagdl.RebarTranscEndence;
 
 import io.github.pylonmc.rebar.addon.RebarAddon;
 import lombok.Getter;
@@ -10,10 +10,10 @@ import java.util.Locale;
 import java.util.Set;
 
 @SuppressWarnings("unused")
-public class ExampleAddon extends JavaPlugin implements RebarAddon {
+public class RebarTranscEndence extends JavaPlugin implements RebarAddon {
 
     // Stores the instance of the addon (there's only ever one)
-    @Getter private static ExampleAddon instance;
+    @Getter private static RebarTranscEndence instance;
 
     // Called when the addon is enabled
     @Override
@@ -23,8 +23,9 @@ public class ExampleAddon extends JavaPlugin implements RebarAddon {
         // Every Rebar addon must call this BEFORE doing anything Rebar-related
         registerWithRebar();
 
-        ExampleAddonItems.initialize();
-        ExampleAddonBlocks.initialize();
+        RebarTranscEndenceItems.initialize();
+        RebarTranscEndenceBlocks.initialize();
+        RebarTranscEndencePages.initialise();
     }
 
     @Override
