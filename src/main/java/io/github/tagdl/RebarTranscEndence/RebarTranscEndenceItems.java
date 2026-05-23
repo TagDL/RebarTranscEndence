@@ -69,7 +69,7 @@ public final class RebarTranscEndenceItems {
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
 
-    public static final ItemStack ZOT_COLLECTOR = ItemStackBuilder.rebar(Material.PURPUR_BLOCK, RebarTranscEndenceKeys.ZOT_COLLECTOR)
+    public static final ItemStack ZOT_COLLECTOR = ItemStackBuilder.rebar(Material.PURPUR_PILLAR, RebarTranscEndenceKeys.ZOT_COLLECTOR)
             .build();
     public static final ItemStack ZOT_CONDENSER = ItemStackBuilder.rebar(Material.YELLOW_CONCRETE, RebarTranscEndenceKeys.ZOT_CONDENSER)
             .build();
@@ -78,6 +78,8 @@ public final class RebarTranscEndenceItems {
     public static final ItemStack STABLE_MACHINE = ItemStackBuilder.rebar(Material.BLACK_CONCRETE, RebarTranscEndenceKeys.STABLE_MACHINE)
             .build();
     public static final ItemStack ZOT_OVERLOADER = ItemStackBuilder.rebar(Material.WHITE_CONCRETE, RebarTranscEndenceKeys.ZOT_OVERLOADER)
+            .build();
+    public static final ItemStack NANOBOT_CRAFTER = ItemStackBuilder.rebar(Material.DISPENSER, RebarTranscEndenceKeys.NANOBOT_CRAFTER)
             .build();
 
     public static void initialize() {
@@ -140,5 +142,7 @@ public final class RebarTranscEndenceItems {
         RebarTranscEndencePages.MACHINES.addItem(STABLE_MACHINE);
         RebarItem.register(RebarItem.class, ZOT_OVERLOADER, RebarTranscEndenceKeys.ZOT_OVERLOADER);
         RebarTranscEndencePages.MACHINES.addItem(ZOT_OVERLOADER);
+        RebarItem.register(RebarItem.class, NANOBOT_CRAFTER, RebarTranscEndenceKeys.NANOBOT_CRAFTER);
+        RebarTranscEndencePages.MACHINES.addItem(NANOBOT_CRAFTER);
     }
 }

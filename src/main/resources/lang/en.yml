@@ -1,10 +1,12 @@
-addon: "Example Addon"
+addon: "Rebar TranscEndence"
 
 item:
-  example_item:
-    name: "Example Item"
+  unstable_ingot:
+    name: "Unstable Ingot"
     lore: |-
-      <arrow> <insn>Right click a block</insn> to summon lightning
+      <arrow> Unstable degree: %degree%%
+      <arrow> An ingot containing immense energy
+      <arrow> Holding it for a period of time will <red>result in death
 
   example_block:
     name: "Example Block"

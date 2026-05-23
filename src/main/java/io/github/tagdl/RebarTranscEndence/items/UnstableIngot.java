@@ -6,7 +6,6 @@ import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.base.RebarInventoryTicker;
-import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndence;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
@@ -41,7 +40,7 @@ public class UnstableIngot extends RebarItem implements
     @Override
     public @NotNull List<RebarArgument> getPlaceholders() {
         return List.of(
-                RebarArgument.of("degree", UnitFormat.MILLIBUCKETS.format(getAmount()))
+                RebarArgument.of("degree", getAmount())
         );
     }
     @Override

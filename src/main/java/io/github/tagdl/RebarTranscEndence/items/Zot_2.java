@@ -4,7 +4,6 @@ import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
-import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
 
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class Zot_2 extends RebarItem {
     @Override
     public @NotNull List<RebarArgument> getPlaceholders() {
         return List.of(
-                RebarArgument.of("amount", UnitFormat.MILLIBUCKETS.format(getAmount()))
+                RebarArgument.of("amount", getAmount())
         );
     }
 }

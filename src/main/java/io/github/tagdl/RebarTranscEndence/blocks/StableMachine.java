@@ -1,0 +1,168 @@
+package io.github.tagdl.RebarTranscEndence.blocks;
+
+import java.util.List;
+import java.util.Map;
+
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.jetbrains.annotations.NotNull;
+
+import io.github.pylonmc.pylon.PylonFluids;
+import io.github.pylonmc.rebar.block.RebarBlock;
+import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
+import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
+import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
+import io.github.pylonmc.rebar.block.base.RebarProcessor;
+import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
+import io.github.pylonmc.rebar.block.base.RebarVirtualInventoryBlock;
+import io.github.pylonmc.rebar.block.context.BlockBreakContext;
+import io.github.pylonmc.rebar.block.context.BlockCreateContext;
+import io.github.pylonmc.rebar.config.Config;
+import io.github.pylonmc.rebar.config.Settings;
+import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
+import io.github.pylonmc.rebar.fluid.FluidPointType;
+import io.github.pylonmc.rebar.item.RebarItem;
+import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
+import io.github.pylonmc.rebar.logistics.LogisticGroupType;
+import io.github.pylonmc.rebar.util.MachineUpdateReason;
+import io.github.pylonmc.rebar.util.gui.GuiItems;
+import io.github.pylonmc.rebar.util.gui.ProgressItem;
+import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceItems;
+import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceKeys;
+import io.github.tagdl.RebarTranscEndence.items.UnstableIngot;
+import net.kyori.adventure.text.Component;
+import xyz.xenondevs.invui.gui.Gui;
+import xyz.xenondevs.invui.inventory.VirtualInventory;
+import xyz.xenondevs.invui.inventory.event.ItemPostUpdateEvent;
+import xyz.xenondevs.invui.inventory.event.ItemPreUpdateEvent;
+
+public class StableMachine extends RebarBlock implements
+        RebarDirectionalBlock,
+        RebarFluidBufferBlock,
+        RebarVirtualInventoryBlock,
+        RebarLogisticBlock,
+        RebarTickingBlock,
+        RebarProcessor,
+        RebarGuiBlock
+{
+    private static final Config settings = Settings.get(RebarTranscEndenceKeys.STABLE_MACHINE);
+    public static final double buffer = settings.getOrThrow("buffer", ConfigAdapter.INTEGER);
+    public static final double fluidPerCraft = settings.getOrThrow("fluid-per-craft", ConfigAdapter.INTEGER);
+    public static final int timeconsume = Math.round(settings.getOrThrow("seconds-consume", ConfigAdapter.FLOAT) * 20);
+
+    public final ItemStackBuilder inputStack = ItemStackBuilder.gui(Material.PURPLE_STAINED_GLASS_PANE, getKey() + ":input")
+            .name(Component.translatable("rebartranscendence.gui.stable_machine.input"));
+    private final ItemStackBuilder progressItemStackBuilder = ItemStackBuilder.of(Material.CLOCK)
+            .name(Component.translatable("rebartranscendence.gui.stable_machine.progress"));
+    private final ProgressItem progressItem = new ProgressItem(progressItemStackBuilder, false);
+    private final VirtualInventory ingotInventory = new VirtualInventory(1);
+    private final VirtualInventory cooldownInventory = new VirtualInventory(1);
+    private final VirtualInventory outputInventory = new VirtualInventory(1);
+
+    public StableMachine(@NotNull Block block, @NotNull BlockCreateContext context) {
+        super(block, context);
+        setTickInterval(1);
+        this.setFacing(context.getFacing());
+        createFluidPoint(FluidPointType.INPUT, BlockFace.NORTH, context, false);
+        createFluidBuffer(PylonFluids.OBSCYRA, buffer, true, false);
+    }
+    public StableMachine(@NotNull Block block, @NotNull PersistentDataContainer pdc) {
+        super(block, pdc);
+    }
+    @Override
+    public void postInitialise() {
+        setProcessProgressItem(progressItem);
+        ingotInventory.addPreUpdateHandler(event -> onIngotUpdate(event));
+        cooldownInventory.addPreUpdateHandler(event -> onCooldownUpdate(event));
+        ingotInventory.addPostUpdateHandler(event -> onPostUpdate(event));
+        cooldownInventory.addPostUpdateHandler(event -> onPostUpdate(event));
+        outputInventory.addPreUpdateHandler(event -> onOutputUpdate(event));
+        createLogisticGroup("ingot", LogisticGroupType.INPUT, ingotInventory);
+        createLogisticGroup("cooldown", LogisticGroupType.INPUT, cooldownInventory);
+        createLogisticGroup("output", LogisticGroupType.OUTPUT, outputInventory);
+    }
+    public void onIngotUpdate(ItemPreUpdateEvent event){
+        if (event.isAdd()) event.setCancelled(!(RebarItem.fromStack(event.getNewItem()) instanceof UnstableIngot));
+    }
+    public void onCooldownUpdate(ItemPreUpdateEvent event){
+        if (event.isAdd()) event.setCancelled(!(event.getNewItem().isSimilar(RebarTranscEndenceItems.ZOT_COOL_DOWN)));
+    }
+    public void onPostUpdate(ItemPostUpdateEvent event){
+        if (!(event.getUpdateReason() instanceof MachineUpdateReason)) {
+            if (isProcessing()) stopProcess();
+        }
+    }
+    public void onOutputUpdate(ItemPreUpdateEvent event){
+        if (event.isAdd()) event.setCancelled(!(event.getUpdateReason() instanceof MachineUpdateReason));
+    }
+    @Override
+    public @NotNull Gui createGui() {
+        return Gui.builder()
+                .setStructure(
+                        "A A A A A # B B B",
+                        "A I A C A P B O B",
+                        "A A A A A # B B B"
+                )
+                .addIngredient('#', GuiItems.background())
+                .addIngredient('A', inputStack)
+                .addIngredient('B', GuiItems.output())
+                .addIngredient('P', progressItem)
+                .addIngredient('I', ingotInventory)
+                .addIngredient('C', cooldownInventory)
+                .addIngredient('O', outputInventory)
+                .build();
+    }
+    @Override
+    public void tick() {
+        if (getBlock() == null || !getBlock().getChunk().isLoaded()) return;
+        if (outputInventory == null) return;
+        if (ingotInventory.isEmpty() || cooldownInventory.isEmpty()) return;
+        if (!outputInventory.isEmpty()) if (!canRun()) return;
+        if (fluidAmount(PylonFluids.OBSCYRA) < fluidPerCraft) return;
+        if (isProcessing()) {
+            progressItem.notifyWindows();
+            removeFluid(PylonFluids.OBSCYRA, fluidPerCraft);
+            progressProcess(getTickInterval());
+            return;
+        }
+        startProcess(timeconsume);
+    }
+    @Override
+    public void onProcessFinished() {
+        progressItem.notifyWindows();
+        UnstableIngot unstableIngot = (UnstableIngot) RebarItem.fromStack(ingotInventory.getItem(0).asOne());
+        unstableIngot.setAmount(unstableIngot.getAmount() - 25);
+        outputInventory.addItem(new MachineUpdateReason(), 
+            unstableIngot.getAmount() == 0 ? RebarTranscEndenceItems.STABLE_INGOT : unstableIngot.getStack()
+        );
+        ingotInventory.setItemAmount(new MachineUpdateReason(), 0, ingotInventory.getItemAmount(0) - 1);
+        cooldownInventory.setItemAmount(new MachineUpdateReason(), 0, cooldownInventory.getItemAmount(0) - 1);
+    }
+    @Override
+    public @NotNull Map<@NotNull String, @NotNull VirtualInventory> getVirtualInventories() {
+        return Map.of("ingot", ingotInventory, "cooldown", cooldownInventory, "output", outputInventory);
+    }
+    @Override
+    public void onBreak(@NotNull List<@NotNull ItemStack> drops, @NotNull BlockBreakContext context) {
+        RebarVirtualInventoryBlock.super.onBreak(drops, context);
+        RebarFluidBufferBlock.super.onBreak(drops, context);
+    }
+    public boolean canRun() {
+        if (outputInventory.canHold(RebarTranscEndenceItems.STABLE_INGOT)) {
+            if (RebarItem.fromStack(ingotInventory.getItem(0)) instanceof UnstableIngot unstableIngot) {
+                return unstableIngot.getAmount() == 25;
+            }
+        }
+        if (RebarItem.fromStack(outputInventory.getItem(0)) instanceof UnstableIngot unstableIngot_output) {
+            if (RebarItem.fromStack(ingotInventory.getItem(0)) instanceof UnstableIngot unstableIngot) {
+                return unstableIngot.getAmount() - 25 == unstableIngot_output.getAmount();
+            }
+        }
+        return false;
+    }
+
+}
