@@ -1,0 +1,10 @@
+rebartranscendence:zot_reverser:
+  pattern:
+    - " B "
+    - " A "
+    - "   "
+  key:
+    A: pylon:liselette_conductor
+    B: minecraft:purple_carpet
+  result: rebartranscendence:zot_reverser
+  category: building

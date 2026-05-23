@@ -26,6 +26,7 @@ public class RebarTranscEndence extends JavaPlugin implements RebarAddon {
         RebarTranscEndenceItems.initialize();
         RebarTranscEndenceBlocks.initialize();
         RebarTranscEndencePages.initialise();
+        RebarTranscEndenceRecipe.initialize();
     }
 
     @Override

@@ -1,9 +1,12 @@
 package io.github.tagdl.RebarTranscEndence;
 
+import io.github.pylonmc.rebar.content.guide.RebarGuide;
+import io.github.pylonmc.rebar.guide.button.MachineRecipesButton;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.tagdl.RebarTranscEndence.items.UnstableIngot;
 import io.github.tagdl.RebarTranscEndence.items.Zot_2;
+import io.github.tagdl.RebarTranscEndence.recipe.ZotReverserRecipe;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 
 import org.bukkit.Material;
@@ -70,6 +73,12 @@ public final class RebarTranscEndenceItems {
             .build();
     public static final ItemStack ZOT_CONDENSER = ItemStackBuilder.rebar(Material.YELLOW_CONCRETE, RebarTranscEndenceKeys.ZOT_CONDENSER)
             .build();
+    public static final ItemStack ZOT_REVERSER = ItemStackBuilder.rebar(Material.BLUE_CONCRETE, RebarTranscEndenceKeys.ZOT_REVERSER)
+            .build();
+    public static final ItemStack STABLE_MACHINE = ItemStackBuilder.rebar(Material.BLACK_CONCRETE, RebarTranscEndenceKeys.STABLE_MACHINE)
+            .build();
+    public static final ItemStack ZOT_OVERLOADER = ItemStackBuilder.rebar(Material.WHITE_CONCRETE, RebarTranscEndenceKeys.ZOT_OVERLOADER)
+            .build();
 
     public static void initialize() {
         // Register an item using the ExampleItem class
@@ -123,5 +132,13 @@ public final class RebarTranscEndenceItems {
         RebarTranscEndencePages.MACHINES.addItem(ZOT_COLLECTOR);
         RebarItem.register(RebarItem.class, ZOT_CONDENSER, RebarTranscEndenceKeys.ZOT_CONDENSER);
         RebarTranscEndencePages.MACHINES.addItem(ZOT_CONDENSER);
+        RebarItem.register(RebarItem.class, ZOT_REVERSER, RebarTranscEndenceKeys.ZOT_REVERSER);
+        RebarTranscEndencePages.MACHINES.addItem(ZOT_REVERSER);
+        RebarGuide.getOrCreateInfoPage(RebarTranscEndenceKeys.ZOT_REVERSER)
+                .addButton(new MachineRecipesButton(ZOT_REVERSER, ZotReverserRecipe.RECIPE_TYPE));
+        RebarItem.register(RebarItem.class, STABLE_MACHINE, RebarTranscEndenceKeys.STABLE_MACHINE);
+        RebarTranscEndencePages.MACHINES.addItem(STABLE_MACHINE);
+        RebarItem.register(RebarItem.class, ZOT_OVERLOADER, RebarTranscEndenceKeys.ZOT_OVERLOADER);
+        RebarTranscEndencePages.MACHINES.addItem(ZOT_OVERLOADER);
     }
 }

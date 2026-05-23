@@ -26,4 +26,7 @@ public class RebarTranscEndenceKeys {
 
     public static final NamespacedKey ZOT_COLLECTOR = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_collector");
     public static final NamespacedKey ZOT_CONDENSER = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_condenser");
+    public static final NamespacedKey ZOT_REVERSER = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_reverser");
+    public static final NamespacedKey STABLE_MACHINE = new NamespacedKey(RebarTranscEndence.getInstance(), "stable_machine");
+    public static final NamespacedKey ZOT_OVERLOADER = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_overloader");
 }

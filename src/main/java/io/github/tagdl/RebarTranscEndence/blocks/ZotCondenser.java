@@ -74,13 +74,18 @@ public class ZotCondenser extends RebarBlock implements
     }
     public void onZotUpdate(ItemPreUpdateEvent event){
         if (event.isAdd()) { //only receive opposite direction's zot
-            ItemStack otherItemStack = event.getSlot() == 1 ? zotInventory.getItem(0) : zotInventory.getItem(1);
-            if (otherItemStack != null && !otherItemStack.isEmpty()) {
-                ItemStack reverseItemStack = reverseZot(otherItemStack.asOne());
-                event.setCancelled(reverseItemStack == null || reverseItemStack.isEmpty() 
-                    ? false
-                    : !event.getNewItem().isSimilar(reverseItemStack));
+            if (event.getNewItem().isSimilar(reverseZot(event.getNewItem()))) {
+                event.setCancelled(true);
+            } else {
+                ItemStack otherItemStack = event.getSlot() == 1 ? zotInventory.getItem(0) : zotInventory.getItem(1);
+                if (otherItemStack != null && !otherItemStack.isEmpty()) {
+                    ItemStack reverseItemStack = reverseZot(otherItemStack.asOne());
+                    event.setCancelled(reverseItemStack == null || reverseItemStack.isEmpty() 
+                        ? false
+                        : !event.getNewItem().isSimilar(reverseItemStack));
+                }
             }
+
         }
     }
     public void onOutputUpdate(ItemPreUpdateEvent event){
@@ -140,7 +145,7 @@ public class ZotCondenser extends RebarBlock implements
         RebarFluidBufferBlock.super.onBreak(drops, context);
     }
     private ItemStack reverseZot(ItemStack itemStack) {
-        ItemStack resulItemStack = ItemStack.empty();
+        ItemStack resulItemStack = itemStack;
         if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_DOWN)) resulItemStack = RebarTranscEndenceItems.ZOT_UP;
         if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_UP)) resulItemStack = RebarTranscEndenceItems.ZOT_DOWN;
         if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_RIGHT)) resulItemStack = RebarTranscEndenceItems.ZOT_LEFT;

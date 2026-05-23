@@ -1,7 +1,12 @@
 package io.github.tagdl.RebarTranscEndence.blocks;
 
+import java.util.List;
+import java.util.Map;
+
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,32 +14,147 @@ import io.github.pylonmc.pylon.PylonFluids;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
+import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
+import io.github.pylonmc.rebar.block.base.RebarRecipeProcessor;
 import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
+import io.github.pylonmc.rebar.block.base.RebarVirtualInventoryBlock;
+import io.github.pylonmc.rebar.block.context.BlockBreakContext;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
+import io.github.pylonmc.rebar.config.Config;
+import io.github.pylonmc.rebar.config.Settings;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.fluid.FluidPointType;
+import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
+import io.github.pylonmc.rebar.logistics.LogisticGroupType;
+import io.github.pylonmc.rebar.util.MachineUpdateReason;
+import io.github.pylonmc.rebar.util.gui.GuiItems;
+import io.github.pylonmc.rebar.util.gui.ProgressItem;
+import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceItems;
+import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceKeys;
+import io.github.tagdl.RebarTranscEndence.recipe.ZotReverserRecipe;
+import net.kyori.adventure.text.Component;
+import xyz.xenondevs.invui.gui.Gui;
+import xyz.xenondevs.invui.inventory.VirtualInventory;
+import xyz.xenondevs.invui.inventory.event.ItemPostUpdateEvent;
+import xyz.xenondevs.invui.inventory.event.ItemPreUpdateEvent;
 
 public class ZotReverser extends RebarBlock implements
         RebarDirectionalBlock,
         RebarTickingBlock,
-        RebarFluidBufferBlock
+        RebarFluidBufferBlock,
+        RebarLogisticBlock,
+        RebarRecipeProcessor<ZotReverserRecipe>,
+        RebarVirtualInventoryBlock,
+        RebarGuiBlock
 {
-    public final double buffer = getSettings().getOrThrow("buffer", ConfigAdapter.INTEGER);
-    public final double fluidPerCraft = getSettings().getOrThrow("fluid-per-craft", ConfigAdapter.INTEGER);
-    public final int secondsconsume = Math.round(getSettings().getOrThrow("seconds-consume", ConfigAdapter.FLOAT) * 20);
-    
+    private static final Config settings = Settings.get(RebarTranscEndenceKeys.ZOT_REVERSER);
+    public static final double buffer = settings.getOrThrow("buffer", ConfigAdapter.INTEGER);
+    public static final double fluidPerCraft = settings.getOrThrow("fluid-per-craft", ConfigAdapter.INTEGER);
+    public static final int timeconsume = Math.round(settings.getOrThrow("seconds-consume", ConfigAdapter.FLOAT) * 20);
+
+    public final ItemStackBuilder zotStack = ItemStackBuilder.gui(Material.PURPLE_STAINED_GLASS_PANE, getKey() + ":zot")
+            .name(Component.translatable("rebartranscendence.gui.zot_reverser.zot"));
+    private final VirtualInventory zotInventory = new VirtualInventory(1);
+    private final VirtualInventory outputInventory = new VirtualInventory(1);
     public ZotReverser(@NotNull Block block, @NotNull BlockCreateContext context) {
         super(block, context);
         setTickInterval(1);
         this.setFacing(context.getFacing());
         createFluidPoint(FluidPointType.INPUT, BlockFace.NORTH, context, false);
         createFluidBuffer(PylonFluids.OBSCYRA, buffer, true, false);
+        setRecipeType(ZotReverserRecipe.RECIPE_TYPE);
+        setRecipeProgressItem(new ProgressItem(GuiItems.background()));
     }
     public ZotReverser(@NotNull Block block, @NotNull PersistentDataContainer pdc) {
         super(block, pdc);
     }
     @Override
-    public void tick(){
+    public void postInitialise() {
+        zotInventory.addPreUpdateHandler(event -> onZotPreUpdate(event));
+        zotInventory.addPostUpdateHandler(event -> onZotUpdate(event));
+        outputInventory.addPreUpdateHandler(event -> onOutputUpdate(event));
+        outputInventory.addPostUpdateHandler(event -> tryStartRecipe());
+        createLogisticGroup("zot", LogisticGroupType.INPUT, zotInventory);
+        createLogisticGroup("output", LogisticGroupType.OUTPUT, outputInventory);
+    }
+    public void onZotPreUpdate(ItemPreUpdateEvent event){
+        if (event.isAdd()) event.setCancelled(event.getNewItem().isSimilar(reverseZot(event.getNewItem())));
+    }
+    public void onZotUpdate(ItemPostUpdateEvent event){
+        if (!(event.getUpdateReason() instanceof MachineUpdateReason)) {
+            tryStartRecipe();
+        }
+    }
+    public void onOutputUpdate(ItemPreUpdateEvent event){
+        if (event.isAdd()) event.setCancelled(!(event.getUpdateReason() instanceof MachineUpdateReason));
+    }
+    @Override
+    public @NotNull Gui createGui() {
+        return Gui.builder()
+                .setStructure(
+                        "A A A # # # B B B",
+                        "A I A # P # B O B",
+                        "A A A # # # B B B"
+                )
+                .addIngredient('#', GuiItems.background())
+                .addIngredient('A', zotStack)
+                .addIngredient('B', GuiItems.output())
+                .addIngredient('P', getRecipeProgressItem())
+                .addIngredient('I', zotInventory)
+                .addIngredient('O', outputInventory)
+                .build();
+    }
+    @Override
+    public void tick() {
+        if (getBlock() == null || !getBlock().getChunk().isLoaded()) return;
+        if (outputInventory == null) return;
+        if (fluidAmount(PylonFluids.OBSCYRA) < fluidPerCraft) return;
+        if (isProcessingRecipe()) {
+            removeFluid(PylonFluids.OBSCYRA, fluidPerCraft);
+            progressRecipe(getTickInterval());
+            return;
+        }     
+    }
+    @Override
+    public void onRecipeFinished(@NotNull ZotReverserRecipe recipe) {
+        getRecipeProgressItem().setItem(GuiItems.background());
+        outputInventory.addItem(new MachineUpdateReason(), recipe.result());
+    }
+    public void tryStartRecipe() {
+        if (isProcessingRecipe()) return;
+        ItemStack itemStack = zotInventory.getItem(0);
+        if (itemStack == null) return;
+        if (getLastRecipe() != null && tryStartRecipe(getLastRecipe(), itemStack)) return;
 
+        for (ZotReverserRecipe recipe : ZotReverserRecipe.RECIPE_TYPE) {
+            if (tryStartRecipe(recipe, itemStack)) return;
+        }
+    }
+    public boolean tryStartRecipe(@NotNull ZotReverserRecipe recipe, ItemStack itemStack) {
+        if (!recipe.input().matches(itemStack)) return false; //continue loop
+        if (!outputInventory.canHold(recipe.result())) return true; //stop loop
+
+        startRecipe(recipe, timeconsume);
+        getRecipeProgressItem().setItem(ItemStackBuilder.of(itemStack.asOne()).clearLore());
+        zotInventory.setItem(new MachineUpdateReason(), 0, itemStack.subtract(recipe.input().getAmount()));
+        return true;
+    }
+    private ItemStack reverseZot(ItemStack itemStack) {
+        ItemStack resulItemStack = itemStack;
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_DOWN)) resulItemStack = RebarTranscEndenceItems.ZOT_UP;
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_UP)) resulItemStack = RebarTranscEndenceItems.ZOT_DOWN;
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_RIGHT)) resulItemStack = RebarTranscEndenceItems.ZOT_LEFT;
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_LEFT)) resulItemStack = RebarTranscEndenceItems.ZOT_RIGHT;
+        return resulItemStack;
+    }
+    @Override
+    public @NotNull Map<@NotNull String, @NotNull VirtualInventory> getVirtualInventories() {
+        return Map.of("zot", zotInventory, "output", outputInventory);
+    }
+    @Override
+    public void onBreak(@NotNull List<@NotNull ItemStack> drops, @NotNull BlockBreakContext context) {
+        RebarVirtualInventoryBlock.super.onBreak(drops, context);
+        RebarFluidBufferBlock.super.onBreak(drops, context);
     }
 }
