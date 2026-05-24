@@ -1,6 +1,5 @@
 package io.github.tagdl.RebarTranscEndence.items;
 
-import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
@@ -27,7 +26,7 @@ public class UnstableIngot extends RebarItem implements
 {
     @Getter
     private final long deleteDelay = getSettings().getOrThrow("max_hold_seconds", ConfigAdapter.INTEGER) * 20;
-    private static final NamespacedKey DEGREE_KEY = PylonUtils.pylonKey("unstable_ingot_degree");
+    private static final NamespacedKey DEGREE_KEY = new NamespacedKey(RebarTranscEndence.getInstance(), "unstable_ingot_degree");
     public UnstableIngot(@NotNull ItemStack stack) {
         super(stack);
     }

@@ -1,5 +1,6 @@
 package io.github.tagdl.RebarTranscEndence;
 
+import io.github.tagdl.RebarTranscEndence.recipe.NanobotCrafterRecipe;
 import io.github.tagdl.RebarTranscEndence.recipe.ZotReverserRecipe;
 
 public class RebarTranscEndenceRecipe {
@@ -9,5 +10,6 @@ public class RebarTranscEndenceRecipe {
     }
     public static void initialize() {
         ZotReverserRecipe.RECIPE_TYPE.register();
+        NanobotCrafterRecipe.RECIPE_TYPE.register();
     }
 }

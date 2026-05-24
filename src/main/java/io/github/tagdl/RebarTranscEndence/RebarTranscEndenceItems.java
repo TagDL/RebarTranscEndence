@@ -5,7 +5,11 @@ import io.github.pylonmc.rebar.guide.button.MachineRecipesButton;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.tagdl.RebarTranscEndence.items.UnstableIngot;
-import io.github.tagdl.RebarTranscEndence.items.Zot_2;
+import io.github.tagdl.RebarTranscEndence.items.ZotDown2;
+import io.github.tagdl.RebarTranscEndence.items.ZotLeft2;
+import io.github.tagdl.RebarTranscEndence.items.ZotRight2;
+import io.github.tagdl.RebarTranscEndence.items.ZotUp2;
+import io.github.tagdl.RebarTranscEndence.recipe.NanobotCrafterRecipe;
 import io.github.tagdl.RebarTranscEndence.recipe.ZotReverserRecipe;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 
@@ -36,6 +40,22 @@ public final class RebarTranscEndenceItems {
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
     public static final ItemStack ZOT_RIGHT_2 = ItemStackBuilder.rebar(Material.BLUE_DYE, RebarTranscEndenceKeys.ZOT_RIGHT_2)
+                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+            .build();
+    public static final ItemStack ZOT_UP_3 = ItemStackBuilder.rebar(Material.RED_DYE, RebarTranscEndenceKeys.ZOT_UP_3)
+                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+            .build();
+    public static final ItemStack ZOT_DOWN_3 = ItemStackBuilder.rebar(Material.YELLOW_DYE, RebarTranscEndenceKeys.ZOT_DOWN_3)
+                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+            .build();
+    public static final ItemStack ZOT_LEFT_3 = ItemStackBuilder.rebar(Material.GREEN_DYE, RebarTranscEndenceKeys.ZOT_LEFT_3)
+                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
+            .build();
+    public static final ItemStack ZOT_RIGHT_3 = ItemStackBuilder.rebar(Material.BLUE_DYE, RebarTranscEndenceKeys.ZOT_RIGHT_3)
                 .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
@@ -81,6 +101,10 @@ public final class RebarTranscEndenceItems {
             .build();
     public static final ItemStack NANOBOT_CRAFTER = ItemStackBuilder.rebar(Material.DISPENSER, RebarTranscEndenceKeys.NANOBOT_CRAFTER)
             .build();
+    public static final ItemStack NANOBOT_LAUNCHER = ItemStackBuilder.rebar(Material.CRAFTING_TABLE, RebarTranscEndenceKeys.NANOBOT_LAUNCHER)
+            .build();
+    public static final ItemStack NANOBOT_OUTPUT_HATCH = ItemStackBuilder.rebar(Material.PURPUR_BLOCK, RebarTranscEndenceKeys.NANOBOT_OUTPUT_HATCH)
+            .build();
 
     public static void initialize() {
         // Register an item using the ExampleItem class
@@ -93,39 +117,50 @@ public final class RebarTranscEndenceItems {
         RebarItem.register(RebarItem.class, ZOT_RIGHT);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_RIGHT);
 
-        RebarItem.register(Zot_2.class, ZOT_UP_2);
+        RebarItem.register(ZotUp2.class, ZOT_UP_2);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_UP_2);
-        RebarItem.register(Zot_2.class, ZOT_DOWN_2);
+        RebarItem.register(ZotDown2.class, ZOT_DOWN_2);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_DOWN_2);
-        RebarItem.register(Zot_2.class, ZOT_LEFT_2);
+        RebarItem.register(ZotLeft2.class, ZOT_LEFT_2);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_LEFT_2);
-        RebarItem.register(Zot_2.class, ZOT_RIGHT_2);
+        RebarItem.register(ZotRight2.class, ZOT_RIGHT_2);
+        RebarTranscEndencePages.ITEMS.addItem(ZOT_RIGHT_2);
 
-        RebarTranscEndencePages.ITEMS.addItem(UNSTABLE_INGOT);
+        RebarItem.register(RebarItem.class, ZOT_UP_3);
+        RebarTranscEndencePages.ITEMS.addItem(ZOT_UP_3);
+        RebarItem.register(RebarItem.class, ZOT_DOWN_3);
+        RebarTranscEndencePages.ITEMS.addItem(ZOT_DOWN_3);
+        RebarItem.register(RebarItem.class, ZOT_LEFT_3);
+        RebarTranscEndencePages.ITEMS.addItem(ZOT_LEFT_3);
+        RebarItem.register(RebarItem.class, ZOT_RIGHT_3);
+        RebarTranscEndencePages.ITEMS.addItem(ZOT_RIGHT_3);
+
         RebarItem.register(UnstableIngot.class, UNSTABLE_INGOT);
-        RebarTranscEndencePages.ITEMS.addItem(STABLE_INGOT);
+        RebarTranscEndencePages.ITEMS.addItem(UNSTABLE_INGOT);
         RebarItem.register(RebarItem.class, STABLE_INGOT);
-        RebarTranscEndencePages.ITEMS.addItem(STABLE_INGOT_BLOCK);
+        RebarTranscEndencePages.ITEMS.addItem(STABLE_INGOT);
         RebarItem.register(RebarItem.class, STABLE_INGOT_BLOCK);
+        RebarTranscEndencePages.ITEMS.addItem(STABLE_INGOT_BLOCK);
 
-        RebarTranscEndencePages.ITEMS.addItem(ZOT_COOL_DOWN);
         RebarItem.register(RebarItem.class, ZOT_COOL_DOWN);
+        RebarTranscEndencePages.ITEMS.addItem(ZOT_COOL_DOWN);
 
-        RebarTranscEndencePages.ITEMS.addItem(VERTICAL_POLARIZER);
         RebarItem.register(RebarItem.class, VERTICAL_POLARIZER);
-        RebarTranscEndencePages.ITEMS.addItem(HORIZONTAL_POLARIZER);
+        RebarTranscEndencePages.ITEMS.addItem(VERTICAL_POLARIZER);
         RebarItem.register(RebarItem.class, HORIZONTAL_POLARIZER);
+        RebarTranscEndencePages.ITEMS.addItem(HORIZONTAL_POLARIZER);
 
-        RebarTranscEndencePages.ITEMS.addItem(DAXI_STRENGTH);
         RebarItem.register(RebarItem.class, DAXI_STRENGTH);
-        RebarTranscEndencePages.ITEMS.addItem(DAXI_ABSORPTION);
+        RebarTranscEndencePages.ITEMS.addItem(DAXI_STRENGTH);
         RebarItem.register(RebarItem.class, DAXI_ABSORPTION);
-        RebarTranscEndencePages.ITEMS.addItem(DAXI_FORTITUDE);
+        RebarTranscEndencePages.ITEMS.addItem(DAXI_ABSORPTION);
         RebarItem.register(RebarItem.class, DAXI_FORTITUDE);
-        RebarTranscEndencePages.ITEMS.addItem(DAXI_SATURATION);
+        RebarTranscEndencePages.ITEMS.addItem(DAXI_FORTITUDE);
         RebarItem.register(RebarItem.class, DAXI_SATURATION);
-        RebarTranscEndencePages.ITEMS.addItem(DAXI_REGENERATION);
+        RebarTranscEndencePages.ITEMS.addItem(DAXI_SATURATION);
         RebarItem.register(RebarItem.class, DAXI_REGENERATION);
+        RebarTranscEndencePages.ITEMS.addItem(DAXI_REGENERATION);
+
 
         // Register a 'normal' item which represents Example Block
         // Blocks and their corresponding item will almost always share the same key
@@ -144,5 +179,11 @@ public final class RebarTranscEndenceItems {
         RebarTranscEndencePages.MACHINES.addItem(ZOT_OVERLOADER);
         RebarItem.register(RebarItem.class, NANOBOT_CRAFTER, RebarTranscEndenceKeys.NANOBOT_CRAFTER);
         RebarTranscEndencePages.MACHINES.addItem(NANOBOT_CRAFTER);
+        RebarGuide.getOrCreateInfoPage(RebarTranscEndenceKeys.NANOBOT_CRAFTER)
+                .addButton(new MachineRecipesButton(NANOBOT_CRAFTER, NanobotCrafterRecipe.RECIPE_TYPE));
+        RebarItem.register(RebarItem.class, NANOBOT_LAUNCHER, RebarTranscEndenceKeys.NANOBOT_LAUNCHER);
+        RebarTranscEndencePages.MACHINES.addItem(NANOBOT_LAUNCHER);
+        RebarItem.register(RebarItem.class, NANOBOT_OUTPUT_HATCH, RebarTranscEndenceKeys.NANOBOT_OUTPUT_HATCH);
+        RebarTranscEndencePages.MACHINES.addItem(NANOBOT_OUTPUT_HATCH);
     }
 }

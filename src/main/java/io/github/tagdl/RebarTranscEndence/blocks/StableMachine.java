@@ -59,8 +59,8 @@ public class StableMachine extends RebarBlock implements
     private final ItemStackBuilder progressItemStackBuilder = ItemStackBuilder.of(Material.CLOCK)
             .name(Component.translatable("rebartranscendence.gui.stable_machine.progress"));
     private final ProgressItem progressItem = new ProgressItem(progressItemStackBuilder, false);
-    private final VirtualInventory ingotInventory = new VirtualInventory(1);
     private final VirtualInventory cooldownInventory = new VirtualInventory(1);
+    private final VirtualInventory ingotInventory = new VirtualInventory(1);
     private final VirtualInventory outputInventory = new VirtualInventory(1);
 
     public StableMachine(@NotNull Block block, @NotNull BlockCreateContext context) {
@@ -76,20 +76,20 @@ public class StableMachine extends RebarBlock implements
     @Override
     public void postInitialise() {
         setProcessProgressItem(progressItem);
-        ingotInventory.addPreUpdateHandler(event -> onIngotUpdate(event));
         cooldownInventory.addPreUpdateHandler(event -> onCooldownUpdate(event));
-        ingotInventory.addPostUpdateHandler(event -> onPostUpdate(event));
+        ingotInventory.addPreUpdateHandler(event -> onIngotUpdate(event));
         cooldownInventory.addPostUpdateHandler(event -> onPostUpdate(event));
+        ingotInventory.addPostUpdateHandler(event -> onPostUpdate(event));
         outputInventory.addPreUpdateHandler(event -> onOutputUpdate(event));
-        createLogisticGroup("ingot", LogisticGroupType.INPUT, ingotInventory);
-        createLogisticGroup("cooldown", LogisticGroupType.INPUT, cooldownInventory);
+        createLogisticGroup("input2", LogisticGroupType.INPUT, cooldownInventory);
+        createLogisticGroup("input1", LogisticGroupType.INPUT, ingotInventory);
         createLogisticGroup("output", LogisticGroupType.OUTPUT, outputInventory);
     }
     public void onIngotUpdate(ItemPreUpdateEvent event){
         if (event.isAdd()) event.setCancelled(!(RebarItem.fromStack(event.getNewItem()) instanceof UnstableIngot));
     }
     public void onCooldownUpdate(ItemPreUpdateEvent event){
-        if (event.isAdd()) event.setCancelled(!(event.getNewItem().isSimilar(RebarTranscEndenceItems.ZOT_COOL_DOWN)));
+        if (event.isAdd()) event.setCancelled(!(event.getNewItem().isSimilar(RebarTranscEndenceItems.ZOT_COOL_DOWN.clone())));
     }
     public void onPostUpdate(ItemPostUpdateEvent event){
         if (!(event.getUpdateReason() instanceof MachineUpdateReason)) {
@@ -111,8 +111,8 @@ public class StableMachine extends RebarBlock implements
                 .addIngredient('A', inputStack)
                 .addIngredient('B', GuiItems.output())
                 .addIngredient('P', progressItem)
-                .addIngredient('I', ingotInventory)
                 .addIngredient('C', cooldownInventory)
+                .addIngredient('I', ingotInventory)
                 .addIngredient('O', outputInventory)
                 .build();
     }
@@ -137,14 +137,16 @@ public class StableMachine extends RebarBlock implements
         UnstableIngot unstableIngot = (UnstableIngot) RebarItem.fromStack(ingotInventory.getItem(0).asOne());
         unstableIngot.setAmount(unstableIngot.getAmount() - 25);
         outputInventory.addItem(new MachineUpdateReason(), 
-            unstableIngot.getAmount() == 0 ? RebarTranscEndenceItems.STABLE_INGOT : unstableIngot.getStack()
+            unstableIngot.getAmount() == 0 ? RebarTranscEndenceItems.STABLE_INGOT.clone() : unstableIngot.getStack()
         );
-        ingotInventory.setItemAmount(new MachineUpdateReason(), 0, ingotInventory.getItemAmount(0) - 1);
-        cooldownInventory.setItemAmount(new MachineUpdateReason(), 0, cooldownInventory.getItemAmount(0) - 1);
+        ingotInventory.setItem(new MachineUpdateReason(), 0, 
+            ingotInventory.getItem(0).asQuantity(ingotInventory.getItemAmount(0) - 1));
+        cooldownInventory.setItem(new MachineUpdateReason(), 0, 
+            cooldownInventory.getItem(0).asQuantity(cooldownInventory.getItemAmount(0) - 1));
     }
     @Override
     public @NotNull Map<@NotNull String, @NotNull VirtualInventory> getVirtualInventories() {
-        return Map.of("ingot", ingotInventory, "cooldown", cooldownInventory, "output", outputInventory);
+        return Map.of("input1", ingotInventory, "input2", cooldownInventory, "output", outputInventory);
     }
     @Override
     public void onBreak(@NotNull List<@NotNull ItemStack> drops, @NotNull BlockBreakContext context) {
@@ -152,7 +154,7 @@ public class StableMachine extends RebarBlock implements
         RebarFluidBufferBlock.super.onBreak(drops, context);
     }
     public boolean canRun() {
-        if (outputInventory.canHold(RebarTranscEndenceItems.STABLE_INGOT)) {
+        if (outputInventory.canHold(RebarTranscEndenceItems.STABLE_INGOT.clone())) {
             if (RebarItem.fromStack(ingotInventory.getItem(0)) instanceof UnstableIngot unstableIngot) {
                 return unstableIngot.getAmount() == 25;
             }

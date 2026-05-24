@@ -1,9 +1,12 @@
 package io.github.tagdl.RebarTranscEndence.items;
 
-import io.github.pylonmc.pylon.util.PylonUtils;
+import io.github.pylonmc.rebar.config.Config;
+import io.github.pylonmc.rebar.config.Settings;
+import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
+import io.github.tagdl.RebarTranscEndence.RebarTranscEndence;
 
 import java.util.List;
 
@@ -14,7 +17,9 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class Zot_2 extends RebarItem {
-    private static final NamespacedKey AMOUNT_KEY = PylonUtils.pylonKey("zot_2_amount");
+    private static final NamespacedKey AMOUNT_KEY = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_2_amount");
+    private static final Config settings = Settings.get(new NamespacedKey(RebarTranscEndence.getInstance(), "zot_2"));
+    public final int maxAmount = settings.getOrThrow("max-amount", ConfigAdapter.INTEGER);
     public Zot_2(@NotNull ItemStack stack) {
         super(stack);
     }
@@ -24,10 +29,16 @@ public class Zot_2 extends RebarItem {
     public int getAmount() {
         return getStack().getPersistentDataContainer().getOrDefault(AMOUNT_KEY, PersistentDataType.INTEGER, 0);
     }
+    public boolean isSimilar(Zot_2 zot_2) {
+        zot_2.setAmount(0);
+        setAmount(0);
+        return zot_2.getStack().isSimilar(getStack());
+    }
     @Override
     public @NotNull List<RebarArgument> getPlaceholders() {
         return List.of(
-                RebarArgument.of("amount", getAmount())
+                RebarArgument.of("amount", getAmount()),
+                RebarArgument.of("max", maxAmount)
         );
     }
 }

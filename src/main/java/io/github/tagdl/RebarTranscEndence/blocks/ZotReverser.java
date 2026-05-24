@@ -142,10 +142,10 @@ public class ZotReverser extends RebarBlock implements
     }
     private ItemStack reverseZot(ItemStack itemStack) {
         ItemStack resulItemStack = itemStack;
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_DOWN)) resulItemStack = RebarTranscEndenceItems.ZOT_UP;
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_UP)) resulItemStack = RebarTranscEndenceItems.ZOT_DOWN;
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_RIGHT)) resulItemStack = RebarTranscEndenceItems.ZOT_LEFT;
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_LEFT)) resulItemStack = RebarTranscEndenceItems.ZOT_RIGHT;
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_DOWN.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_UP.clone();
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_UP.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_DOWN.clone();
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_RIGHT.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_LEFT.clone();
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_LEFT.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_RIGHT.clone();
         return resulItemStack;
     }
     @Override

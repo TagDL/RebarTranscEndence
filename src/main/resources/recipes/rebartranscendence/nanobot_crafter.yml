@@ -1,0 +1,80 @@
+rebartranscendence:stable_ingot_block:
+  shape:
+    - "AAA"
+    - "AAA"
+    - "AAA"
+  key:
+    A: rebartranscendence:stable_ingot
+  result: rebartranscendence:stable_ingot_block
+
+rebartranscendence:unstable_ingot:
+  shape:
+    - "AUA"
+    - "LBR"
+    - "ADA"
+  key:
+    A: pylon:palladium_ingot
+    B: minecraft:diamond_block
+    U: rebartranscendence:zot_up
+    D: rebartranscendence:zot_down
+    L: rebartranscendence:zot_left
+    R: rebartranscendence:zot_right
+  result: rebartranscendence:unstable_ingot
+
+rebartranscendence:daxi_strength:
+  shape:
+    - "ABA"
+    - "BCB"
+    - "ABA"
+  key:
+    A: rebartranscendence:stable_ingot_block
+    B: rebartranscendence:zot_up_3
+    C: minecraft:diamond_block
+  result: rebartranscendence:daxi_strength
+
+rebartranscendence:daxi_absorption:
+  shape:
+    - "ABA"
+    - "BCB"
+    - "ABA"
+  key:
+    A: rebartranscendence:stable_ingot_block
+    B: rebartranscendence:zot_down_3
+    C: minecraft:diamond_block
+  result: rebartranscendence:daxi_absorption
+
+rebartranscendence:daxi_fortitude:
+  shape:
+    - "ABA"
+    - "BCB"
+    - "ABA"
+  key:
+    A: rebartranscendence:stable_ingot_block
+    B: rebartranscendence:zot_left_3
+    C: minecraft:diamond_block
+  result: rebartranscendence:daxi_fortitude
+
+rebartranscendence:daxi_saturation:
+  shape:
+    - "ABA"
+    - "BCB"
+    - "ABA"
+  key:
+    A: rebartranscendence:stable_ingot_block
+    B: rebartranscendence:zot_right_3
+    C: minecraft:diamond_block
+  result: rebartranscendence:daxi_saturation
+
+rebartranscendence:daxi_regeneration:
+  shape:
+    - "AUA"
+    - "LCR"
+    - "ADA"
+  key:
+    A: rebartranscendence:stable_ingot_block
+    U: rebartranscendence:zot_up_3
+    D: rebartranscendence:zot_down_3
+    L: rebartranscendence:zot_left_3
+    R: rebartranscendence:zot_right_3
+    C: minecraft:diamond_block
+  result: rebartranscendence:daxi_regeneration

@@ -7,6 +7,22 @@ item:
       <arrow> Unstable degree: %degree%%
       <arrow> An ingot containing immense energy
       <arrow> Holding it for a period of time will <red>result in death
+  zot_up_2:
+    name: "Uncharge Zot UP"
+    lore: |-
+      <arrow> Charge degree: %amount%/%max%
+  zot_down_2:
+    name: "Uncharge Zot DOWN"
+    lore: |-
+      <arrow> Charge degree: %amount%/%max%
+  zot_left_2:
+    name: "Uncharge Zot LEFT"
+    lore: |-
+      <arrow> Charge degree: %amount%/%max%
+  zot_right_2:
+    name: "Uncharge Zot RIGHT"
+    lore: |-
+      <arrow> Charge degree: %amount%/%max%
 
   example_block:
     name: "Example Block"

@@ -1,0 +1,4 @@
+buffer: 100
+fluid-per-craft: 10
+seconds-consume: 2
+different-direction-zot-require: 16

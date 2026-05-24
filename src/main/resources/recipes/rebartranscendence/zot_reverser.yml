@@ -1,15 +1,15 @@
 rebartranscendence:zot_up:
-  input: rebartranscendence:zot_down
+  input: rebartranscendence:zot_left
   result: rebartranscendence:zot_up
   
 rebartranscendence:zot_down:
-  input: rebartranscendence:zot_up
+  input: rebartranscendence:zot_right
   result: rebartranscendence:zot_down
 
 rebartranscendence:zot_left:
-  input: rebartranscendence:zot_right
+  input: rebartranscendence:zot_down
   result: rebartranscendence:zot_left
 
 rebartranscendence:zot_right:
-  input: rebartranscendence:zot_left
+  input: rebartranscendence:zot_up
   result: rebartranscendence:zot_right

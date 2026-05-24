@@ -79,15 +79,15 @@ public class ZotCollector extends RebarBlock implements
     }
     private void onPolarizerPreUpdate(ItemPreUpdateEvent event) {
         if (event.isAdd()) {
-            boolean tempbool = event.getNewItem().isSimilar(RebarTranscEndenceItems.VERTICAL_POLARIZER)
-                || event.getNewItem().isSimilar(RebarTranscEndenceItems.HORIZONTAL_POLARIZER);
+            boolean tempbool = event.getNewItem().isSimilar(RebarTranscEndenceItems.VERTICAL_POLARIZER.clone())
+                || event.getNewItem().isSimilar(RebarTranscEndenceItems.HORIZONTAL_POLARIZER.clone());
             event.setCancelled(!tempbool);
         }
     }
     private void onPolarizerUpdate(ItemPostUpdateEvent event) {
         weight = event.getNewItem() == null 
             ? new double[]{0.25, 0.25, 0.25, 0.25}
-            : event.getNewItem().isSimilar(RebarTranscEndenceItems.VERTICAL_POLARIZER)
+            : event.getNewItem().isSimilar(RebarTranscEndenceItems.VERTICAL_POLARIZER.clone())
                 ? new double[]{0.4, 0.4, 0.1, 0.1}
                 : new double[]{0.1, 0.1, 0.4, 0.4};
     }
@@ -127,10 +127,10 @@ public class ZotCollector extends RebarBlock implements
     @Override
     public void onProcessFinished() {
         ItemStack[] itemStacks = new ItemStack[]{
-            RebarTranscEndenceItems.ZOT_UP,
-            RebarTranscEndenceItems.ZOT_DOWN,
-            RebarTranscEndenceItems.ZOT_LEFT,
-            RebarTranscEndenceItems.ZOT_RIGHT,
+            RebarTranscEndenceItems.ZOT_UP.clone(),
+            RebarTranscEndenceItems.ZOT_DOWN.clone(),
+            RebarTranscEndenceItems.ZOT_LEFT.clone(),
+            RebarTranscEndenceItems.ZOT_RIGHT.clone(),
         };
         Double weightNow = 0.0;
         Double randomDouble = Math.random();

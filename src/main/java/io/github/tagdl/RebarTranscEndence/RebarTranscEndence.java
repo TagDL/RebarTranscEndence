@@ -1,8 +1,12 @@
 package io.github.tagdl.RebarTranscEndence;
 
 import io.github.pylonmc.rebar.addon.RebarAddon;
+import io.github.tagdl.RebarTranscEndence.daxi.DaxiListener;
 import lombok.Getter;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,11 +26,12 @@ public class RebarTranscEndence extends JavaPlugin implements RebarAddon {
 
         // Every Rebar addon must call this BEFORE doing anything Rebar-related
         registerWithRebar();
-
+        PluginManager pm = Bukkit.getPluginManager();
         RebarTranscEndenceItems.initialize();
         RebarTranscEndenceBlocks.initialize();
         RebarTranscEndencePages.initialise();
         RebarTranscEndenceRecipe.initialize();
+        pm.registerEvents(new DaxiListener(), this);
     }
 
     @Override

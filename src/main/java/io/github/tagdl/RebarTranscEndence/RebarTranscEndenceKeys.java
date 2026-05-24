@@ -12,6 +12,10 @@ public class RebarTranscEndenceKeys {
     public static final NamespacedKey ZOT_DOWN_2 = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_down_2");
     public static final NamespacedKey ZOT_LEFT_2 = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_left_2");
     public static final NamespacedKey ZOT_RIGHT_2 = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_right_2");
+    public static final NamespacedKey ZOT_UP_3 = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_up_3");
+    public static final NamespacedKey ZOT_DOWN_3 = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_down_3");
+    public static final NamespacedKey ZOT_LEFT_3 = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_left_3");
+    public static final NamespacedKey ZOT_RIGHT_3 = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_right_3");
     public static final NamespacedKey UNSTABLE_INGOT = new NamespacedKey(RebarTranscEndence.getInstance(), "unstable_ingot");
     public static final NamespacedKey STABLE_INGOT = new NamespacedKey(RebarTranscEndence.getInstance(), "stable_ingot");
     public static final NamespacedKey STABLE_INGOT_BLOCK = new NamespacedKey(RebarTranscEndence.getInstance(), "stable_ingot_block");
@@ -30,4 +34,6 @@ public class RebarTranscEndenceKeys {
     public static final NamespacedKey STABLE_MACHINE = new NamespacedKey(RebarTranscEndence.getInstance(), "stable_machine");
     public static final NamespacedKey ZOT_OVERLOADER = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_overloader");
     public static final NamespacedKey NANOBOT_CRAFTER = new NamespacedKey(RebarTranscEndence.getInstance(), "nanobot_crafter");
+    public static final NamespacedKey NANOBOT_LAUNCHER = new NamespacedKey(RebarTranscEndence.getInstance(), "nanobot_launcher");
+    public static final NamespacedKey NANOBOT_OUTPUT_HATCH = new NamespacedKey(RebarTranscEndence.getInstance(), "nanobot_output_hatch");
 }

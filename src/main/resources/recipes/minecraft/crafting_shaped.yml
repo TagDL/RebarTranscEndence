@@ -8,3 +8,14 @@ rebartranscendence:zot_reverser:
     B: minecraft:purple_carpet
   result: rebartranscendence:zot_reverser
   category: building
+
+rebartranscendence:nanobot_crafter:
+  pattern:
+    - " B "
+    - " A "
+    - "   "
+  key:
+    A: pylon:liselette_conductor
+    B: minecraft:white_carpet
+  result: rebartranscendence:nanobot_crafter
+  category: building

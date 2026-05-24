@@ -111,7 +111,7 @@ public class ZotCondenser extends RebarBlock implements
     public void tick() {
         if (getBlock() == null || !getBlock().getChunk().isLoaded()) return;
         if (outputInventory == null) return;
-        if (!outputInventory.canHold(RebarTranscEndenceItems.ZOT_COOL_DOWN)) return;
+        if (!outputInventory.canHold(RebarTranscEndenceItems.ZOT_COOL_DOWN.clone())) return;
         if (fluidAmount(PylonFluids.OBSCYRA) < fluidPerCraft) return;
         if (isProcessing()) {
             progressItem.notifyWindows();
@@ -119,21 +119,25 @@ public class ZotCondenser extends RebarBlock implements
             progressProcess(getTickInterval());
             return;
         }
-        if (zotInventory.containsSimilar(RebarTranscEndenceItems.ZOT_DOWN) 
-                    && zotInventory.containsSimilar(RebarTranscEndenceItems.ZOT_UP)) {
-            zotInventory.setItemAmount(new MachineUpdateReason(), 0, zotInventory.getItemAmount(0) - 1);
-            zotInventory.setItemAmount(new MachineUpdateReason(), 1, zotInventory.getItemAmount(1) - 1);
-        } else if (zotInventory.containsSimilar(RebarTranscEndenceItems.ZOT_RIGHT) 
-                    && zotInventory.containsSimilar(RebarTranscEndenceItems.ZOT_LEFT)) {
-            zotInventory.setItemAmount(new MachineUpdateReason(), 0, zotInventory.getItemAmount(0) - 1);
-            zotInventory.setItemAmount(new MachineUpdateReason(), 1, zotInventory.getItemAmount(1) - 1);
+        if (zotInventory.containsSimilar(RebarTranscEndenceItems.ZOT_DOWN.clone()) 
+                    && zotInventory.containsSimilar(RebarTranscEndenceItems.ZOT_UP.clone())) {
+            zotInventory.setItem(new MachineUpdateReason(), 0, 
+                zotInventory.getItem(0).asQuantity(zotInventory.getItemAmount(0) - 1));
+            zotInventory.setItem(new MachineUpdateReason(), 1, 
+                zotInventory.getItem(1).asQuantity(zotInventory.getItemAmount(1) - 1));
+        } else if (zotInventory.containsSimilar(RebarTranscEndenceItems.ZOT_RIGHT.clone()) 
+                    && zotInventory.containsSimilar(RebarTranscEndenceItems.ZOT_LEFT.clone())) {
+            zotInventory.setItem(new MachineUpdateReason(), 0, 
+                zotInventory.getItem(0).asQuantity(zotInventory.getItemAmount(0) - 1));
+            zotInventory.setItem(new MachineUpdateReason(), 1, 
+                zotInventory.getItem(1).asQuantity(zotInventory.getItemAmount(1) - 1));
         } else return;
         startProcess(secondsconsume);
     }
     @Override
     public void onProcessFinished() {
         progressItem.notifyWindows();
-        outputInventory.addItem(new MachineUpdateReason(), RebarTranscEndenceItems.ZOT_COOL_DOWN);
+        outputInventory.addItem(new MachineUpdateReason(), RebarTranscEndenceItems.ZOT_COOL_DOWN.clone());
     }
     @Override
     public @NotNull Map<@NotNull String, @NotNull VirtualInventory> getVirtualInventories() {
@@ -146,10 +150,10 @@ public class ZotCondenser extends RebarBlock implements
     }
     private ItemStack reverseZot(ItemStack itemStack) {
         ItemStack resulItemStack = itemStack;
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_DOWN)) resulItemStack = RebarTranscEndenceItems.ZOT_UP;
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_UP)) resulItemStack = RebarTranscEndenceItems.ZOT_DOWN;
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_RIGHT)) resulItemStack = RebarTranscEndenceItems.ZOT_LEFT;
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_LEFT)) resulItemStack = RebarTranscEndenceItems.ZOT_RIGHT;
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_DOWN.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_UP.clone();
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_UP.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_DOWN.clone();
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_RIGHT.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_LEFT.clone();
+        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_LEFT.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_RIGHT.clone();
         return resulItemStack;
     }
 }
