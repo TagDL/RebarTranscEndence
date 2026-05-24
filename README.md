@@ -1,5 +1,12 @@
-# Rebar Addon Template
+# Rebar TranscEndence
 
-This repo contains everything you need to get started with making a Rebar addon.
+A [Rebar](https://github.com/pylonmc/rebar) addon which add endgame effect.
 
-For more information, see the [\'Creating addons\' section in the Rebar docs](https://pylonmc.github.io/creating-addons/getting-started/).
+## Require
+
+- [Rebar](https://github.com/pylonmc/rebar)
+- [Pylon](https://github.com/pylonmc/pylon)
+
+## IdeasFrom
+
+- [TranscEndence](https://github.com/Alessio-Colombo/TranscEndence)
