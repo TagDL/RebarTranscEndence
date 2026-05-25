@@ -1,18 +1,23 @@
 package io.github.tagdl.RebarTranscEndence.blocks;
 
+import static io.github.pylonmc.pylon.util.PylonUtils.colorToTextColor;
 import static java.lang.Math.max;
 
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import io.github.pylonmc.pylon.PylonFluids;
+import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
@@ -26,15 +31,19 @@ import io.github.pylonmc.rebar.config.Config;
 import io.github.pylonmc.rebar.config.Settings;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.fluid.FluidPointType;
+import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.pylonmc.rebar.logistics.LogisticGroupType;
 import io.github.pylonmc.rebar.util.MachineUpdateReason;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
+import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
+import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceItems;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceKeys;
 import io.github.tagdl.RebarTranscEndence.items.Zot_2;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.inventory.VirtualInventory;
 import xyz.xenondevs.invui.inventory.event.ItemPreUpdateEvent;
@@ -53,15 +62,15 @@ public class ZotOverloader extends RebarBlock implements
     public static final int timeconsume = Math.round(settings.getOrThrow("seconds-consume", ConfigAdapter.FLOAT) * 20);
     public static final int diffZot = settings.getOrThrow("different-direction-zot-require", ConfigAdapter.INTEGER);
     public final ItemStackBuilder upStack = ItemStackBuilder.gui(Material.RED_STAINED_GLASS_PANE, getKey() + ":up")
-            .name(Component.translatable("rebartranscendence.gui.zot_condenser.up"));
+            .name(Component.translatable("rebartranscendence.gui.zot_overloader.up"));
     public final ItemStackBuilder downStack = ItemStackBuilder.gui(Material.YELLOW_STAINED_GLASS_PANE, getKey() + ":down")
-            .name(Component.translatable("rebartranscendence.gui.zot_condenser.down"));
+            .name(Component.translatable("rebartranscendence.gui.zot_overloader.down"));
     public final ItemStackBuilder leftStack = ItemStackBuilder.gui(Material.GREEN_STAINED_GLASS_PANE, getKey() + ":left")
-            .name(Component.translatable("rebartranscendence.gui.zot_condenser.left"));
+            .name(Component.translatable("rebartranscendence.gui.zot_overloader.left"));
     public final ItemStackBuilder rightStack = ItemStackBuilder.gui(Material.BLUE_STAINED_GLASS_PANE, getKey() + ":right")
-            .name(Component.translatable("rebartranscendence.gui.zot_condenser.right"));
+            .name(Component.translatable("rebartranscendence.gui.zot_overloader.right"));
     public final ItemStackBuilder unchargeStack = ItemStackBuilder.gui(Material.BLUE_STAINED_GLASS_PANE, getKey() + ":uncharge")
-            .name(Component.translatable("rebartranscendence.gui.zot_condenser.uncharge"));
+            .name(Component.translatable("rebartranscendence.gui.zot_overloader.uncharge"));
     private final VirtualInventory zotInventory = new VirtualInventory(4);
     private final VirtualInventory outputInventory = new VirtualInventory(1);
     private final ItemStack[] itemStacks_2 = new ItemStack[]{
@@ -70,6 +79,25 @@ public class ZotOverloader extends RebarBlock implements
                 RebarTranscEndenceItems.ZOT_LEFT_2.clone(), 
                 RebarTranscEndenceItems.ZOT_RIGHT_2.clone()
             };
+    private Color color = Color.WHITE;
+    private int inner_amount = 0;
+    public static class Item extends RebarItem {
+
+        public final double fluidPerCraft = getSettings().getOrThrow("fluid-per-craft", ConfigAdapter.INTEGER);
+        public final double buffer = getSettings().getOrThrow("buffer", ConfigAdapter.INTEGER);
+        public static final int diffZot = settings.getOrThrow("different-direction-zot-require", ConfigAdapter.INTEGER);
+        public Item(@NotNull ItemStack stack) {
+            super(stack);
+        }
+        @Override
+        public @NotNull List<RebarArgument> getPlaceholders() {
+            return List.of(
+                    RebarArgument.of("diff", diffZot),
+                    RebarArgument.of("fluid-per-craft", UnitFormat.MILLIBUCKETS.format(fluidPerCraft)),
+                    RebarArgument.of("buffer", UnitFormat.MILLIBUCKETS.format(buffer))
+            );
+        }
+    }
     public ZotOverloader(@NotNull Block block, @NotNull BlockCreateContext context) {
         super(block, context);
         setTickInterval(timeconsume);
@@ -175,8 +203,19 @@ public class ZotOverloader extends RebarBlock implements
             }
         } else {
             zot_2.setAmount(zot_2.getAmount() + 1);
-            outputInventory.setItem(new MachineUpdateReason(), 0, zot_2.getStack());
+            outputInventory.setItem(new MachineUpdateReason(), 0, zot_2.getStack().clone());
+            setInner(zot_2.getStack().asOne(), zot_2.getAmount());
         }
+    }
+    public void setInner(ItemStack itemStack, int amount) {
+        if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_UP_2) this.color = Color.RED;
+        else if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_DOWN_2) this.color = Color.YELLOW;
+        else if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_LEFT_2) this.color = Color.LIME;
+        else if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_RIGHT_2) this.color = Color.BLUE;
+        this.inner_amount = amount;
+    }
+    public Component getInner() {
+        return Component.text(this.inner_amount).color(colorToTextColor(this.color));
     }
     public boolean canRun() {
         boolean tempbool = false;
@@ -205,5 +244,26 @@ public class ZotOverloader extends RebarBlock implements
     public void onBreak(@NotNull List<@NotNull ItemStack> drops, @NotNull BlockBreakContext context) {
         RebarVirtualInventoryBlock.super.onBreak(drops, context);
         RebarFluidBufferBlock.super.onBreak(drops, context);
+    }
+    @Override
+    public @Nullable WailaDisplay getWaila(@NotNull Player player) {
+        return new WailaDisplay(outputInventory != null && !outputInventory.isEmpty() 
+            ? Component.translatable("rebartranscendence.item.zot_overloader.waila.running")
+                .arguments(
+                    RebarArgument.of("amount", getInner()),
+                    RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
+                        fluidAmount(PylonFluids.OBSCYRA),
+                        fluidCapacity(PylonFluids.OBSCYRA),
+                        20,
+                        TextColor.fromHexString("#000000")
+                )))
+            : Component.translatable("rebartranscendence.item.zot_overloader.waila.not_running")
+                .arguments(RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
+                        fluidAmount(PylonFluids.OBSCYRA),
+                        fluidCapacity(PylonFluids.OBSCYRA),
+                        20,
+                        TextColor.fromHexString("#000000")
+                )))
+        );
     }
 }

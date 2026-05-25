@@ -4,6 +4,11 @@ import io.github.pylonmc.rebar.content.guide.RebarGuide;
 import io.github.pylonmc.rebar.guide.button.MachineRecipesButton;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
+import io.github.tagdl.RebarTranscEndence.blocks.StableMachine;
+import io.github.tagdl.RebarTranscEndence.blocks.ZotCollector;
+import io.github.tagdl.RebarTranscEndence.blocks.ZotCondenser;
+import io.github.tagdl.RebarTranscEndence.blocks.ZotOverloader;
+import io.github.tagdl.RebarTranscEndence.blocks.ZotReverser;
 import io.github.tagdl.RebarTranscEndence.items.UnstableIngot;
 import io.github.tagdl.RebarTranscEndence.items.ZotDown2;
 import io.github.tagdl.RebarTranscEndence.items.ZotLeft2;
@@ -165,17 +170,17 @@ public final class RebarTranscEndenceItems {
         // Register a 'normal' item which represents Example Block
         // Blocks and their corresponding item will almost always share the same key
         // Note the 3rd parameter - this is the key of the corresponding block registered in [RebarTranscEndenceBlocks]
-        RebarItem.register(RebarItem.class, ZOT_COLLECTOR, RebarTranscEndenceKeys.ZOT_COLLECTOR);
+        RebarItem.register(ZotCollector.Item.class, ZOT_COLLECTOR, RebarTranscEndenceKeys.ZOT_COLLECTOR);
         RebarTranscEndencePages.MACHINES.addItem(ZOT_COLLECTOR);
-        RebarItem.register(RebarItem.class, ZOT_CONDENSER, RebarTranscEndenceKeys.ZOT_CONDENSER);
+        RebarItem.register(ZotCondenser.Item.class, ZOT_CONDENSER, RebarTranscEndenceKeys.ZOT_CONDENSER);
         RebarTranscEndencePages.MACHINES.addItem(ZOT_CONDENSER);
-        RebarItem.register(RebarItem.class, ZOT_REVERSER, RebarTranscEndenceKeys.ZOT_REVERSER);
+        RebarItem.register(ZotReverser.Item.class, ZOT_REVERSER, RebarTranscEndenceKeys.ZOT_REVERSER);
         RebarTranscEndencePages.MACHINES.addItem(ZOT_REVERSER);
         RebarGuide.getOrCreateInfoPage(RebarTranscEndenceKeys.ZOT_REVERSER)
                 .addButton(new MachineRecipesButton(ZOT_REVERSER, ZotReverserRecipe.RECIPE_TYPE));
-        RebarItem.register(RebarItem.class, STABLE_MACHINE, RebarTranscEndenceKeys.STABLE_MACHINE);
+        RebarItem.register(StableMachine.Item.class, STABLE_MACHINE, RebarTranscEndenceKeys.STABLE_MACHINE);
         RebarTranscEndencePages.MACHINES.addItem(STABLE_MACHINE);
-        RebarItem.register(RebarItem.class, ZOT_OVERLOADER, RebarTranscEndenceKeys.ZOT_OVERLOADER);
+        RebarItem.register(ZotOverloader.Item.class, ZOT_OVERLOADER, RebarTranscEndenceKeys.ZOT_OVERLOADER);
         RebarTranscEndencePages.MACHINES.addItem(ZOT_OVERLOADER);
         RebarItem.register(RebarItem.class, NANOBOT_CRAFTER, RebarTranscEndenceKeys.NANOBOT_CRAFTER);
         RebarTranscEndencePages.MACHINES.addItem(NANOBOT_CRAFTER);

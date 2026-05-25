@@ -7,25 +7,194 @@ item:
       <arrow> Unstable degree: %degree%%
       <arrow> An ingot containing immense energy
       <arrow> Holding it for a period of time will <red>result in death
+  zot_up:
+    name: "Quirp UP"
+    lore: |-
+      <arrow> Fundamental particle of the Universe
+  zot_down:
+    name: "Quirp DOWN"
+    lore: |-
+      <arrow> Fundamental particle of the Universe
+  zot_left:
+    name: "Quirp LEFT"
+    lore: |-
+      <arrow> Fundamental particle of the Universe
+  zot_right:
+    name: "Quirp RIGHT"
+    lore: |-
+      <arrow> Fundamental particle of the Universe
   zot_up_2:
-    name: "Uncharge Zot UP"
+    name: "Uncharged Zot UP"
     lore: |-
-      <arrow> Charge degree: %amount%/%max%
+      <arrow> Concentrated matter
+      <arrow> Charged degree: %amount%/%max%
   zot_down_2:
-    name: "Uncharge Zot DOWN"
+    name: "Uncharged Zot DOWN"
     lore: |-
-      <arrow> Charge degree: %amount%/%max%
+      <arrow> Concentrated matter
+      <arrow> Charged degree: %amount%/%max%
   zot_left_2:
-    name: "Uncharge Zot LEFT"
+    name: "Uncharged Zot LEFT"
     lore: |-
-      <arrow> Charge degree: %amount%/%max%
+      <arrow> Concentrated matter
+      <arrow> Charged degree: %amount%/%max%
   zot_right_2:
-    name: "Uncharge Zot RIGHT"
+    name: "Uncharged Zot RIGHT"
     lore: |-
-      <arrow> Charge degree: %amount%/%max%
+      <arrow> Concentrated matter
+      <arrow> Charged degree: %amount%/%max%
+  zot_up_3:
+    name: "Charged Zot UP"
+    lore: |-
+      <arrow> Concentrated matter
+      <arrow> Something contains huge <red>UP <gray>energy
+  zot_down_3:
+    name: "Charged Zot DOWN"
+    lore: |-
+      <arrow> Concentrated matter
+      <arrow> Something contains huge <yellow>DOWN <gray>energy
+  zot_left_3:
+    name: "Charged Zot LEFT"
+    lore: |-
+      <arrow> Concentrated matter
+      <arrow> Something contains huge <green>LEFT <gray>energy
+  zot_right_3:
+    name: "Charged Zot RIGHT"
+    lore: |-
+      <arrow> Concentrated matter
+      <arrow> Something contains huge <blue>RIGHT <gray>energy
+  stable_ingot:
+    name: "Stable Ingot"
+    lore: |-
+      <arrow> <yellow>Priceless material
+  stable_ingot_block:
+    name: "Stable Block"
+    lore: |-
+      <arrow> <yellow>Priceless material
+  zot_cool_down:
+    name: "Zot Cooldown"
+    lore: |-
+      <arrow> An energy singularity
+  daxi_strength:
+    name: "<green>Daxi (S)"
+    lore: |-
+      <arrow> Right click to unleash its power
+  daxi_absorption:
+    name: "<green>Daxi (A)"
+    lore: |-
+      <arrow> Right click to unleash its power
+  daxi_fortitude:
+    name: "<green>Daxi (F)"
+    lore: |-
+      <arrow> Right click to unleash its power
+  daxi_saturation:
+    name: "<green>Daxi (H)"
+    lore: |-
+      <arrow> Right click to unleash its power
+  daxi_regeneration:
+    name: "<green>Daxi (R)"
+    lore: |-
+      <arrow> Right click to unleash its power
+  vertical_polarizer:
+    name: "Vertical Polarizer"
+    lore: |-
+      <arrow> Focuses Oscillator on vertical spins
+      <arrow> Increased chance for vertical spin zots
+  horizontal_polarizer:
+    name: "Horizontal Polarizer"
+    lore: |-
+      <arrow> Focuses Oscillator on horizontal spins
+      <arrow> Increased chance for horizontal spin zots
 
-  example_block:
-    name: "Example Block"
+  nanobot_crafter:
+    name: "Nanobot Crafter"
     lore: |-
-      <arrow> A block that spawns campfire smoke particles
-      <arrow> <insn>Left or right click</insn> to spawn campfire smoke
+      <star> Multiblocks
+      <arrow> 1x <attr><lang:rebartranscendence.item.nanobot_launcher.name></attr>
+      <arrow> 1x <attr><lang:rebartranscendence.item.nanobot_output_hatch.name></attr>
+      <arrow> 1x End Rod
+      <arrow> Allows particle manipulation
+      <arrow> Click <attr><lang:rebartranscendence.item.nanobot_launcher.name></attr> to use
+    waila:
+      running: "Nanobot Crafter | Producing: %result% | Time Left: <yellow>%progress% <white>s"
+      not_running: "Nanobot Crafter | <red>Not Running"
+  nanobot_launcher:
+    name: "Nanobot Launcher"
+    lore: |-
+      <arrow> Part of <attr><lang:rebartranscendence.item.nanobot_crafter.name></attr>
+  nanobot_output_hatch:
+    name: "Nanobot Output Hatch"
+    lore: |-
+      <arrow> Part of <attr><lang:rebartranscendence.item.nanobot_crafter.name></attr>
+  zot_collector:
+    name: "Quirp Collector"
+    lore: |-
+      <arrow> Harnesses Quirps from the void
+      <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
+      <arrow> <attr>Buffer:</attr> %buffer%
+      <arrow> <red>Works only in the end!
+    waila:
+      running: "Quirp Collector | Collected: %output% | Time left: <yellow>%time%<white>s | %input-bar%"
+      not_running: "Quirp Collector | <red>Not running <white>| %input-bar%"
+      none_item: "No Quirp Collected"
+  zot_reverser:
+    name: "Quirp Cycler"
+    lore: |-
+      <arrow> Rotates Quirps
+      <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
+      <arrow> <attr>Buffer:</attr> %buffer%
+    waila:
+      running: "Quirp Cycler | Producing: %result% | Time left: <yellow>%process%<white>s | %input-bar%"
+      not_running: "Quirp Cycler | <red>Not running <white>| %input-bar%"
+  zot_condenser:
+    name: "Quirp Condenser"
+    lore: |-
+      <arrow> Condesates opposite Quirps
+      <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
+      <arrow> <attr>Buffer:</attr> %buffer%
+    waila:
+      running: "Quirp Condenser | Time left: <yellow>%time%<white>s | %input-bar%"
+      not_running: "Quirp Condenser | <red>Not running <white>| %input-bar%"
+  stable_machine:
+    name: "Stabilizer"
+    lore: |-
+      <arrow> A controlled environment
+      <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
+      <arrow> <attr>Buffer:</attr> %buffer%
+    waila:
+      running: "Stabilizer | Time left: <yellow>%time%<white>s | %input-bar%"
+      not_running: "Stabilizer | <red>Not running <white>| %input-bar%"
+  zot_overloader:
+    name: "Zot Overloader"
+    lore: |-
+      <arrow> Even higher power concentrations
+      <arrow> Require 1 of same direction quirp or %diff% of different direction quirp to charge a point
+      <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per works
+      <arrow> <attr>Buffer:</attr> %buffer%
+      <arrow> <red>Works only in the end!
+    waila:
+      running: "Quirp Condenser | Charged: <yellow>%amount% <white>| %input-bar%"
+      not_running: "Quirp Condenser | <red>Not running <white>| %input-bar%"
+gui:
+  stable_machine:
+    input: Put Unstable Ingot and Zot Cooldown
+    progress: <yellow>Status
+  zot_collector:
+    polarizer: Put Vertical Polarizer or Horizontal Polarizer to control chance
+    progress: <yellow>Status
+  zot_condenser:
+    zot: Put Opposite quirp
+    progress: <yellow>Status
+  zot_overloader:
+    up: Put Quirp UP
+    down: Put Quirp DOWN
+    left: Put Quirp LEFT
+    right: Put Quirp RIGHT
+    uncharge: Put Uncharged Zot
+  zot_reverser:
+    zot: Put Quirp
+guide:
+  page:
+    rebartranscendence_guide: <#b24cd8>Rebar TranscEndence
+    rebartranscendence_items: <#b24cd8>Items
+    rebartranscendence_machines: <#b24cd8>Machines

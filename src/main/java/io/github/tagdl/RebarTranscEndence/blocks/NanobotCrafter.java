@@ -1,10 +1,13 @@
 package io.github.tagdl.RebarTranscEndence.blocks;
 
+import static io.github.pylonmc.pylon.util.PylonUtils.colorToTextColor;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -13,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3i;
 
 import io.github.pylonmc.rebar.block.RebarBlock;
@@ -20,18 +24,22 @@ import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
 import io.github.pylonmc.rebar.block.base.RebarRecipeProcessor;
 import io.github.pylonmc.rebar.block.base.RebarSimpleMultiblock;
+import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
 import io.github.pylonmc.rebar.block.base.RebarVirtualInventoryBlock;
 import io.github.pylonmc.rebar.block.context.BlockBreakContext;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.pylonmc.rebar.config.Config;
 import io.github.pylonmc.rebar.config.Settings;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
+import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.recipe.RecipeInput;
 import io.github.pylonmc.rebar.util.MachineUpdateReason;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
+import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndence;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceKeys;
 import io.github.tagdl.RebarTranscEndence.recipe.NanobotCrafterRecipe;
+import net.kyori.adventure.text.Component;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.inventory.VirtualInventory;
 
@@ -39,6 +47,7 @@ public class NanobotCrafter extends RebarBlock implements
         RebarDirectionalBlock,
         RebarSimpleMultiblock,
         RebarVirtualInventoryBlock,
+        RebarTickingBlock,
         RebarRecipeProcessor<NanobotCrafterRecipe>,
         RebarGuiBlock
 {
@@ -91,7 +100,6 @@ public class NanobotCrafter extends RebarBlock implements
                         player.getWorld().playSound(block.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 1F);
                     } else {
                         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1F, 1F);
-                        finishRecipe();
                     }
                 }
             }, j * Math.round(timeconsume / 3));
@@ -126,6 +134,12 @@ public class NanobotCrafter extends RebarBlock implements
         return result;
     }
     @Override
+    public void tick() {
+        if (isProcessingRecipe()) {
+            progressRecipe(20);
+        }
+    }
+    @Override
     public void onRecipeFinished(@NotNull NanobotCrafterRecipe recipe) {
         getMultiblockComponentOrThrow(NanobotOutpuHatch.class, new Vector3i(2, 0, 0))
                 .inventory
@@ -138,5 +152,13 @@ public class NanobotCrafter extends RebarBlock implements
     @Override
     public void onBreak(@NotNull List<@NotNull ItemStack> drops, @NotNull BlockBreakContext context) {
         RebarVirtualInventoryBlock.super.onBreak(drops, context);
+    }
+    @Override
+    public @Nullable WailaDisplay getWaila(@NotNull Player player) {
+        return new WailaDisplay(isProcessingRecipe() 
+            ? Component.translatable("rebartranscendence.item.nanobot_crafter.waila.running")
+                .arguments(RebarArgument.of("progress", getRecipeTicksRemaining() / 20),
+                    RebarArgument.of("result", getCurrentRecipe().result().effectiveName().color(colorToTextColor(Color.LIME))))
+            : Component.translatable("rebartranscendence.item.nanobot_crafter.waila.not_running"));
     }
 }
