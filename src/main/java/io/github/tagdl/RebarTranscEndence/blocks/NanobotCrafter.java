@@ -22,6 +22,7 @@ import org.joml.Vector3i;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
 import io.github.pylonmc.rebar.block.base.RebarRecipeProcessor;
 import io.github.pylonmc.rebar.block.base.RebarSimpleMultiblock;
 import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
@@ -32,6 +33,7 @@ import io.github.pylonmc.rebar.config.Config;
 import io.github.pylonmc.rebar.config.Settings;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
+import io.github.pylonmc.rebar.logistics.LogisticGroupType;
 import io.github.pylonmc.rebar.recipe.RecipeInput;
 import io.github.pylonmc.rebar.util.MachineUpdateReason;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
@@ -47,6 +49,7 @@ public class NanobotCrafter extends RebarBlock implements
         RebarDirectionalBlock,
         RebarSimpleMultiblock,
         RebarVirtualInventoryBlock,
+        RebarLogisticBlock,
         RebarTickingBlock,
         RebarRecipeProcessor<NanobotCrafterRecipe>,
         RebarGuiBlock
@@ -62,6 +65,17 @@ public class NanobotCrafter extends RebarBlock implements
     }
     public NanobotCrafter(@NotNull Block block, @NotNull PersistentDataContainer pdc) {
         super(block, pdc);
+    }
+    @Override
+    public void postInitialise() {
+        inputInventory.addPreUpdateHandler(event -> {
+            if (!(event.getUpdateReason() instanceof MachineUpdateReason)) {
+                if (event.isRemove() || event.isSwap()) {
+                    event.setCancelled(isProcessingRecipe());
+                }
+            }
+        });
+        createLogisticGroup("input", LogisticGroupType.INPUT, inputInventory);
     }
     @Override
     public @NotNull Map<Vector3i, MultiblockComponent> getComponents() {
@@ -113,7 +127,7 @@ public class NanobotCrafter extends RebarBlock implements
             boolean find = true;
             for (int i = 0; i < recipe.inputs().size(); i++) {
                 RecipeInput.Item input = recipe.inputs().get(i);
-                if (input.matches(inputInventory.getItem(i))) {
+                if (input.matches(inputInventory.getItem(i).asOne())) {
                     find = true;
                     continue;
                 }

@@ -147,7 +147,7 @@ public class ZotReverser extends RebarBlock implements
     }
     public void tryStartRecipe() {
         if (isProcessingRecipe()) return;
-        ItemStack itemStack = zotInventory.getItem(0);
+        ItemStack itemStack = zotInventory.getItem(0).asOne();
         if (itemStack == null) return;
         if (getLastRecipe() != null && tryStartRecipe(getLastRecipe(), itemStack)) return;
 

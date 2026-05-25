@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -161,6 +162,7 @@ public class ZotOverloader extends RebarBlock implements
     @Override
     public void tick() {
         if (getBlock() == null || !getBlock().getChunk().isLoaded()) return;
+        if (getBlock().getWorld().getEnvironment() != World.Environment.THE_END) return;
         if (outputInventory == null) return;
         if (outputInventory.getItem(0) == null || outputInventory.getItem(0).isEmpty()) return;
         if (fluidAmount(PylonFluids.OBSCYRA) < fluidPerCraft) return;

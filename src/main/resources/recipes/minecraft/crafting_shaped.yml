@@ -1,21 +1,32 @@
-rebartranscendence:zot_reverser:
-  pattern:
-    - " B "
-    - " A "
-    - "   "
-  key:
-    A: pylon:liselette_conductor
-    B: minecraft:purple_carpet
-  result: rebartranscendence:zot_reverser
-  category: building
-
 rebartranscendence:nanobot_crafter:
   pattern:
-    - " B "
+    - "B B"
     - " A "
-    - "   "
+    - "B B"
   key:
-    A: pylon:liselette_conductor
-    B: minecraft:white_carpet
+    A: minecraft:dispenser
+    B: minecraft:purpur_block
   result: rebartranscendence:nanobot_crafter
+  category: building
+
+rebartranscendence:nanobot_launcher:
+  pattern:
+    - "B B"
+    - " A "
+    - "B B"
+  key:
+    A: minecraft:crafting_table
+    B: minecraft:purpur_block
+  result: rebartranscendence:nanobot_launcher
+  category: building
+
+rebartranscendence:nanobot_output_hatch:
+  pattern:
+    - "B B"
+    - " A "
+    - "B B"
+  key:
+    A: pylon:item_output_hatch
+    B: minecraft:purpur_block
+  result: rebartranscendence:nanobot_output_hatch
   category: building

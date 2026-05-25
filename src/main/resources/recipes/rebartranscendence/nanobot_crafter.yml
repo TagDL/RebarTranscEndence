@@ -78,3 +78,72 @@ rebartranscendence:daxi_regeneration:
     R: rebartranscendence:zot_right_3
     C: minecraft:diamond_block
   result: rebartranscendence:daxi_regeneration
+
+rebartranscendence:zot_reverser:
+  shape:
+    - "AUA"
+    - "LBR"
+    - "ADA"
+  key:
+    A: rebartranscendence:zot_cool_down
+    B: rebartranscendence:zot_collector
+    U: rebartranscendence:zot_up
+    D: rebartranscendence:zot_down
+    L: rebartranscendence:zot_left
+    R: rebartranscendence:zot_right
+  result: rebartranscendence:zot_reverser
+
+rebartranscendence:zot_collector:
+  shape:
+    - "AUA"
+    - "NBN"
+    - "ADA"
+  key:
+    N: pylon:palladium_nugget
+    B: pylon:collimator
+    U: pylon:liselette_anode
+    A: minecraft:purpur_block
+    D: pylon:liselette_cathode
+  result: rebartranscendence:zot_collector
+
+rebartranscendence:zot_condenser:
+  shape:
+    - "AUA"
+    - "LBR"
+    - "ADA"
+  key:
+    B: pylon:fluid_pipe_palladium
+    A: minecraft:blue_ice
+    U: rebartranscendence:zot_up
+    D: rebartranscendence:zot_down
+    L: rebartranscendence:zot_left
+    R: rebartranscendence:zot_right
+  result: rebartranscendence:zot_condenser
+
+rebartranscendence:zot_overloader:
+  shape:
+    - "AUA"
+    - "LBR"
+    - "ADA"
+  key:
+    A: rebartranscendence:zot_cool_down
+    B: rebartranscendence:stable_ingot_block
+    U: rebartranscendence:zot_up
+    D: rebartranscendence:zot_down
+    L: rebartranscendence:zot_left
+    R: rebartranscendence:zot_right
+  result: rebartranscendence:zot_overloader
+
+rebartranscendence:stable_machine:
+  shape:
+    - "AUA"
+    - "LBR"
+    - "ADA"
+  key:
+    A: rebartranscendence:zot_cool_down
+    B: rebartranscendence:unstable_ingot
+    U: rebartranscendence:zot_up
+    D: rebartranscendence:zot_down
+    L: rebartranscendence:zot_left
+    R: rebartranscendence:zot_right
+  result: rebartranscendence:stable_machine

@@ -173,8 +173,8 @@ item:
       <arrow> <attr>Buffer:</attr> %buffer%
       <arrow> <red>Works only in the end!
     waila:
-      running: "Quirp Condenser | Charged: <yellow>%amount% <white>| %input-bar%"
-      not_running: "Quirp Condenser | <red>Not running <white>| %input-bar%"
+      running: "Zot Overloader | Charged: <yellow>%amount% <white>| %input-bar%"
+      not_running: "Zot Overloader | <red>Not running <white>| %input-bar%"
 gui:
   stable_machine:
     input: Put Unstable Ingot and Zot Cooldown
