@@ -199,3 +199,11 @@ guide:
     rebartranscendence_guide: <#b24cd8>Rebar TranscEndence
     rebartranscendence_items: <#b24cd8>Items
     rebartranscendence_machines: <#b24cd8>Machines
+message:
+  unstable-death-message: " tried to become unstable. They succeeded."
+  daxi-message-intro: "You feel power flowing through your veins."
+  daxi-message-strength: "Your strikes are now more effective."
+  daxi-message-absorption: "You feel healthier."
+  daxi-message-fortitude: "Enemy strikes are now less effective."
+  daxi-message-saturation: "You won't need food for a while."
+  daxi-message-regeneration: "You've acquired permanent self-healing."

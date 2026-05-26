@@ -44,36 +44,31 @@ public class DaxiListener implements Listener {
             if (!getPlayerPdc(event.getPlayer(), DAXI_STRENGTH_KEY)) {
                 event.getItem().subtract();
                 setPlayerPdc(event.getPlayer(), DAXI_STRENGTH_KEY, true);
-                event.getPlayer().addPotionEffect(
-                    new PotionEffect(PotionEffectType.STRENGTH, PotionEffect.INFINITE_DURATION, strength));
+                DaxiAnimation.startAnimation(event.getPlayer(), DaxiAnimation.Type.STRENGTH);
             }
         } else if (event.getItem().isSimilar(RebarTranscEndenceItems.DAXI_ABSORPTION)) {
             if (!getPlayerPdc(event.getPlayer(), DAXI_ABSORPTION_KEY)) {
                 event.getItem().subtract();
                 setPlayerPdc(event.getPlayer(), DAXI_ABSORPTION_KEY, true);
-                event.getPlayer().addPotionEffect(
-                    new PotionEffect(PotionEffectType.ABSORPTION, PotionEffect.INFINITE_DURATION, absorption));
+                DaxiAnimation.startAnimation(event.getPlayer(), DaxiAnimation.Type.ABSORPTION);
             }
         } else if (event.getItem().isSimilar(RebarTranscEndenceItems.DAXI_FORTITUDE)) {
             if (!getPlayerPdc(event.getPlayer(), DAXI_FORTITUDE_KEY)) {
                 event.getItem().subtract();
                 setPlayerPdc(event.getPlayer(), DAXI_FORTITUDE_KEY, true);
-                event.getPlayer().addPotionEffect(
-                    new PotionEffect(PotionEffectType.RESISTANCE, PotionEffect.INFINITE_DURATION, fortitude));
+                DaxiAnimation.startAnimation(event.getPlayer(), DaxiAnimation.Type.FORTITUDE);
             }
         } else if (event.getItem().isSimilar(RebarTranscEndenceItems.DAXI_SATURATION)) {
             if (!getPlayerPdc(event.getPlayer(), DAXI_SATURATION_KEY)) {
                 event.getItem().subtract();
                 setPlayerPdc(event.getPlayer(), DAXI_SATURATION_KEY, true);
-                event.getPlayer().addPotionEffect(
-                    new PotionEffect(PotionEffectType.SATURATION, PotionEffect.INFINITE_DURATION, saturation));
+                DaxiAnimation.startAnimation(event.getPlayer(), DaxiAnimation.Type.SATURATION);
             }
         } else if (event.getItem().isSimilar(RebarTranscEndenceItems.DAXI_REGENERATION)) {
             if (!getPlayerPdc(event.getPlayer(), DAXI_REGENERATION_KEY)) {
                 event.getItem().subtract();
                 setPlayerPdc(event.getPlayer(), DAXI_REGENERATION_KEY, true);
-                event.getPlayer().addPotionEffect(
-                    new PotionEffect(PotionEffectType.REGENERATION, PotionEffect.INFINITE_DURATION, regeneration));
+                DaxiAnimation.startAnimation(event.getPlayer(), DaxiAnimation.Type.REGENERATION);
             }
         }
     }
