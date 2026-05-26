@@ -1,0 +1,15 @@
+rebartranscendence:quirp_up:
+  input: rebartranscendence:quirp_left
+  result: rebartranscendence:quirp_up
+  
+rebartranscendence:quirp_down:
+  input: rebartranscendence:quirp_right
+  result: rebartranscendence:quirp_down
+
+rebartranscendence:quirp_left:
+  input: rebartranscendence:quirp_down
+  result: rebartranscendence:quirp_left
+
+rebartranscendence:quirp_right:
+  input: rebartranscendence:quirp_up
+  result: rebartranscendence:quirp_right

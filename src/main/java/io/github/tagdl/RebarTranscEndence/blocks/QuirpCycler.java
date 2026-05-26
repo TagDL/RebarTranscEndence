@@ -39,7 +39,7 @@ import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceItems;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceKeys;
-import io.github.tagdl.RebarTranscEndence.recipe.ZotReverserRecipe;
+import io.github.tagdl.RebarTranscEndence.recipe.QuirpCyclerRecipe;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import xyz.xenondevs.invui.gui.Gui;
@@ -47,22 +47,22 @@ import xyz.xenondevs.invui.inventory.VirtualInventory;
 import xyz.xenondevs.invui.inventory.event.ItemPostUpdateEvent;
 import xyz.xenondevs.invui.inventory.event.ItemPreUpdateEvent;
 
-public class ZotReverser extends RebarBlock implements
+public class QuirpCycler extends RebarBlock implements
         RebarDirectionalBlock,
         RebarTickingBlock,
         RebarFluidBufferBlock,
         RebarLogisticBlock,
-        RebarRecipeProcessor<ZotReverserRecipe>,
+        RebarRecipeProcessor<QuirpCyclerRecipe>,
         RebarVirtualInventoryBlock,
         RebarGuiBlock
 {
-    private static final Config settings = Settings.get(RebarTranscEndenceKeys.ZOT_REVERSER);
+    private static final Config settings = Settings.get(RebarTranscEndenceKeys.QUIRP_CYCLER);
     public static final double buffer = settings.getOrThrow("buffer", ConfigAdapter.INTEGER);
     public static final double fluidPerCraft = settings.getOrThrow("fluid-per-craft", ConfigAdapter.INTEGER);
     public static final int timeconsume = Math.round(settings.getOrThrow("seconds-consume", ConfigAdapter.FLOAT) * 20);
 
     public final ItemStackBuilder zotStack = ItemStackBuilder.gui(Material.PURPLE_STAINED_GLASS_PANE, getKey() + ":zot")
-            .name(Component.translatable("rebartranscendence.gui.zot_reverser.zot"));
+            .name(Component.translatable("rebartranscendence.gui.quirp_cycler.zot"));
     private final VirtualInventory zotInventory = new VirtualInventory(1);
     private final VirtualInventory outputInventory = new VirtualInventory(1);
     public static class Item extends RebarItem {
@@ -81,16 +81,16 @@ public class ZotReverser extends RebarBlock implements
             );
         }
     }
-    public ZotReverser(@NotNull Block block, @NotNull BlockCreateContext context) {
+    public QuirpCycler(@NotNull Block block, @NotNull BlockCreateContext context) {
         super(block, context);
         setTickInterval(20);
         this.setFacing(context.getFacing());
         createFluidPoint(FluidPointType.INPUT, BlockFace.NORTH, context, false);
         createFluidBuffer(PylonFluids.OBSCYRA, buffer, true, false);
-        setRecipeType(ZotReverserRecipe.RECIPE_TYPE);
+        setRecipeType(QuirpCyclerRecipe.RECIPE_TYPE);
         setRecipeProgressItem(new ProgressItem(GuiItems.background()));
     }
-    public ZotReverser(@NotNull Block block, @NotNull PersistentDataContainer pdc) {
+    public QuirpCycler(@NotNull Block block, @NotNull PersistentDataContainer pdc) {
         super(block, pdc);
     }
     @Override
@@ -141,21 +141,22 @@ public class ZotReverser extends RebarBlock implements
         }     
     }
     @Override
-    public void onRecipeFinished(@NotNull ZotReverserRecipe recipe) {
+    public void onRecipeFinished(@NotNull QuirpCyclerRecipe recipe) {
         getRecipeProgressItem().setItem(GuiItems.background());
         outputInventory.addItem(new MachineUpdateReason(), recipe.result());
     }
     public void tryStartRecipe() {
         if (isProcessingRecipe()) return;
-        ItemStack itemStack = zotInventory.getItem(0).asOne();
+        if (zotInventory.isEmpty()) return;
+        ItemStack itemStack = zotInventory.getItem(0).clone();
         if (itemStack == null) return;
         if (getLastRecipe() != null && tryStartRecipe(getLastRecipe(), itemStack)) return;
 
-        for (ZotReverserRecipe recipe : ZotReverserRecipe.RECIPE_TYPE) {
+        for (QuirpCyclerRecipe recipe : QuirpCyclerRecipe.RECIPE_TYPE) {
             if (tryStartRecipe(recipe, itemStack)) return;
         }
     }
-    public boolean tryStartRecipe(@NotNull ZotReverserRecipe recipe, ItemStack itemStack) {
+    public boolean tryStartRecipe(@NotNull QuirpCyclerRecipe recipe, ItemStack itemStack) {
         if (!recipe.input().matches(itemStack)) return false; //continue loop
         if (!outputInventory.canHold(recipe.result())) return true; //stop loop
 
@@ -166,11 +167,17 @@ public class ZotReverser extends RebarBlock implements
     }
     private ItemStack reverseZot(ItemStack itemStack) {
         ItemStack resulItemStack = itemStack;
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_DOWN.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_UP.clone();
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_UP.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_DOWN.clone();
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_RIGHT.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_LEFT.clone();
-        if (itemStack.isSimilar(RebarTranscEndenceItems.ZOT_LEFT.clone())) resulItemStack = RebarTranscEndenceItems.ZOT_RIGHT.clone();
+        if (itemStack.isSimilar(RebarTranscEndenceItems.QUIRP_DOWN.clone())) resulItemStack = RebarTranscEndenceItems.QUIRP_UP.clone();
+        if (itemStack.isSimilar(RebarTranscEndenceItems.QUIRP_UP.clone())) resulItemStack = RebarTranscEndenceItems.QUIRP_DOWN.clone();
+        if (itemStack.isSimilar(RebarTranscEndenceItems.QUIRP_RIGHT.clone())) resulItemStack = RebarTranscEndenceItems.QUIRP_LEFT.clone();
+        if (itemStack.isSimilar(RebarTranscEndenceItems.QUIRP_LEFT.clone())) resulItemStack = RebarTranscEndenceItems.QUIRP_RIGHT.clone();
         return resulItemStack;
+    }
+    @Override
+    public void postLoad() {
+        if (isProcessingRecipe()) {
+            finishRecipe();
+        }
     }
     @Override
     public @NotNull Map<@NotNull String, @NotNull VirtualInventory> getVirtualInventories() {
@@ -184,17 +191,17 @@ public class ZotReverser extends RebarBlock implements
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
         return new WailaDisplay(isProcessingRecipe()
-            ? Component.translatable("rebartranscendence.item.zot_reverser.waila.running")
+            ? Component.translatable("rebartranscendence.item.quirp_cycler.waila.running")
                 .arguments(
                     RebarArgument.of("result", getCurrentRecipe().result().effectiveName()),
-                    RebarArgument.of("process", getRecipeTicksRemaining() / 20),
+                    RebarArgument.of("process", UnitFormat.SECONDS.format(getRecipeTicksRemaining() / 20)),
                     RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
                         fluidAmount(PylonFluids.OBSCYRA),
                         fluidCapacity(PylonFluids.OBSCYRA),
                         20,
                         TextColor.fromHexString("#000000")
                 )))
-            : Component.translatable("rebartranscendence.item.zot_reverser.waila.not_running")
+            : Component.translatable("rebartranscendence.item.quirp_cycler.waila.not_running")
                 .arguments(RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
                         fluidAmount(PylonFluids.OBSCYRA),
                         fluidCapacity(PylonFluids.OBSCYRA),

@@ -16,11 +16,11 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 
-public class Zot_2 extends RebarItem {
-    private static final NamespacedKey AMOUNT_KEY = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_2_amount");
-    private static final Config settings = Settings.get(new NamespacedKey(RebarTranscEndence.getInstance(), "zot_2"));
+public class Zot extends RebarItem {
+    private static final NamespacedKey AMOUNT_KEY = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_amount");
+    private static final Config settings = Settings.get(new NamespacedKey(RebarTranscEndence.getInstance(), "zot"));
     public final int maxAmount = settings.getOrThrow("max-amount", ConfigAdapter.INTEGER);
-    public Zot_2(@NotNull ItemStack stack) {
+    public Zot(@NotNull ItemStack stack) {
         super(stack);
     }
     public void setAmount(int amount) {
@@ -29,10 +29,10 @@ public class Zot_2 extends RebarItem {
     public int getAmount() {
         return getStack().getPersistentDataContainer().getOrDefault(AMOUNT_KEY, PersistentDataType.INTEGER, 0);
     }
-    public boolean isSimilar(Zot_2 zot_2) {
-        zot_2.setAmount(0);
+    public boolean isSimilar(Zot zot) {
+        zot.setAmount(0);
         setAmount(0);
-        return zot_2.getStack().isSimilar(getStack());
+        return zot.getStack().isSimilar(getStack());
     }
     @Override
     public @NotNull List<RebarArgument> getPlaceholders() {

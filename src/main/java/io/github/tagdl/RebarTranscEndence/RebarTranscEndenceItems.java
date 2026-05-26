@@ -4,73 +4,67 @@ import io.github.pylonmc.rebar.content.guide.RebarGuide;
 import io.github.pylonmc.rebar.guide.button.MachineRecipesButton;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
-import io.github.tagdl.RebarTranscEndence.blocks.StableMachine;
-import io.github.tagdl.RebarTranscEndence.blocks.ZotCollector;
-import io.github.tagdl.RebarTranscEndence.blocks.ZotCondenser;
+import io.github.tagdl.RebarTranscEndence.blocks.Stabilizer;
+import io.github.tagdl.RebarTranscEndence.blocks.QuirpOscillator;
+import io.github.tagdl.RebarTranscEndence.blocks.QuirpAnnihilator;
 import io.github.tagdl.RebarTranscEndence.blocks.ZotOverloader;
-import io.github.tagdl.RebarTranscEndence.blocks.ZotReverser;
+import io.github.tagdl.RebarTranscEndence.blocks.QuirpCycler;
 import io.github.tagdl.RebarTranscEndence.items.UnstableIngot;
-import io.github.tagdl.RebarTranscEndence.items.ZotDown2;
-import io.github.tagdl.RebarTranscEndence.items.ZotLeft2;
-import io.github.tagdl.RebarTranscEndence.items.ZotRight2;
-import io.github.tagdl.RebarTranscEndence.items.ZotUp2;
+import io.github.tagdl.RebarTranscEndence.items.ZotDown;
+import io.github.tagdl.RebarTranscEndence.items.ZotLeft;
+import io.github.tagdl.RebarTranscEndence.items.ZotRight;
+import io.github.tagdl.RebarTranscEndence.items.ZotUp;
 import io.github.tagdl.RebarTranscEndence.recipe.NanobotCrafterRecipe;
-import io.github.tagdl.RebarTranscEndence.recipe.ZotReverserRecipe;
+import io.github.tagdl.RebarTranscEndence.recipe.QuirpCyclerRecipe;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-
 public final class RebarTranscEndenceItems {
-
-    public static final ItemStack ZOT_UP = ItemStackBuilder.rebar(Material.RED_DYE, RebarTranscEndenceKeys.ZOT_UP)
+    public static final ItemStack QUIRP_UP = ItemStackBuilder.rebar(Material.RED_CONCRETE, RebarTranscEndenceKeys.QUIRP_UP)
             .build();
-    public static final ItemStack ZOT_DOWN = ItemStackBuilder.rebar(Material.YELLOW_DYE, RebarTranscEndenceKeys.ZOT_DOWN)
+    public static final ItemStack QUIRP_DOWN = ItemStackBuilder.rebar(Material.YELLOW_CONCRETE, RebarTranscEndenceKeys.QUIRP_DOWN)
             .build();
-    public static final ItemStack ZOT_LEFT = ItemStackBuilder.rebar(Material.GREEN_DYE, RebarTranscEndenceKeys.ZOT_LEFT)
+    public static final ItemStack QUIRP_LEFT = ItemStackBuilder.rebar(Material.LIME_CONCRETE, RebarTranscEndenceKeys.QUIRP_LEFT)
             .build();
-    public static final ItemStack ZOT_RIGHT = ItemStackBuilder.rebar(Material.BLUE_DYE, RebarTranscEndenceKeys.ZOT_RIGHT)
+    public static final ItemStack QUIRP_RIGHT = ItemStackBuilder.rebar(Material.BLUE_CONCRETE, RebarTranscEndenceKeys.QUIRP_RIGHT)
             .build();
-    public static final ItemStack ZOT_UP_2 = ItemStackBuilder.rebar(Material.RED_DYE, RebarTranscEndenceKeys.ZOT_UP_2)
+    public static final ItemStack ZOT_UP = ItemStackBuilder.rebar(Material.RED_CONCRETE, RebarTranscEndenceKeys.ZOT_UP)
                 .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack ZOT_DOWN_2 = ItemStackBuilder.rebar(Material.YELLOW_DYE, RebarTranscEndenceKeys.ZOT_DOWN_2)
+    public static final ItemStack ZOT_DOWN = ItemStackBuilder.rebar(Material.YELLOW_CONCRETE, RebarTranscEndenceKeys.ZOT_DOWN)
                 .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack ZOT_LEFT_2 = ItemStackBuilder.rebar(Material.GREEN_DYE, RebarTranscEndenceKeys.ZOT_LEFT_2)
+    public static final ItemStack ZOT_LEFT = ItemStackBuilder.rebar(Material.LIME_CONCRETE, RebarTranscEndenceKeys.ZOT_LEFT)
                 .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack ZOT_RIGHT_2 = ItemStackBuilder.rebar(Material.BLUE_DYE, RebarTranscEndenceKeys.ZOT_RIGHT_2)
+    public static final ItemStack ZOT_RIGHT = ItemStackBuilder.rebar(Material.BLUE_CONCRETE, RebarTranscEndenceKeys.ZOT_RIGHT)
                 .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack ZOT_UP_3 = ItemStackBuilder.rebar(Material.RED_DYE, RebarTranscEndenceKeys.ZOT_UP_3)
-                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+    public static final ItemStack ZOT_UP_2 = ItemStackBuilder.rebar(Material.RED_GLAZED_TERRACOTTA, RebarTranscEndenceKeys.ZOT_UP_2)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack ZOT_DOWN_3 = ItemStackBuilder.rebar(Material.YELLOW_DYE, RebarTranscEndenceKeys.ZOT_DOWN_3)
-                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+    public static final ItemStack ZOT_DOWN_2 = ItemStackBuilder.rebar(Material.YELLOW_GLAZED_TERRACOTTA, RebarTranscEndenceKeys.ZOT_DOWN_2)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack ZOT_LEFT_3 = ItemStackBuilder.rebar(Material.GREEN_DYE, RebarTranscEndenceKeys.ZOT_LEFT_3)
-                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+    public static final ItemStack ZOT_LEFT_2 = ItemStackBuilder.rebar(Material.LIME_GLAZED_TERRACOTTA, RebarTranscEndenceKeys.ZOT_LEFT_2)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack ZOT_RIGHT_3 = ItemStackBuilder.rebar(Material.BLUE_DYE, RebarTranscEndenceKeys.ZOT_RIGHT_3)
-                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+    public static final ItemStack ZOT_RIGHT_2 = ItemStackBuilder.rebar(Material.BLUE_GLAZED_TERRACOTTA, RebarTranscEndenceKeys.ZOT_RIGHT_2)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
     public static final ItemStack UNSTABLE_INGOT = ItemStackBuilder.rebar(Material.NETHER_BRICK, RebarTranscEndenceKeys.UNSTABLE_INGOT)
             .build();
     public static final ItemStack STABLE_INGOT = ItemStackBuilder.rebar(Material.BRICK, RebarTranscEndenceKeys.STABLE_INGOT)
             .build();
-    public static final ItemStack STABLE_INGOT_BLOCK = ItemStackBuilder.rebar(Material.BRICKS, RebarTranscEndenceKeys.STABLE_INGOT_BLOCK)
+    public static final ItemStack STABLE_BLOCK = ItemStackBuilder.rebar(Material.BRICKS, RebarTranscEndenceKeys.STABLE_BLOCK)
             .build();
-    public static final ItemStack ZOT_COOL_DOWN = ItemStackBuilder.rebar(Material.GRAY_DYE, RebarTranscEndenceKeys.ZOT_COOL_DOWN)
+    public static final ItemStack QUIRP_CONDENSATE = ItemStackBuilder.rebar(Material.GRAY_GLAZED_TERRACOTTA, RebarTranscEndenceKeys.QUIRP_CONDENSATE)
             .build();
     public static final ItemStack VERTICAL_POLARIZER = ItemStackBuilder.rebar(Material.END_ROD, RebarTranscEndenceKeys.VERTICAL_POLARIZER)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
@@ -78,29 +72,35 @@ public final class RebarTranscEndenceItems {
     public static final ItemStack HORIZONTAL_POLARIZER = ItemStackBuilder.rebar(Material.END_ROD, RebarTranscEndenceKeys.HORIZONTAL_POLARIZER)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack DAXI_STRENGTH = ItemStackBuilder.rebar(Material.END_ROD, RebarTranscEndenceKeys.DAXI_STRENGTH)
+    public static final ItemStack DAXI_STRENGTH = ItemStackBuilder.rebar(Material.WHITE_GLAZED_TERRACOTTA, RebarTranscEndenceKeys.DAXI_STRENGTH)
+                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack DAXI_ABSORPTION = ItemStackBuilder.rebar(Material.END_ROD, RebarTranscEndenceKeys.DAXI_ABSORPTION)
+    public static final ItemStack DAXI_ABSORPTION = ItemStackBuilder.rebar(Material.WHITE_GLAZED_TERRACOTTA, RebarTranscEndenceKeys.DAXI_ABSORPTION)
+                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack DAXI_FORTITUDE = ItemStackBuilder.rebar(Material.END_ROD, RebarTranscEndenceKeys.DAXI_FORTITUDE)
+    public static final ItemStack DAXI_FORTITUDE = ItemStackBuilder.rebar(Material.WHITE_GLAZED_TERRACOTTA, RebarTranscEndenceKeys.DAXI_FORTITUDE)
+                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack DAXI_SATURATION = ItemStackBuilder.rebar(Material.END_ROD, RebarTranscEndenceKeys.DAXI_SATURATION)
+    public static final ItemStack DAXI_SATURATION = ItemStackBuilder.rebar(Material.WHITE_GLAZED_TERRACOTTA, RebarTranscEndenceKeys.DAXI_SATURATION)
+                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
-    public static final ItemStack DAXI_REGENERATION = ItemStackBuilder.rebar(Material.END_ROD, RebarTranscEndenceKeys.DAXI_REGENERATION)
+    public static final ItemStack DAXI_REGENERATION = ItemStackBuilder.rebar(Material.WHITE_GLAZED_TERRACOTTA, RebarTranscEndenceKeys.DAXI_REGENERATION)
+                .set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+                .set(DataComponentTypes.MAX_STACK_SIZE, 1)
                 .set(DataComponentTypes.MAX_STACK_SIZE, 1)
             .build();
 
-    public static final ItemStack ZOT_COLLECTOR = ItemStackBuilder.rebar(Material.PURPUR_PILLAR, RebarTranscEndenceKeys.ZOT_COLLECTOR)
+    public static final ItemStack QUIRP_OSCILLATOR = ItemStackBuilder.rebar(Material.PURPUR_PILLAR, RebarTranscEndenceKeys.QUIRP_OSCILLATOR)
             .build();
-    public static final ItemStack ZOT_CONDENSER = ItemStackBuilder.rebar(Material.YELLOW_CONCRETE, RebarTranscEndenceKeys.ZOT_CONDENSER)
+    public static final ItemStack QUIRP_ANNIHILATOR = ItemStackBuilder.rebar(Material.YELLOW_CONCRETE, RebarTranscEndenceKeys.QUIRP_ANNIHILATOR)
             .build();
-    public static final ItemStack ZOT_REVERSER = ItemStackBuilder.rebar(Material.BLUE_CONCRETE, RebarTranscEndenceKeys.ZOT_REVERSER)
+    public static final ItemStack QUIRP_CYCLER = ItemStackBuilder.rebar(Material.BLUE_CONCRETE, RebarTranscEndenceKeys.QUIRP_CYCLER)
             .build();
-    public static final ItemStack STABLE_MACHINE = ItemStackBuilder.rebar(Material.BLACK_CONCRETE, RebarTranscEndenceKeys.STABLE_MACHINE)
+    public static final ItemStack STABILIZER = ItemStackBuilder.rebar(Material.BLACK_CONCRETE, RebarTranscEndenceKeys.STABILIZER)
             .build();
     public static final ItemStack ZOT_OVERLOADER = ItemStackBuilder.rebar(Material.WHITE_CONCRETE, RebarTranscEndenceKeys.ZOT_OVERLOADER)
             .build();
@@ -110,45 +110,44 @@ public final class RebarTranscEndenceItems {
             .build();
     public static final ItemStack NANOBOT_OUTPUT_HATCH = ItemStackBuilder.rebar(Material.PURPUR_BLOCK, RebarTranscEndenceKeys.NANOBOT_OUTPUT_HATCH)
             .build();
-
     public static void initialize() {
-        // Register an item using the ExampleItem class
-        RebarItem.register(RebarItem.class, ZOT_UP);
+
+        RebarItem.register(RebarItem.class, QUIRP_UP);
+        RebarTranscEndencePages.ITEMS.addItem(QUIRP_UP);
+        RebarItem.register(RebarItem.class, QUIRP_DOWN);
+        RebarTranscEndencePages.ITEMS.addItem(QUIRP_DOWN);
+        RebarItem.register(RebarItem.class, QUIRP_LEFT);
+        RebarTranscEndencePages.ITEMS.addItem(QUIRP_LEFT);
+        RebarItem.register(RebarItem.class, QUIRP_RIGHT);
+        RebarTranscEndencePages.ITEMS.addItem(QUIRP_RIGHT);
+
+        RebarItem.register(ZotUp.class, ZOT_UP);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_UP);
-        RebarItem.register(RebarItem.class, ZOT_DOWN);
+        RebarItem.register(ZotDown.class, ZOT_DOWN);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_DOWN);
-        RebarItem.register(RebarItem.class, ZOT_LEFT);
+        RebarItem.register(ZotLeft.class, ZOT_LEFT);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_LEFT);
-        RebarItem.register(RebarItem.class, ZOT_RIGHT);
+        RebarItem.register(ZotRight.class, ZOT_RIGHT);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_RIGHT);
 
-        RebarItem.register(ZotUp2.class, ZOT_UP_2);
+        RebarItem.register(RebarItem.class, ZOT_UP_2);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_UP_2);
-        RebarItem.register(ZotDown2.class, ZOT_DOWN_2);
+        RebarItem.register(RebarItem.class, ZOT_DOWN_2);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_DOWN_2);
-        RebarItem.register(ZotLeft2.class, ZOT_LEFT_2);
+        RebarItem.register(RebarItem.class, ZOT_LEFT_2);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_LEFT_2);
-        RebarItem.register(ZotRight2.class, ZOT_RIGHT_2);
+        RebarItem.register(RebarItem.class, ZOT_RIGHT_2);
         RebarTranscEndencePages.ITEMS.addItem(ZOT_RIGHT_2);
-
-        RebarItem.register(RebarItem.class, ZOT_UP_3);
-        RebarTranscEndencePages.ITEMS.addItem(ZOT_UP_3);
-        RebarItem.register(RebarItem.class, ZOT_DOWN_3);
-        RebarTranscEndencePages.ITEMS.addItem(ZOT_DOWN_3);
-        RebarItem.register(RebarItem.class, ZOT_LEFT_3);
-        RebarTranscEndencePages.ITEMS.addItem(ZOT_LEFT_3);
-        RebarItem.register(RebarItem.class, ZOT_RIGHT_3);
-        RebarTranscEndencePages.ITEMS.addItem(ZOT_RIGHT_3);
 
         RebarItem.register(UnstableIngot.class, UNSTABLE_INGOT);
         RebarTranscEndencePages.ITEMS.addItem(UNSTABLE_INGOT);
         RebarItem.register(RebarItem.class, STABLE_INGOT);
         RebarTranscEndencePages.ITEMS.addItem(STABLE_INGOT);
-        RebarItem.register(RebarItem.class, STABLE_INGOT_BLOCK);
-        RebarTranscEndencePages.ITEMS.addItem(STABLE_INGOT_BLOCK);
+        RebarItem.register(RebarItem.class, STABLE_BLOCK);
+        RebarTranscEndencePages.ITEMS.addItem(STABLE_BLOCK);
 
-        RebarItem.register(RebarItem.class, ZOT_COOL_DOWN);
-        RebarTranscEndencePages.ITEMS.addItem(ZOT_COOL_DOWN);
+        RebarItem.register(RebarItem.class, QUIRP_CONDENSATE);
+        RebarTranscEndencePages.ITEMS.addItem(QUIRP_CONDENSATE);
 
         RebarItem.register(RebarItem.class, VERTICAL_POLARIZER);
         RebarTranscEndencePages.ITEMS.addItem(VERTICAL_POLARIZER);
@@ -167,19 +166,16 @@ public final class RebarTranscEndenceItems {
         RebarTranscEndencePages.ITEMS.addItem(DAXI_REGENERATION);
 
 
-        // Register a 'normal' item which represents Example Block
-        // Blocks and their corresponding item will almost always share the same key
-        // Note the 3rd parameter - this is the key of the corresponding block registered in [RebarTranscEndenceBlocks]
-        RebarItem.register(ZotCollector.Item.class, ZOT_COLLECTOR, RebarTranscEndenceKeys.ZOT_COLLECTOR);
-        RebarTranscEndencePages.MACHINES.addItem(ZOT_COLLECTOR);
-        RebarItem.register(ZotCondenser.Item.class, ZOT_CONDENSER, RebarTranscEndenceKeys.ZOT_CONDENSER);
-        RebarTranscEndencePages.MACHINES.addItem(ZOT_CONDENSER);
-        RebarItem.register(ZotReverser.Item.class, ZOT_REVERSER, RebarTranscEndenceKeys.ZOT_REVERSER);
-        RebarTranscEndencePages.MACHINES.addItem(ZOT_REVERSER);
-        RebarGuide.getOrCreateInfoPage(RebarTranscEndenceKeys.ZOT_REVERSER)
-                .addButton(new MachineRecipesButton(ZOT_REVERSER, ZotReverserRecipe.RECIPE_TYPE));
-        RebarItem.register(StableMachine.Item.class, STABLE_MACHINE, RebarTranscEndenceKeys.STABLE_MACHINE);
-        RebarTranscEndencePages.MACHINES.addItem(STABLE_MACHINE);
+        RebarItem.register(QuirpOscillator.Item.class, QUIRP_OSCILLATOR, RebarTranscEndenceKeys.QUIRP_OSCILLATOR);
+        RebarTranscEndencePages.MACHINES.addItem(QUIRP_OSCILLATOR);
+        RebarItem.register(QuirpAnnihilator.Item.class, QUIRP_ANNIHILATOR, RebarTranscEndenceKeys.QUIRP_ANNIHILATOR);
+        RebarTranscEndencePages.MACHINES.addItem(QUIRP_ANNIHILATOR);
+        RebarItem.register(QuirpCycler.Item.class, QUIRP_CYCLER, RebarTranscEndenceKeys.QUIRP_CYCLER);
+        RebarTranscEndencePages.MACHINES.addItem(QUIRP_CYCLER);
+        RebarGuide.getOrCreateInfoPage(RebarTranscEndenceKeys.QUIRP_CYCLER)
+                .addButton(new MachineRecipesButton(QUIRP_CYCLER, QuirpCyclerRecipe.RECIPE_TYPE));
+        RebarItem.register(Stabilizer.Item.class, STABILIZER, RebarTranscEndenceKeys.STABILIZER);
+        RebarTranscEndencePages.MACHINES.addItem(STABILIZER);
         RebarItem.register(ZotOverloader.Item.class, ZOT_OVERLOADER, RebarTranscEndenceKeys.ZOT_OVERLOADER);
         RebarTranscEndencePages.MACHINES.addItem(ZOT_OVERLOADER);
         RebarItem.register(RebarItem.class, NANOBOT_CRAFTER, RebarTranscEndenceKeys.NANOBOT_CRAFTER);

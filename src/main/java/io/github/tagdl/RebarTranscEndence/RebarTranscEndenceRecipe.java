@@ -1,7 +1,7 @@
 package io.github.tagdl.RebarTranscEndence;
 
 import io.github.tagdl.RebarTranscEndence.recipe.NanobotCrafterRecipe;
-import io.github.tagdl.RebarTranscEndence.recipe.ZotReverserRecipe;
+import io.github.tagdl.RebarTranscEndence.recipe.QuirpCyclerRecipe;
 
 public class RebarTranscEndenceRecipe {
 
@@ -9,7 +9,7 @@ public class RebarTranscEndenceRecipe {
         throw new AssertionError("Utility class");
     }
     public static void initialize() {
-        ZotReverserRecipe.RECIPE_TYPE.register();
+        QuirpCyclerRecipe.RECIPE_TYPE.register();
         NanobotCrafterRecipe.RECIPE_TYPE.register();
     }
 }

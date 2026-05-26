@@ -42,7 +42,7 @@ import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceItems;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceKeys;
-import io.github.tagdl.RebarTranscEndence.items.Zot_2;
+import io.github.tagdl.RebarTranscEndence.items.Zot;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import xyz.xenondevs.invui.gui.Gui;
@@ -75,10 +75,10 @@ public class ZotOverloader extends RebarBlock implements
     private final VirtualInventory zotInventory = new VirtualInventory(4);
     private final VirtualInventory outputInventory = new VirtualInventory(1);
     private final ItemStack[] itemStacks_2 = new ItemStack[]{
-                RebarTranscEndenceItems.ZOT_UP_2.clone(), 
-                RebarTranscEndenceItems.ZOT_DOWN_2.clone(), 
-                RebarTranscEndenceItems.ZOT_LEFT_2.clone(), 
-                RebarTranscEndenceItems.ZOT_RIGHT_2.clone()
+                RebarTranscEndenceItems.ZOT_UP.clone(), 
+                RebarTranscEndenceItems.ZOT_DOWN.clone(), 
+                RebarTranscEndenceItems.ZOT_LEFT.clone(), 
+                RebarTranscEndenceItems.ZOT_RIGHT.clone()
             };
     private Color color = Color.WHITE;
     private int inner_amount = 0;
@@ -120,16 +120,16 @@ public class ZotOverloader extends RebarBlock implements
         if (event.isAdd() || event.isSwap()) {
             switch (event.getSlot()) {
                 case 0:
-                    event.setCancelled(!event.getNewItem().isSimilar(RebarTranscEndenceItems.ZOT_UP.clone()));
+                    event.setCancelled(!event.getNewItem().isSimilar(RebarTranscEndenceItems.QUIRP_UP.clone()));
                     break;
                 case 1:
-                    event.setCancelled(!event.getNewItem().isSimilar(RebarTranscEndenceItems.ZOT_DOWN.clone()));
+                    event.setCancelled(!event.getNewItem().isSimilar(RebarTranscEndenceItems.QUIRP_DOWN.clone()));
                     break;
                 case 2:
-                    event.setCancelled(!event.getNewItem().isSimilar(RebarTranscEndenceItems.ZOT_LEFT.clone()));
+                    event.setCancelled(!event.getNewItem().isSimilar(RebarTranscEndenceItems.QUIRP_LEFT.clone()));
                     break;
                 case 3:
-                    event.setCancelled(!event.getNewItem().isSimilar(RebarTranscEndenceItems.ZOT_RIGHT.clone()));
+                    event.setCancelled(!event.getNewItem().isSimilar(RebarTranscEndenceItems.QUIRP_RIGHT.clone()));
                     break;
                 default:
                     event.setCancelled(true);
@@ -138,7 +138,7 @@ public class ZotOverloader extends RebarBlock implements
         }
     }
     public void onOutputUpdate(ItemPreUpdateEvent event){
-        if (event.isAdd()) event.setCancelled(!(RebarItem.fromStack(event.getNewItem()) instanceof Zot_2));
+        if (event.isAdd()) event.setCancelled(!(RebarItem.fromStack(event.getNewItem()) instanceof Zot));
     }
     @Override
     public @NotNull Gui createGui() {
@@ -170,13 +170,13 @@ public class ZotOverloader extends RebarBlock implements
         Run();
     }
     public void Run() {
-        ItemStack[] zot_3 = {
-            RebarTranscEndenceItems.ZOT_UP_3.clone(),
-            RebarTranscEndenceItems.ZOT_DOWN_3.clone(),
-            RebarTranscEndenceItems.ZOT_LEFT_3.clone(),
-            RebarTranscEndenceItems.ZOT_RIGHT_3.clone()
+        ItemStack[] zot_2 = {
+            RebarTranscEndenceItems.ZOT_UP_2.clone(),
+            RebarTranscEndenceItems.ZOT_DOWN_2.clone(),
+            RebarTranscEndenceItems.ZOT_LEFT_2.clone(),
+            RebarTranscEndenceItems.ZOT_RIGHT_2.clone()
         };
-        Zot_2 zot_2 = (Zot_2) RebarItem.fromStack(outputInventory.getItem(0).asOne());
+        Zot zot = (Zot) RebarItem.fromStack(outputInventory.getItem(0).asOne());
         removeFluid(PylonFluids.OBSCYRA, fluidPerCraft);
         for (int i = 0; i < zotInventory.getSize(); i++) {
             if (RebarItem.fromStack(outputInventory.getItem(0)).getKey().equals(RebarItem.fromStack(itemStacks_2[i]).getKey())) { //find uncharge zot
@@ -196,24 +196,24 @@ public class ZotOverloader extends RebarBlock implements
                 }
             }
         }
-        if (zot_2.getAmount() == zot_2.maxAmount - 1) {
+        if (zot.getAmount() == zot.maxAmount - 1) {
             for (int i = 0; i < itemStacks_2.length; i++) {
                 if (RebarItem.fromStack(outputInventory.getItem(0)).getKey().equals(RebarItem.fromStack(itemStacks_2[i]).getKey())) {
-                    outputInventory.setItem(new MachineUpdateReason(), 0, zot_3[i]);
+                    outputInventory.setItem(new MachineUpdateReason(), 0, zot_2[i]);
                     break;
                 }
             }
         } else {
-            zot_2.setAmount(zot_2.getAmount() + 1);
-            outputInventory.setItem(new MachineUpdateReason(), 0, zot_2.getStack().clone());
-            setInner(zot_2.getStack().asOne(), zot_2.getAmount());
+            zot.setAmount(zot.getAmount() + 1);
+            outputInventory.setItem(new MachineUpdateReason(), 0, zot.getStack().clone());
+            setInner(zot.getStack().asOne(), zot.getAmount());
         }
     }
     public void setInner(ItemStack itemStack, int amount) {
-        if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_UP_2) this.color = Color.RED;
-        else if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_DOWN_2) this.color = Color.YELLOW;
-        else if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_LEFT_2) this.color = Color.LIME;
-        else if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_RIGHT_2) this.color = Color.BLUE;
+        if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_UP) this.color = Color.RED;
+        else if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_DOWN) this.color = Color.YELLOW;
+        else if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_LEFT) this.color = Color.LIME;
+        else if (RebarItem.fromStack(itemStack).getKey() == RebarTranscEndenceKeys.ZOT_RIGHT) this.color = Color.BLUE;
         this.inner_amount = amount;
     }
     public Component getInner() {

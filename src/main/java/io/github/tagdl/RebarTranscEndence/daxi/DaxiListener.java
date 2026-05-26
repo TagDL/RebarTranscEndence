@@ -1,10 +1,12 @@
 package io.github.tagdl.RebarTranscEndence.daxi;
 
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -76,6 +78,44 @@ public class DaxiListener implements Listener {
         }
     }
     @EventHandler
+    public void onEffect(EntityPotionEffectEvent event) {
+        if (!(event.getEntity() instanceof Player)) return;
+        Player player = (Player) event.getEntity();
+        if (event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION 
+                || event.getCause() == EntityPotionEffectEvent.Cause.MILK) {
+            if (getPlayerPdc(player, DAXI_STRENGTH_KEY)) {
+                Bukkit.getScheduler().runTask(RebarTranscEndence.getInstance(), () -> {
+                    player.addPotionEffect(
+                        new PotionEffect(PotionEffectType.STRENGTH, PotionEffect.INFINITE_DURATION, strength));
+                });
+            }
+            if (getPlayerPdc(player, DAXI_ABSORPTION_KEY)) {
+                Bukkit.getScheduler().runTask(RebarTranscEndence.getInstance(), () -> {
+                    player.addPotionEffect(
+                        new PotionEffect(PotionEffectType.ABSORPTION, PotionEffect.INFINITE_DURATION, absorption));
+                });
+            }
+            if (getPlayerPdc(player, DAXI_FORTITUDE_KEY)) {
+                Bukkit.getScheduler().runTask(RebarTranscEndence.getInstance(), () -> {
+                    player.addPotionEffect(
+                        new PotionEffect(PotionEffectType.RESISTANCE, PotionEffect.INFINITE_DURATION, fortitude));
+                });
+            }
+            if (getPlayerPdc(player, DAXI_SATURATION_KEY)) {
+                Bukkit.getScheduler().runTask(RebarTranscEndence.getInstance(), () -> {
+                    player.addPotionEffect(
+                        new PotionEffect(PotionEffectType.SATURATION, PotionEffect.INFINITE_DURATION, saturation));
+                });
+            }
+            if (getPlayerPdc(player, DAXI_REGENERATION_KEY)) {
+                Bukkit.getScheduler().runTask(RebarTranscEndence.getInstance(), () -> {
+                    player.addPotionEffect(
+                        new PotionEffect(PotionEffectType.REGENERATION, PotionEffect.INFINITE_DURATION, regeneration));
+                });
+            }
+        }
+    }
+    @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) { //give up thinking, it just works
         int drop_amount = 0;
         if (getPlayerPdc(event.getPlayer(), DAXI_STRENGTH_KEY)) {
@@ -99,7 +139,7 @@ public class DaxiListener implements Listener {
             drop_amount += 4;
         }
         if (drop_amount != 0) {
-            ItemStack dropItemStack = RebarTranscEndenceItems.STABLE_INGOT_BLOCK.clone();
+            ItemStack dropItemStack = RebarTranscEndenceItems.STABLE_BLOCK.clone();
             dropItemStack.setAmount(drop_amount);
             event.getPlayer().getWorld().dropItem(event.getPlayer().getLocation(), dropItemStack);   
         }

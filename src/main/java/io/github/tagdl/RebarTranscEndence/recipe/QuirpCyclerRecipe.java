@@ -23,18 +23,18 @@ import io.github.pylonmc.rebar.util.gui.GuiItems;
 import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndence;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceItems;
-import io.github.tagdl.RebarTranscEndence.blocks.ZotReverser;
+import io.github.tagdl.RebarTranscEndence.blocks.QuirpCycler;
 import xyz.xenondevs.invui.gui.Gui;
 
-public record ZotReverserRecipe(
+public record QuirpCyclerRecipe(
         @NotNull NamespacedKey key,
         @NotNull RecipeInput.Item input,
         @NotNull ItemStack result
 ) implements RebarRecipe {
-    public static final RecipeType<ZotReverserRecipe> RECIPE_TYPE = new ConfigurableRecipeType<>(new NamespacedKey(RebarTranscEndence.getInstance(), "zot_reverser")) {
+    public static final RecipeType<QuirpCyclerRecipe> RECIPE_TYPE = new ConfigurableRecipeType<>(new NamespacedKey(RebarTranscEndence.getInstance(), "quirp_cycler")) {
         @Override
-        protected @NotNull ZotReverserRecipe loadRecipe(@NotNull NamespacedKey key, @NotNull ConfigSection section) {
-            return new ZotReverserRecipe(
+        protected @NotNull QuirpCyclerRecipe loadRecipe(@NotNull NamespacedKey key, @NotNull ConfigSection section) {
+            return new QuirpCyclerRecipe(
                     key,
                     section.getOrThrow("input", ConfigAdapter.RECIPE_INPUT_ITEM),
                     section.getOrThrow("result", ConfigAdapter.ITEM_STACK)
@@ -66,17 +66,17 @@ public record ZotReverserRecipe(
                 )
                 .addIngredient('#', GuiItems.backgroundBlack())
                 .addIngredient('i', ItemButton.of(input))
-                .addIngredient('h', new ItemButton(RebarTranscEndenceItems.ZOT_REVERSER))
+                .addIngredient('h', new ItemButton(RebarTranscEndenceItems.QUIRP_CYCLER))
                 .addIngredient('o', ItemButton.of(result))
-                .addIngredient('p', GuiItems.progressCyclingItem(ZotReverser.timeconsume,
+                .addIngredient('p', GuiItems.progressCyclingItem(QuirpCycler.timeconsume,
                     ItemStackBuilder.of(Material.CLOCK)
                             .name(net.kyori.adventure.text.Component.translatable(
-                                    "rebartranscendence.guide.recipe.zot_reverser",
-                                    RebarArgument.of("time", UnitFormat.SECONDS.format(ZotReverser.timeconsume / 20.0))
+                                    "rebartranscendence.gui.quirp_cycler.recipe",
+                                    RebarArgument.of("time", UnitFormat.SECONDS.format(QuirpCycler.timeconsume / 20.0))
                             ))
                 ))
                 .addIngredient('l', new FluidButton(
-                    ZotReverser.fluidPerCraft * ZotReverser.timeconsume, PylonFluids.OBSCYRA))
+                    QuirpCycler.fluidPerCraft * QuirpCycler.timeconsume / 20, PylonFluids.OBSCYRA))
                 .build();
     }
 }

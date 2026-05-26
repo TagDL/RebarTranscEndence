@@ -47,7 +47,7 @@ import xyz.xenondevs.invui.inventory.VirtualInventory;
 import xyz.xenondevs.invui.inventory.event.ItemPostUpdateEvent;
 import xyz.xenondevs.invui.inventory.event.ItemPreUpdateEvent;
 
-public class StableMachine extends RebarBlock implements
+public class Stabilizer extends RebarBlock implements
         RebarDirectionalBlock,
         RebarFluidBufferBlock,
         RebarVirtualInventoryBlock,
@@ -56,15 +56,15 @@ public class StableMachine extends RebarBlock implements
         RebarProcessor,
         RebarGuiBlock
 {
-    private static final Config settings = Settings.get(RebarTranscEndenceKeys.STABLE_MACHINE);
+    private static final Config settings = Settings.get(RebarTranscEndenceKeys.STABILIZER);
     public static final double buffer = settings.getOrThrow("buffer", ConfigAdapter.INTEGER);
     public static final double fluidPerCraft = settings.getOrThrow("fluid-per-craft", ConfigAdapter.INTEGER);
     public static final int timeconsume = Math.round(settings.getOrThrow("seconds-consume", ConfigAdapter.FLOAT) * 20);
 
     public final ItemStackBuilder inputStack = ItemStackBuilder.gui(Material.PURPLE_STAINED_GLASS_PANE, getKey() + ":input")
-            .name(Component.translatable("rebartranscendence.gui.stable_machine.input"));
+            .name(Component.translatable("rebartranscendence.gui.stabilizer.input"));
     private final ItemStackBuilder progressItemStackBuilder = ItemStackBuilder.of(Material.CLOCK)
-            .name(Component.translatable("rebartranscendence.gui.stable_machine.progress"));
+            .name(Component.translatable("rebartranscendence.gui.stabilizer.progress"));
     private final ProgressItem progressItem = new ProgressItem(progressItemStackBuilder, false);
     private final VirtualInventory cooldownInventory = new VirtualInventory(1);
     private final VirtualInventory ingotInventory = new VirtualInventory(1);
@@ -85,14 +85,14 @@ public class StableMachine extends RebarBlock implements
             );
         }
     }
-    public StableMachine(@NotNull Block block, @NotNull BlockCreateContext context) {
+    public Stabilizer(@NotNull Block block, @NotNull BlockCreateContext context) {
         super(block, context);
         setTickInterval(20);
         this.setFacing(context.getFacing());
         createFluidPoint(FluidPointType.INPUT, BlockFace.NORTH, context, false);
         createFluidBuffer(PylonFluids.OBSCYRA, buffer, true, false);
     }
-    public StableMachine(@NotNull Block block, @NotNull PersistentDataContainer pdc) {
+    public Stabilizer(@NotNull Block block, @NotNull PersistentDataContainer pdc) {
         super(block, pdc);
     }
     @Override
@@ -111,7 +111,7 @@ public class StableMachine extends RebarBlock implements
         if (event.isAdd()) event.setCancelled(!(RebarItem.fromStack(event.getNewItem()) instanceof UnstableIngot));
     }
     public void onCooldownUpdate(ItemPreUpdateEvent event){
-        if (event.isAdd()) event.setCancelled(!(event.getNewItem().isSimilar(RebarTranscEndenceItems.ZOT_COOL_DOWN.clone())));
+        if (event.isAdd()) event.setCancelled(!(event.getNewItem().isSimilar(RebarTranscEndenceItems.QUIRP_CONDENSATE.clone())));
     }
     public void onPostUpdate(ItemPostUpdateEvent event){
         if (!(event.getUpdateReason() instanceof MachineUpdateReason)) {
@@ -191,17 +191,17 @@ public class StableMachine extends RebarBlock implements
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
         return new WailaDisplay(isProcessing()
-            ? Component.translatable("rebartranscendence.item.stable_machine.waila.running")
+            ? Component.translatable("rebartranscendence.item.stabilizer.waila.running")
                 .arguments(
-                    RebarArgument.of("time", 
-                        Math.round(progressItem.getTotalTime().toSeconds() * (1.0 - progressItem.getProgress()))),
+                    RebarArgument.of("time", UnitFormat.SECONDS.format(
+                        Math.round(progressItem.getTotalTime().toSeconds() * (1.0 - progressItem.getProgress())))),
                     RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
                         fluidAmount(PylonFluids.OBSCYRA),
                         fluidCapacity(PylonFluids.OBSCYRA),
                         20,
                         TextColor.fromHexString("#000000")
                 )))
-            : Component.translatable("rebartranscendence.item.stable_machine.waila.not_running")
+            : Component.translatable("rebartranscendence.item.stabilizer.waila.not_running")
                 .arguments(RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
                         fluidAmount(PylonFluids.OBSCYRA),
                         fluidCapacity(PylonFluids.OBSCYRA),

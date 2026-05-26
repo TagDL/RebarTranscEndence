@@ -1,17 +1,29 @@
 package io.github.tagdl.RebarTranscEndence;
 
 import io.github.pylonmc.rebar.addon.RebarAddon;
+import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.tagdl.RebarTranscEndence.daxi.DaxiListener;
 import lombok.Getter;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
+
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.Set;
+import java.util.UUID;
 
 @SuppressWarnings("unused")
 public class RebarTranscEndence extends JavaPlugin implements RebarAddon {

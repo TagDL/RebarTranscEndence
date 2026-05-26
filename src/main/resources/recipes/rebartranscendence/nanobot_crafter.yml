@@ -1,11 +1,11 @@
-rebartranscendence:stable_ingot_block:
+rebartranscendence:stable_block:
   shape:
     - "AAA"
     - "AAA"
     - "AAA"
   key:
     A: rebartranscendence:stable_ingot
-  result: rebartranscendence:stable_ingot_block
+  result: rebartranscendence:stable_block
 
 rebartranscendence:unstable_ingot:
   shape:
@@ -15,10 +15,10 @@ rebartranscendence:unstable_ingot:
   key:
     A: pylon:palladium_ingot
     B: minecraft:diamond_block
-    U: rebartranscendence:zot_up
-    D: rebartranscendence:zot_down
-    L: rebartranscendence:zot_left
-    R: rebartranscendence:zot_right
+    U: rebartranscendence:quirp_up
+    D: rebartranscendence:quirp_down
+    L: rebartranscendence:quirp_left
+    R: rebartranscendence:quirp_right
   result: rebartranscendence:unstable_ingot
 
 rebartranscendence:daxi_strength:
@@ -27,8 +27,8 @@ rebartranscendence:daxi_strength:
     - "BCB"
     - "ABA"
   key:
-    A: rebartranscendence:stable_ingot_block
-    B: rebartranscendence:zot_up_3
+    A: rebartranscendence:stable_block
+    B: rebartranscendence:zot_up_2
     C: minecraft:diamond_block
   result: rebartranscendence:daxi_strength
 
@@ -38,8 +38,8 @@ rebartranscendence:daxi_absorption:
     - "BCB"
     - "ABA"
   key:
-    A: rebartranscendence:stable_ingot_block
-    B: rebartranscendence:zot_down_3
+    A: rebartranscendence:stable_block
+    B: rebartranscendence:zot_down_2
     C: minecraft:diamond_block
   result: rebartranscendence:daxi_absorption
 
@@ -49,8 +49,8 @@ rebartranscendence:daxi_fortitude:
     - "BCB"
     - "ABA"
   key:
-    A: rebartranscendence:stable_ingot_block
-    B: rebartranscendence:zot_left_3
+    A: rebartranscendence:stable_block
+    B: rebartranscendence:zot_left_2
     C: minecraft:diamond_block
   result: rebartranscendence:daxi_fortitude
 
@@ -60,8 +60,8 @@ rebartranscendence:daxi_saturation:
     - "BCB"
     - "ABA"
   key:
-    A: rebartranscendence:stable_ingot_block
-    B: rebartranscendence:zot_right_3
+    A: rebartranscendence:stable_block
+    B: rebartranscendence:zot_right_2
     C: minecraft:diamond_block
   result: rebartranscendence:daxi_saturation
 
@@ -71,29 +71,29 @@ rebartranscendence:daxi_regeneration:
     - "LCR"
     - "ADA"
   key:
-    A: rebartranscendence:stable_ingot_block
-    U: rebartranscendence:zot_up_3
-    D: rebartranscendence:zot_down_3
-    L: rebartranscendence:zot_left_3
-    R: rebartranscendence:zot_right_3
+    A: rebartranscendence:stable_block
+    U: rebartranscendence:zot_up_2
+    D: rebartranscendence:zot_down_2
+    L: rebartranscendence:zot_left_2
+    R: rebartranscendence:zot_right_2
     C: minecraft:diamond_block
   result: rebartranscendence:daxi_regeneration
 
-rebartranscendence:zot_reverser:
+rebartranscendence:quirp_cycler:
   shape:
     - "AUA"
     - "LBR"
     - "ADA"
   key:
-    A: rebartranscendence:zot_cool_down
-    B: rebartranscendence:zot_collector
-    U: rebartranscendence:zot_up
-    D: rebartranscendence:zot_down
-    L: rebartranscendence:zot_left
-    R: rebartranscendence:zot_right
-  result: rebartranscendence:zot_reverser
+    A: rebartranscendence:quirp_condensate
+    B: rebartranscendence:quirp_oscillator
+    U: rebartranscendence:quirp_up
+    D: rebartranscendence:quirp_down
+    L: rebartranscendence:quirp_left
+    R: rebartranscendence:quirp_right
+  result: rebartranscendence:quirp_cycler
 
-rebartranscendence:zot_collector:
+rebartranscendence:quirp_oscillator:
   shape:
     - "AUA"
     - "NBN"
@@ -104,9 +104,9 @@ rebartranscendence:zot_collector:
     U: pylon:liselette_anode
     A: minecraft:purpur_block
     D: pylon:liselette_cathode
-  result: rebartranscendence:zot_collector
+  result: rebartranscendence:quirp_oscillator
 
-rebartranscendence:zot_condenser:
+rebartranscendence:quirp_annihilator:
   shape:
     - "AUA"
     - "LBR"
@@ -114,11 +114,11 @@ rebartranscendence:zot_condenser:
   key:
     B: pylon:fluid_pipe_palladium
     A: minecraft:blue_ice
-    U: rebartranscendence:zot_up
-    D: rebartranscendence:zot_down
-    L: rebartranscendence:zot_left
-    R: rebartranscendence:zot_right
-  result: rebartranscendence:zot_condenser
+    U: rebartranscendence:quirp_up
+    D: rebartranscendence:quirp_down
+    L: rebartranscendence:quirp_left
+    R: rebartranscendence:quirp_right
+  result: rebartranscendence:quirp_annihilator
 
 rebartranscendence:zot_overloader:
   shape:
@@ -126,24 +126,64 @@ rebartranscendence:zot_overloader:
     - "LBR"
     - "ADA"
   key:
-    A: rebartranscendence:zot_cool_down
-    B: rebartranscendence:stable_ingot_block
-    U: rebartranscendence:zot_up
-    D: rebartranscendence:zot_down
-    L: rebartranscendence:zot_left
-    R: rebartranscendence:zot_right
+    A: rebartranscendence:quirp_condensate
+    B: rebartranscendence:stable_block
+    U: rebartranscendence:quirp_up
+    D: rebartranscendence:quirp_down
+    L: rebartranscendence:quirp_left
+    R: rebartranscendence:quirp_right
   result: rebartranscendence:zot_overloader
 
-rebartranscendence:stable_machine:
+rebartranscendence:stabilizer:
   shape:
     - "AUA"
     - "LBR"
     - "ADA"
   key:
-    A: rebartranscendence:zot_cool_down
+    A: rebartranscendence:quirp_condensate
     B: rebartranscendence:unstable_ingot
-    U: rebartranscendence:zot_up
-    D: rebartranscendence:zot_down
-    L: rebartranscendence:zot_left
-    R: rebartranscendence:zot_right
-  result: rebartranscendence:stable_machine
+    U: rebartranscendence:quirp_up
+    D: rebartranscendence:quirp_down
+    L: rebartranscendence:quirp_left
+    R: rebartranscendence:quirp_right
+  result: rebartranscendence:stabilizer
+
+rebartranscendence:zot_up:
+  shape:
+    - "AAA"
+    - "ABA"
+    - "AAA"
+  key:
+    A: rebartranscendence:quirp_up
+    B: rebartranscendence:stable_block
+  result: rebartranscendence:zot_up
+
+rebartranscendence:zot_down:
+  shape:
+    - "AAA"
+    - "ABA"
+    - "AAA"
+  key:
+    A: rebartranscendence:quirp_down
+    B: rebartranscendence:stable_block
+  result: rebartranscendence:zot_down
+
+rebartranscendence:zot_left:
+  shape:
+    - "AAA"
+    - "ABA"
+    - "AAA"
+  key:
+    A: rebartranscendence:quirp_left
+    B: rebartranscendence:stable_block
+  result: rebartranscendence:zot_left
+
+rebartranscendence:zot_right:
+  shape:
+    - "AAA"
+    - "ABA"
+    - "AAA"
+  key:
+    A: rebartranscendence:quirp_right
+    B: rebartranscendence:stable_block
+  result: rebartranscendence:zot_right

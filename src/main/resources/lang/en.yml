@@ -7,58 +7,58 @@ item:
       <arrow> Unstable degree: %degree%%
       <arrow> An ingot containing immense energy
       <arrow> Holding it for a period of time will <red>result in death
-  zot_up:
+  quirp_up:
     name: "Quirp UP"
     lore: |-
       <arrow> Fundamental particle of the Universe
-  zot_down:
+  quirp_down:
     name: "Quirp DOWN"
     lore: |-
       <arrow> Fundamental particle of the Universe
-  zot_left:
+  quirp_left:
     name: "Quirp LEFT"
     lore: |-
       <arrow> Fundamental particle of the Universe
-  zot_right:
+  quirp_right:
     name: "Quirp RIGHT"
     lore: |-
       <arrow> Fundamental particle of the Universe
-  zot_up_2:
+  zot_up:
     name: "Uncharged Zot UP"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Charged degree: %amount%/%max%
-  zot_down_2:
+  zot_down:
     name: "Uncharged Zot DOWN"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Charged degree: %amount%/%max%
-  zot_left_2:
+  zot_left:
     name: "Uncharged Zot LEFT"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Charged degree: %amount%/%max%
-  zot_right_2:
+  zot_right:
     name: "Uncharged Zot RIGHT"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Charged degree: %amount%/%max%
-  zot_up_3:
+  zot_up_2:
     name: "Charged Zot UP"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Something contains huge <red>UP <gray>energy
-  zot_down_3:
+  zot_down_2:
     name: "Charged Zot DOWN"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Something contains huge <yellow>DOWN <gray>energy
-  zot_left_3:
+  zot_left_2:
     name: "Charged Zot LEFT"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Something contains huge <green>LEFT <gray>energy
-  zot_right_3:
+  zot_right_2:
     name: "Charged Zot RIGHT"
     lore: |-
       <arrow> Concentrated matter
@@ -67,12 +67,12 @@ item:
     name: "Stable Ingot"
     lore: |-
       <arrow> <yellow>Priceless material
-  stable_ingot_block:
+  stable_block:
     name: "Stable Block"
     lore: |-
       <arrow> <yellow>Priceless material
-  zot_cool_down:
-    name: "Zot Cooldown"
+  quirp_condensate:
+    name: "Quirp Condensate"
     lore: |-
       <arrow> An energy singularity
   daxi_strength:
@@ -116,7 +116,7 @@ item:
       <arrow> Allows particle manipulation
       <arrow> Click <attr><lang:rebartranscendence.item.nanobot_launcher.name></attr> to use
     waila:
-      running: "Nanobot Crafter | Producing: %result% | Time Left: <yellow>%progress% <white>s"
+      running: "Nanobot Crafter | Producing: %result%"
       not_running: "Nanobot Crafter | <red>Not Running"
   nanobot_launcher:
     name: "Nanobot Launcher"
@@ -126,7 +126,7 @@ item:
     name: "Nanobot Output Hatch"
     lore: |-
       <arrow> Part of <attr><lang:rebartranscendence.item.nanobot_crafter.name></attr>
-  zot_collector:
+  quirp_oscillator:
     name: "Quirp Collector"
     lore: |-
       <arrow> Harnesses Quirps from the void
@@ -134,35 +134,35 @@ item:
       <arrow> <attr>Buffer:</attr> %buffer%
       <arrow> <red>Works only in the end!
     waila:
-      running: "Quirp Collector | Collected: %output% | Time left: <yellow>%time%<white>s | %input-bar%"
-      not_running: "Quirp Collector | <red>Not running <white>| %input-bar%"
+      running: "Quirp Collector | <green>Collecting <white>| Time left: <yellow>%time%<white> | %input-bar%"
+      not_running: "Quirp Collector | Collected: %output% | %input-bar%"
       none_item: "No Quirp Collected"
-  zot_reverser:
+  quirp_cycler:
     name: "Quirp Cycler"
     lore: |-
       <arrow> Rotates Quirps
       <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
     waila:
-      running: "Quirp Cycler | Producing: %result% | Time left: <yellow>%process%<white>s | %input-bar%"
+      running: "Quirp Cycler | Producing: %result% | Time left: <yellow>%process%<white> | %input-bar%"
       not_running: "Quirp Cycler | <red>Not running <white>| %input-bar%"
-  zot_condenser:
-    name: "Quirp Condenser"
+  quirp_annihilator:
+    name: "Quirp Annihilator"
     lore: |-
       <arrow> Condesates opposite Quirps
       <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
     waila:
-      running: "Quirp Condenser | Time left: <yellow>%time%<white>s | %input-bar%"
-      not_running: "Quirp Condenser | <red>Not running <white>| %input-bar%"
-  stable_machine:
+      running: "Quirp Annihilator | Time left: <yellow>%time%<white> | %input-bar%"
+      not_running: "Quirp Annihilator | <red>Not running <white>| %input-bar%"
+  stabilizer:
     name: "Stabilizer"
     lore: |-
       <arrow> A controlled environment
       <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
     waila:
-      running: "Stabilizer | Time left: <yellow>%time%<white>s | %input-bar%"
+      running: "Stabilizer | Time left: <yellow>%time%<white> | %input-bar%"
       not_running: "Stabilizer | <red>Not running <white>| %input-bar%"
   zot_overloader:
     name: "Zot Overloader"
@@ -176,13 +176,13 @@ item:
       running: "Zot Overloader | Charged: <yellow>%amount% <white>| %input-bar%"
       not_running: "Zot Overloader | <red>Not running <white>| %input-bar%"
 gui:
-  stable_machine:
-    input: Put Unstable Ingot and Zot Cooldown
+  stabilizer:
+    input: Put Unstable Ingot and Quirp Condensate
     progress: <yellow>Status
-  zot_collector:
+  quirp_oscillator:
     polarizer: Put Vertical Polarizer or Horizontal Polarizer to control chance
     progress: <yellow>Status
-  zot_condenser:
+  quirp_annihilator:
     zot: Put Opposite quirp
     progress: <yellow>Status
   zot_overloader:
@@ -191,8 +191,9 @@ gui:
     left: Put Quirp LEFT
     right: Put Quirp RIGHT
     uncharge: Put Uncharged Zot
-  zot_reverser:
+  quirp_cycler:
     zot: Put Quirp
+    recipe: "Spend Time: %time%" 
 guide:
   page:
     rebartranscendence_guide: <#b24cd8>Rebar TranscEndence

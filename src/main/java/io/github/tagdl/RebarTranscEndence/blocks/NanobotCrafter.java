@@ -25,7 +25,6 @@ import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
 import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
 import io.github.pylonmc.rebar.block.base.RebarRecipeProcessor;
 import io.github.pylonmc.rebar.block.base.RebarSimpleMultiblock;
-import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
 import io.github.pylonmc.rebar.block.base.RebarVirtualInventoryBlock;
 import io.github.pylonmc.rebar.block.context.BlockBreakContext;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
@@ -50,7 +49,6 @@ public class NanobotCrafter extends RebarBlock implements
         RebarSimpleMultiblock,
         RebarVirtualInventoryBlock,
         RebarLogisticBlock,
-        RebarTickingBlock,
         RebarRecipeProcessor<NanobotCrafterRecipe>,
         RebarGuiBlock
 {
@@ -114,6 +112,7 @@ public class NanobotCrafter extends RebarBlock implements
                         player.getWorld().playSound(block.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 1F);
                     } else {
                         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1F, 1F);
+                        finishRecipe();
                     }
                 }
             }, j * Math.round(timeconsume / 3));
@@ -148,12 +147,6 @@ public class NanobotCrafter extends RebarBlock implements
         return result;
     }
     @Override
-    public void tick() {
-        if (isProcessingRecipe()) {
-            progressRecipe(20);
-        }
-    }
-    @Override
     public void onRecipeFinished(@NotNull NanobotCrafterRecipe recipe) {
         getMultiblockComponentOrThrow(NanobotOutpuHatch.class, new Vector3i(2, 0, 0))
                 .inventory
@@ -168,10 +161,16 @@ public class NanobotCrafter extends RebarBlock implements
         RebarVirtualInventoryBlock.super.onBreak(drops, context);
     }
     @Override
+    public void postLoad() {
+        if (isProcessingRecipe()) {
+            finishRecipe();
+        }
+    }
+    @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
         return new WailaDisplay(isProcessingRecipe() 
             ? Component.translatable("rebartranscendence.item.nanobot_crafter.waila.running")
-                .arguments(RebarArgument.of("progress", getRecipeTicksRemaining() / 20),
+                .arguments(
                     RebarArgument.of("result", getCurrentRecipe().result().effectiveName().color(colorToTextColor(Color.LIME))))
             : Component.translatable("rebartranscendence.item.nanobot_crafter.waila.not_running"));
     }
