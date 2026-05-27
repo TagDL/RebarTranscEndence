@@ -9,4 +9,4 @@ A [Rebar](https://github.com/pylonmc/rebar) addon which add endgame effect.
 
 ## IdeasFrom
 
-- [TranscEndence](https://github.com/Alessio-Colombo/TranscEndence)
+- [TranscEndence](https://github.com/Alessio-Colombo/TranscEndence) under MIT License
