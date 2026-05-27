@@ -158,7 +158,7 @@ public class QuirpCycler extends RebarBlock implements
     }
     public boolean tryStartRecipe(@NotNull QuirpCyclerRecipe recipe, ItemStack itemStack) {
         if (!recipe.input().matches(itemStack)) return false; //continue loop
-        if (!outputInventory.canHold(recipe.result())) return true; //stop loop
+        if (!outputInventory.canHold(recipe.result())) return false; //stop loop
 
         startRecipe(recipe, timeconsume);
         getRecipeProgressItem().setItem(ItemStackBuilder.of(itemStack.asOne()).clearLore());

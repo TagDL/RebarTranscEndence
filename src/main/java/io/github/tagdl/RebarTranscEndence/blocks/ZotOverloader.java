@@ -43,6 +43,10 @@ import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceItems;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceKeys;
 import io.github.tagdl.RebarTranscEndence.items.Zot;
+import io.github.tagdl.RebarTranscEndence.items.ZotDown;
+import io.github.tagdl.RebarTranscEndence.items.ZotLeft;
+import io.github.tagdl.RebarTranscEndence.items.ZotRight;
+import io.github.tagdl.RebarTranscEndence.items.ZotUp;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import xyz.xenondevs.invui.gui.Gui;
@@ -138,7 +142,18 @@ public class ZotOverloader extends RebarBlock implements
         }
     }
     public void onOutputUpdate(ItemPreUpdateEvent event){
-        if (event.isAdd()) event.setCancelled(!(RebarItem.fromStack(event.getNewItem()) instanceof Zot));
+        if (event.isAdd()) {
+            if (!(RebarItem.fromStack(event.getNewItem()) instanceof Zot)) {
+                event.setCancelled(true);
+            } else {
+                RebarItem newItem = RebarItem.fromStack(event.getNewItem());
+                if (newItem instanceof ZotUp zotUp) this.inner_amount = zotUp.getAmount();
+                else if (newItem instanceof ZotDown zotDown) this.inner_amount = zotDown.getAmount();
+                else if (newItem instanceof ZotLeft zotLeft) this.inner_amount = zotLeft.getAmount();
+                else if (newItem instanceof ZotRight zotRight) this.inner_amount = zotRight.getAmount();
+            }
+            
+        }
     }
     @Override
     public @NotNull Gui createGui() {

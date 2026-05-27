@@ -126,7 +126,7 @@ public class NanobotCrafter extends RebarBlock implements
             boolean find = true;
             for (int i = 0; i < recipe.inputs().size(); i++) {
                 RecipeInput.Item input = recipe.inputs().get(i);
-                if (input.matches(inputInventory.getItem(i).asOne())) {
+                if (input.matches(inputInventory.getItem(i))) {
                     find = true;
                     continue;
                 }
