@@ -115,23 +115,23 @@ public class DaxiListener implements Listener {
         int drop_amount = 0;
         if (getPlayerPdc(event.getPlayer(), DAXI_STRENGTH_KEY)) {
             setPlayerPdc(event.getPlayer(), DAXI_STRENGTH_KEY, false);
-            drop_amount += 4;
+            drop_amount += 8;
         }
         if (getPlayerPdc(event.getPlayer(), DAXI_ABSORPTION_KEY)) {
             setPlayerPdc(event.getPlayer(), DAXI_ABSORPTION_KEY, false);
-            drop_amount += 4;
+            drop_amount += 8;
         }
         if (getPlayerPdc(event.getPlayer(), DAXI_FORTITUDE_KEY)) {
             setPlayerPdc(event.getPlayer(), DAXI_FORTITUDE_KEY, false);
-            drop_amount += 4;
+            drop_amount += 8;
         }
         if (getPlayerPdc(event.getPlayer(), DAXI_SATURATION_KEY)) {
             setPlayerPdc(event.getPlayer(), DAXI_SATURATION_KEY, false);
-            drop_amount += 4;
+            drop_amount += 8;
         }
         if (getPlayerPdc(event.getPlayer(), DAXI_REGENERATION_KEY)) {
             setPlayerPdc(event.getPlayer(), DAXI_REGENERATION_KEY, false);
-            drop_amount += 4;
+            drop_amount += 8;
         }
         if (drop_amount != 0) {
             ItemStack dropItemStack = RebarTranscEndenceItems.STABLE_BLOCK.clone();
