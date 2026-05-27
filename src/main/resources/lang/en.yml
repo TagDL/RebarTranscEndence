@@ -2,73 +2,73 @@ addon: "Rebar TranscEndence"
 
 item:
   unstable_ingot:
-    name: "Unstable Ingot"
+    name: "<red>Unstable Ingot"
     lore: |-
       <arrow> Unstable degree: %degree%%
       <arrow> An ingot containing immense energy
       <arrow> Holding it for a period of time will <red>result in death
   quirp_up:
-    name: "Quirp UP"
+    name: "<red>Quirp UP"
     lore: |-
       <arrow> Fundamental particle of the Universe
   quirp_down:
-    name: "Quirp DOWN"
+    name: "<yellow>Quirp DOWN"
     lore: |-
       <arrow> Fundamental particle of the Universe
   quirp_left:
-    name: "Quirp LEFT"
+    name: "<green>Quirp LEFT"
     lore: |-
       <arrow> Fundamental particle of the Universe
   quirp_right:
-    name: "Quirp RIGHT"
+    name: "<blue>Quirp RIGHT"
     lore: |-
       <arrow> Fundamental particle of the Universe
   zot_up:
-    name: "Uncharged Zot UP"
+    name: "<red>Uncharged Zot UP"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Charged degree: %amount%/%max%
   zot_down:
-    name: "Uncharged Zot DOWN"
+    name: "<yellow>Uncharged Zot DOWN"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Charged degree: %amount%/%max%
   zot_left:
-    name: "Uncharged Zot LEFT"
+    name: "<green>Uncharged Zot LEFT"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Charged degree: %amount%/%max%
   zot_right:
-    name: "Uncharged Zot RIGHT"
+    name: "<blue>Uncharged Zot RIGHT"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Charged degree: %amount%/%max%
   zot_up_2:
-    name: "Charged Zot UP"
+    name: "<red>Charged Zot UP"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Something contains huge <red>UP <gray>energy
   zot_down_2:
-    name: "Charged Zot DOWN"
+    name: "<yellow>Charged Zot DOWN"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Something contains huge <yellow>DOWN <gray>energy
   zot_left_2:
-    name: "Charged Zot LEFT"
+    name: "<green>Charged Zot LEFT"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Something contains huge <green>LEFT <gray>energy
   zot_right_2:
-    name: "Charged Zot RIGHT"
+    name: "<blue>Charged Zot RIGHT"
     lore: |-
       <arrow> Concentrated matter
       <arrow> Something contains huge <blue>RIGHT <gray>energy
   stable_ingot:
-    name: "Stable Ingot"
+    name: "<green>Stable Ingot"
     lore: |-
       <arrow> <yellow>Priceless material
   stable_block:
-    name: "Stable Block"
+    name: "<green>Stable Block"
     lore: |-
       <arrow> <yellow>Priceless material
   quirp_condensate:
@@ -114,7 +114,7 @@ item:
       <arrow> 1x <attr><lang:rebartranscendence.item.nanobot_output_hatch.name></attr>
       <arrow> 1x End Rod
       <arrow> Allows particle manipulation
-      <arrow> Click <attr><lang:rebartranscendence.item.nanobot_launcher.name></attr> to use
+      <arrow> Right Click <attr><lang:rebartranscendence.item.nanobot_launcher.name></attr> to use
     waila:
       running: "Nanobot Crafter | Producing: %result%"
       not_running: "Nanobot Crafter | <red>Not Running"
@@ -127,15 +127,15 @@ item:
     lore: |-
       <arrow> Part of <attr><lang:rebartranscendence.item.nanobot_crafter.name></attr>
   quirp_oscillator:
-    name: "Quirp Collector"
+    name: "Quirp Oscillator"
     lore: |-
       <arrow> Harnesses Quirps from the void
       <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
       <arrow> <red>Works only in the end!
     waila:
-      running: "Quirp Collector | <green>Collecting <white>| Time left: <yellow>%time%<white> | %input-bar%"
-      not_running: "Quirp Collector | Collected: %output% | %input-bar%"
+      running: "Quirp Oscillator | <green>Collecting <white>| Time left: <yellow>%time%<white> | %input-bar%"
+      not_running: "Quirp Oscillator | Collected: %output% | %input-bar%"
       none_item: "No Quirp Collected"
   quirp_cycler:
     name: "Quirp Cycler"
@@ -177,7 +177,7 @@ item:
       not_running: "Zot Overloader | <red>Not running <white>| %input-bar%"
 gui:
   stabilizer:
-    input: Put Unstable Ingot and Quirp Condensate
+    input: Put <red>Unstable Ingot <white>and Quirp Condensate
     progress: <yellow>Status
   quirp_oscillator:
     polarizer: Put Vertical Polarizer or Horizontal Polarizer to control chance
@@ -186,10 +186,10 @@ gui:
     zot: Put Opposite quirp
     progress: <yellow>Status
   zot_overloader:
-    up: Put Quirp UP
-    down: Put Quirp DOWN
-    left: Put Quirp LEFT
-    right: Put Quirp RIGHT
+    up: Put <red>Quirp UP
+    down: Put <yellow>Quirp DOWN
+    left: Put <green>Quirp LEFT
+    right: Put <blue>Quirp RIGHT
     uncharge: Put Uncharged Zot
   quirp_cycler:
     zot: Put Quirp

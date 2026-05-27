@@ -5,7 +5,7 @@ import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
-import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
 import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
 import io.github.pylonmc.rebar.block.base.RebarProcessor;
 import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
@@ -53,7 +53,7 @@ public class QuirpOscillator extends RebarBlock implements
         RebarProcessor,
         RebarLogisticBlock,
         RebarVirtualInventoryBlock,
-        RebarGuiBlock,
+        RebarInventoryBlock,
         RebarFluidBufferBlock,
         RebarTickingBlock
 {
@@ -117,8 +117,8 @@ public class QuirpOscillator extends RebarBlock implements
         weight = event.getNewItem() == null 
             ? new double[]{0.25, 0.25, 0.25, 0.25}
             : event.getNewItem().isSimilar(RebarTranscEndenceItems.VERTICAL_POLARIZER.clone())
-                ? new double[]{0.4, 0.4, 0.1, 0.1}
-                : new double[]{0.1, 0.1, 0.4, 0.4};
+                ? new double[]{0.1, 0.1, 0.4, 0.4}
+                : new double[]{0.4, 0.4, 0.1, 0.1};
     }
     private void onOutputUpdate(ItemPreUpdateEvent event) {
         if (event.isAdd()) event.setCancelled(!(event.getUpdateReason() instanceof MachineUpdateReason));

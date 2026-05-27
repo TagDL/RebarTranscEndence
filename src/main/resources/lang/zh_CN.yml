@@ -1,0 +1,209 @@
+addon: "Rebar TranscEndence"
+
+item:
+  unstable_ingot:
+    name: "<red>不稳定的锭"
+    lore: |-
+      <arrow> 不稳定程度: %degree%%
+      <arrow> 持有一段时间后将<red>死亡
+      <arrow> 超过时间,物品将会消失.....
+  quirp_up:
+    name: "<red>水平粒子 (Up)"
+    lore: |-
+      <arrow> 宇宙中的基本粒子
+  quirp_down:
+    name: "<yellow>水平粒子 (Down)"
+    lore: |-
+      <arrow> 宇宙中的基本粒子
+  quirp_left:
+    name: "<green>垂直粒子 (Left)"
+    lore: |-
+      <arrow> 宇宙中的基本粒子
+  quirp_right:
+    name: "<blue>垂直粒子 (Right)"
+    lore: |-
+      <arrow> 宇宙中的基本粒子
+  zot_up:
+    name: "<red>未充能的水平粒子 (Up)"
+    lore: |-
+      <arrow> 需要粒子过载机
+      <arrow> 进度: %amount%/%max%
+  zot_down:
+    name: "<yellow>未充能的水平粒子 (Down)"
+    lore: |-
+      <arrow> 需要粒子过载机
+      <arrow> 进度: %amount%/%max%
+  zot_left:
+    name: "<green>未充能的垂直粒子 (Left)"
+    lore: |-
+      <arrow> 需要粒子过载机
+      <arrow> 进度: %amount%/%max%
+  zot_right:
+    name: "<blue>未充能的垂直粒子 (Right)"
+    lore: |-
+      <arrow> 需要粒子过载机
+      <arrow> 进度: %amount%/%max%
+  zot_up_2:
+    name: "<red>充能水平粒子 (Up)"
+    lore: |-
+      <arrow> 充能完成
+      <arrow> 某种蕴含了巨大<red> UP <gray>能量的凝聚物
+  zot_down_2:
+    name: "<yellow>充能水平粒子 (Down)"
+    lore: |-
+      <arrow> 充能完成
+      <arrow> 某种蕴含了巨大<red> DOWN <gray>能量的凝聚物
+  zot_left_2:
+    name: "<green>充能垂直粒子 (Left)"
+    lore: |-
+      <arrow> 充能完成
+      <arrow> 某种蕴含了巨大<red> LEFT <gray>能量的凝聚物
+  zot_right_2:
+    name: "<blue>充能垂直粒子 (Right)"
+    lore: |-
+      <arrow> 充能完成
+      <arrow> 某种蕴含了巨大<red> RIGHT <gray>能量的凝聚物
+  stable_ingot:
+    name: "<green>稳定的锭"
+    lore: |-
+      <arrow> <yellow>无价材料
+  stable_block:
+    name: "<green>稳定的锭块"
+    lore: |-
+      <arrow> <yellow>无价材料
+  quirp_condensate:
+    name: "冷凝粒子"
+    lore: |-
+      <arrow> 能量奇点
+  daxi_strength:
+    name: "<green>超能力核心 (S)"
+    lore: |-
+      <arrow> 右键获得药水效果(力量%level%)
+  daxi_absorption:
+    name: "<green>超能力核心 (A)"
+    lore: |-
+      <arrow> 右键获得药水效果(伤害吸收%level%)
+  daxi_fortitude:
+    name: "<green>超能力核心 (F)"
+    lore: |-
+      <arrow> 右键获得药水效果(抗性提升%level%)
+  daxi_saturation:
+    name: "<green>超能力核心 (H)"
+    lore: |-
+      <arrow> 右键获得药水效果(饱和%level%)
+  daxi_regeneration:
+    name: "<green>超能力核心 (R)"
+    lore: |-
+      <arrow> 右键获得药水效果(生命恢复%level%)
+  vertical_polarizer:
+    name: "垂直偏振器"
+    lore: |-
+      <arrow> 增加垂直粒子的产出几率
+      <arrow> 需要放入粒子生产机
+  horizontal_polarizer:
+    name: "水平偏振器"
+    lore: |-
+      <arrow> 增加水平粒子产出几率
+      <arrow> 需要放入粒子生产机
+
+  nanobot_crafter:
+    name: "纳米工作台"
+    lore: |-
+      <star> 多方块结构
+      <arrow> 1x <attr><lang:rebartranscendence.item.nanobot_launcher.name></attr>
+      <arrow> 1x <attr><lang:rebartranscendence.item.nanobot_output_hatch.name></attr>
+      <arrow> 1x 末地烛
+      <arrow> 末地科技最基本制作
+      <arrow> 右键 <attr><lang:rebartranscendence.item.nanobot_launcher.name></attr> 以开始制作
+    waila:
+      running: "纳米工作台 | 正在制作: %result%"
+      not_running: "纳米工作台 | <red>暂未运行"
+  nanobot_launcher:
+    name: "纳米工作台启动器"
+    lore: |-
+      <arrow> <attr><lang:rebartranscendence.item.nanobot_crafter.name></attr>的组件之一
+  nanobot_output_hatch:
+    name: "纳米工作台输出口"
+    lore: |-
+      <arrow> <attr><lang:rebartranscendence.item.nanobot_crafter.name></attr>的组件之一
+  quirp_oscillator:
+    name: "粒子生产机"
+    lore: |-
+      <arrow> 来自虚空
+      <arrow> <attr><lang:pylon.fluid.obscyra/> 每秒消耗:</attr> %fluid-per-craft%
+      <arrow> <attr>缓冲区:</attr> %buffer%
+      <arrow> <red>需要在末地运行!
+    waila:
+      running: "粒子生产机 | <green>正在生产 <white>| 剩余时间: <yellow>%time%<white> | %input-bar%"
+      not_running: "粒子生产机 | 产出: %output% | %input-bar%"
+      none_item: "未产出粒子"
+  quirp_cycler:
+    name: "粒子转向机"
+    lore: |-
+      <arrow> 使粒子转向(顺时针)
+      <arrow> <attr><lang:pylon.fluid.obscyra/> 每秒消耗:</attr> %fluid-per-craft%
+      <arrow> <attr>缓冲区:</attr> %buffer%
+    waila:
+      running: "粒子转向机 | 正在制作: %result% | 剩余时间: <yellow>%process%<white> | %input-bar%"
+      not_running: "粒子转向机 | <red>暂未运行 <white>| %input-bar%"
+  quirp_annihilator:
+    name: "粒子冷凝机"
+    lore: |-
+      <arrow> 需要两种方向相反的粒子才能运行
+      <arrow> <attr><lang:pylon.fluid.obscyra/> 每秒消耗:</attr> %fluid-per-craft%
+      <arrow> <attr>缓冲区:</attr> %buffer%
+    waila:
+      running: "粒子冷凝机 | 剩余时间: <yellow>%time%<white> | %input-bar%"
+      not_running: "粒子冷凝机 | <red>暂未运行 <white>| %input-bar%"
+  stabilizer:
+    name: "稳定器"
+    lore: |-
+      <arrow> 冷凝不稳定的锭
+      <arrow> <attr><lang:pylon.fluid.obscyra/> 每秒消耗:</attr> %fluid-per-craft%
+      <arrow> <attr>缓冲区:</attr> %buffer%
+    waila:
+      running: "稳定器 | 剩余时间: <yellow>%time%<white> | %input-bar%"
+      not_running: "稳定器 | <red>暂未运行 <white>| %input-bar%"
+  zot_overloader:
+    name: "粒子过载机"
+    lore: |-
+      <arrow> 用于凝聚更强大的能量
+      <arrow> 要求使用 1 个同向粒子或 %diff% 个不同向粒子提供一点过载
+      <arrow> <attr><lang:pylon.fluid.obscyra/> 每秒消耗:</attr> %fluid-per-craft%
+      <arrow> <attr>缓冲区:</attr> %buffer%
+      <arrow> <red>需要在末地运行!
+    waila:
+      running: "粒子过载机 | 过载程度: <yellow>%amount% <white>| %input-bar%"
+      not_running: "粒子过载机 | <red>暂未运行 <white>| %input-bar%"
+gui:
+  stabilizer:
+    input: 放入<red>不稳定的锭<white>和冷凝粒子
+    progress: <yellow>运行状态
+  quirp_oscillator:
+    polarizer: 放入垂直偏振器或水平偏振器
+    progress: <yellow>运行状态
+  quirp_annihilator:
+    zot: 放入方向相反的粒子
+    progress: <yellow>运行状态
+  zot_overloader:
+    up: 放入<red>水平粒子 (Up)
+    down: 放入<yellow>水平粒子 (Down)
+    left: 放入<green>垂直粒子 (Left)
+    right: 放入<blue>垂直粒子 (Right)
+    uncharge: 放入未超载完成的粒子
+  quirp_cycler:
+    zot: 放入粒子
+    recipe: "用时: %time%" 
+guide:
+  page:
+    rebartranscendence_guide: <#b24cd8>Rebar TranscEndence
+    rebartranscendence_items: <#b24cd8>物品
+    rebartranscendence_machines: <#b24cd8>机器
+message:
+  unstable-death-message: " 试图变得不稳定. 他成功了."
+  daxi-message-intro: "你感受到力量在你的血管中流动."
+  daxi-message-strength: "你的攻击更加迅猛."
+  daxi-message-absorption: "你感到更加健康了."
+  daxi-message-fortitude: "敌人的攻击效果变弱了."
+  daxi-message-saturation: "一段时间内你不再需要食物了."
+  daxi-message-regeneration: "你获得了永久的自愈效果."

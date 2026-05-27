@@ -17,7 +17,7 @@ import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
-import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
 import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
 import io.github.pylonmc.rebar.block.base.RebarProcessor;
 import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
@@ -49,7 +49,7 @@ public class QuirpAnnihilator extends RebarBlock implements
         RebarTickingBlock,
         RebarVirtualInventoryBlock,
         RebarLogisticBlock,
-        RebarGuiBlock
+        RebarInventoryBlock
 {
     public final double buffer = getSettings().getOrThrow("buffer", ConfigAdapter.INTEGER);
     public final double fluidPerCraft = getSettings().getOrThrow("fluid-per-craft", ConfigAdapter.INTEGER);

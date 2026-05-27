@@ -17,7 +17,7 @@ import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
-import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
 import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
 import io.github.pylonmc.rebar.block.base.RebarRecipeProcessor;
 import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
@@ -54,7 +54,7 @@ public class QuirpCycler extends RebarBlock implements
         RebarLogisticBlock,
         RebarRecipeProcessor<QuirpCyclerRecipe>,
         RebarVirtualInventoryBlock,
-        RebarGuiBlock
+        RebarInventoryBlock
 {
     private static final Config settings = Settings.get(RebarTranscEndenceKeys.QUIRP_CYCLER);
     public static final double buffer = settings.getOrThrow("buffer", ConfigAdapter.INTEGER);

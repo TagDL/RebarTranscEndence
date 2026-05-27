@@ -14,6 +14,11 @@ import io.github.tagdl.RebarTranscEndence.items.ZotDown;
 import io.github.tagdl.RebarTranscEndence.items.ZotLeft;
 import io.github.tagdl.RebarTranscEndence.items.ZotRight;
 import io.github.tagdl.RebarTranscEndence.items.ZotUp;
+import io.github.tagdl.RebarTranscEndence.items.Daxi.DaxiA;
+import io.github.tagdl.RebarTranscEndence.items.Daxi.DaxiF;
+import io.github.tagdl.RebarTranscEndence.items.Daxi.DaxiH;
+import io.github.tagdl.RebarTranscEndence.items.Daxi.DaxiR;
+import io.github.tagdl.RebarTranscEndence.items.Daxi.DaxiS;
 import io.github.tagdl.RebarTranscEndence.recipe.NanobotCrafterRecipe;
 import io.github.tagdl.RebarTranscEndence.recipe.QuirpCyclerRecipe;
 import io.papermc.paper.datacomponent.DataComponentTypes;
@@ -154,15 +159,15 @@ public final class RebarTranscEndenceItems {
         RebarItem.register(RebarItem.class, HORIZONTAL_POLARIZER);
         RebarTranscEndencePages.ITEMS.addItem(HORIZONTAL_POLARIZER);
 
-        RebarItem.register(RebarItem.class, DAXI_STRENGTH);
+        RebarItem.register(DaxiS.class, DAXI_STRENGTH);
         RebarTranscEndencePages.ITEMS.addItem(DAXI_STRENGTH);
-        RebarItem.register(RebarItem.class, DAXI_ABSORPTION);
+        RebarItem.register(DaxiA.class, DAXI_ABSORPTION);
         RebarTranscEndencePages.ITEMS.addItem(DAXI_ABSORPTION);
-        RebarItem.register(RebarItem.class, DAXI_FORTITUDE);
+        RebarItem.register(DaxiF.class, DAXI_FORTITUDE);
         RebarTranscEndencePages.ITEMS.addItem(DAXI_FORTITUDE);
-        RebarItem.register(RebarItem.class, DAXI_SATURATION);
+        RebarItem.register(DaxiH.class, DAXI_SATURATION);
         RebarTranscEndencePages.ITEMS.addItem(DAXI_SATURATION);
-        RebarItem.register(RebarItem.class, DAXI_REGENERATION);
+        RebarItem.register(DaxiR.class, DAXI_REGENERATION);
         RebarTranscEndencePages.ITEMS.addItem(DAXI_REGENERATION);
 
 

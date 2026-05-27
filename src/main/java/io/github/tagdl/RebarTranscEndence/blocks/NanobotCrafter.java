@@ -21,7 +21,7 @@ import org.joml.Vector3i;
 
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarGuiBlock;
+import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
 import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
 import io.github.pylonmc.rebar.block.base.RebarRecipeProcessor;
 import io.github.pylonmc.rebar.block.base.RebarSimpleMultiblock;
@@ -50,7 +50,7 @@ public class NanobotCrafter extends RebarBlock implements
         RebarVirtualInventoryBlock,
         RebarLogisticBlock,
         RebarRecipeProcessor<NanobotCrafterRecipe>,
-        RebarGuiBlock
+        RebarInventoryBlock
 {
     private static final Config settings = Settings.get(RebarTranscEndenceKeys.NANOBOT_CRAFTER);
     public static final int timeconsume = Math.round(settings.getOrThrow("seconds-consume", ConfigAdapter.FLOAT) * 20);

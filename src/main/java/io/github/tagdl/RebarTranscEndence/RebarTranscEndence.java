@@ -53,7 +53,10 @@ public class RebarTranscEndence extends JavaPlugin implements RebarAddon {
 
     @Override
     public @NotNull Set<@NotNull Locale> getLanguages() {
-        return Set.of(Locale.ENGLISH);
+        return Set.of(
+            Locale.ENGLISH,
+            Locale.SIMPLIFIED_CHINESE
+        );
     }
 
     @Override

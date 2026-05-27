@@ -143,5 +143,8 @@ public class DaxiAnimation {
             this.component = component;
             this.colors = colors;
         }
+        public int getLevel() {
+            return this.level;
+        }
     }
 }

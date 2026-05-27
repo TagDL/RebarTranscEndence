@@ -12,14 +12,14 @@ import io.github.pylonmc.rebar.block.BlockStorage;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
 import io.github.pylonmc.rebar.block.base.RebarInteractBlock;
-import io.github.pylonmc.rebar.block.base.RebarNoVanillaContainerBlock;
+import io.github.pylonmc.rebar.block.base.RebarNoVanillaInventoryBlock;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.tagdl.RebarTranscEndence.recipe.NanobotCrafterRecipe;
 
 public class NanobotLauncher extends RebarBlock implements
         RebarDirectionalBlock,
         RebarInteractBlock,
-        RebarNoVanillaContainerBlock
+        RebarNoVanillaInventoryBlock
 {
     public NanobotLauncher(@NotNull Block block, @NotNull BlockCreateContext context) {
         super(block, context);
