@@ -187,3 +187,25 @@ rebartranscendence:zot_right:
     A: rebartranscendence:quirp_right
     B: rebartranscendence:stable_block
   result: rebartranscendence:zot_right
+
+rebartranscendence:horizontal_polarizer:
+  shape:
+    - "AAA"
+    - "BCA"
+    - "BBB"
+  key:
+    A: rebartranscendence:quirp_up
+    B: rebartranscendence:quirp_down
+    C: minecraft:end_rod
+  result: rebartranscendence:horizontal_polarizer
+
+rebartranscendence:vertical_polarizer:
+  shape:
+    - "BBA"
+    - "BCA"
+    - "BAA"
+  key:
+    A: rebartranscendence:quirp_left
+    B: rebartranscendence:quirp_right
+    C: minecraft:end_rod
+  result: rebartranscendence:vertical_polarizer

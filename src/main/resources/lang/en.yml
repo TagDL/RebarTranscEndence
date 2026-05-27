@@ -149,6 +149,7 @@ item:
   quirp_annihilator:
     name: "Quirp Annihilator"
     lore: |-
+      <arrow> Use to produce <attr><lang:rebartranscendence.item.quirp_condensate.name></attr>
       <arrow> Condesates opposite Quirps
       <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%

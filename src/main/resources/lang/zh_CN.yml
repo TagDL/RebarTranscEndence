@@ -149,6 +149,7 @@ item:
   quirp_annihilator:
     name: "粒子冷凝机"
     lore: |-
+      <arrow> 用于生产<attr><lang:rebartranscendence.item.quirp_condensate.name></attr>
       <arrow> 需要两种方向相反的粒子才能运行
       <arrow> <attr><lang:pylon.fluid.obscyra/> 每秒消耗:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
