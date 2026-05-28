@@ -75,7 +75,7 @@ public class DaxiAnimation {
                 }
                 player.getWorld().playSound(l, Sound.ENTITY_ZOMBIE_VILLAGER_CURE, 1F, 1F);
                 player.addPotionEffect(
-                    new PotionEffect(type.effect, PotionEffect.INFINITE_DURATION, type.level));
+                    new PotionEffect(type.effect, PotionEffect.INFINITE_DURATION, type.level - 1));
                 player.sendMessage(type.component);
             }, lasttick);
         }
