@@ -81,31 +81,31 @@ public class DaxiListener implements Listener {
             if (getPlayerPdc(player, DAXI_STRENGTH_KEY)) {
                 Bukkit.getScheduler().runTask(RebarTranscEndence.getInstance(), () -> {
                     player.addPotionEffect(
-                        new PotionEffect(PotionEffectType.STRENGTH, PotionEffect.INFINITE_DURATION, strength));
+                        new PotionEffect(PotionEffectType.STRENGTH, PotionEffect.INFINITE_DURATION, strength - 1));
                 });
             }
             if (getPlayerPdc(player, DAXI_ABSORPTION_KEY)) {
                 Bukkit.getScheduler().runTask(RebarTranscEndence.getInstance(), () -> {
                     player.addPotionEffect(
-                        new PotionEffect(PotionEffectType.ABSORPTION, PotionEffect.INFINITE_DURATION, absorption));
+                        new PotionEffect(PotionEffectType.ABSORPTION, PotionEffect.INFINITE_DURATION, absorption - 1));
                 });
             }
             if (getPlayerPdc(player, DAXI_FORTITUDE_KEY)) {
                 Bukkit.getScheduler().runTask(RebarTranscEndence.getInstance(), () -> {
                     player.addPotionEffect(
-                        new PotionEffect(PotionEffectType.RESISTANCE, PotionEffect.INFINITE_DURATION, fortitude));
+                        new PotionEffect(PotionEffectType.RESISTANCE, PotionEffect.INFINITE_DURATION, fortitude - 1));
                 });
             }
             if (getPlayerPdc(player, DAXI_SATURATION_KEY)) {
                 Bukkit.getScheduler().runTask(RebarTranscEndence.getInstance(), () -> {
                     player.addPotionEffect(
-                        new PotionEffect(PotionEffectType.SATURATION, PotionEffect.INFINITE_DURATION, saturation));
+                        new PotionEffect(PotionEffectType.SATURATION, PotionEffect.INFINITE_DURATION, saturation - 1));
                 });
             }
             if (getPlayerPdc(player, DAXI_REGENERATION_KEY)) {
                 Bukkit.getScheduler().runTask(RebarTranscEndence.getInstance(), () -> {
                     player.addPotionEffect(
-                        new PotionEffect(PotionEffectType.REGENERATION, PotionEffect.INFINITE_DURATION, regeneration));
+                        new PotionEffect(PotionEffectType.REGENERATION, PotionEffect.INFINITE_DURATION, regeneration - 1));
                 });
             }
         }
