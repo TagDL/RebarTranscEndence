@@ -1,17 +1,50 @@
 package io.github.tagdl.RebarTranscEndence.blocks;
 
+import java.util.Map;
+
 import org.bukkit.block.Block;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
-import io.github.pylonmc.pylon.content.components.ItemOutputHatch;
+import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.GuiRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.LogisticRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.VirtualInventoryRebarBlock;
+import io.github.pylonmc.rebar.logistics.LogisticGroupType;
+import io.github.pylonmc.rebar.util.gui.GuiItems;
+import xyz.xenondevs.invui.gui.Gui;
+import xyz.xenondevs.invui.inventory.VirtualInventory;
 
-public class NanobotOutpuHatch extends ItemOutputHatch {
+public class NanobotOutpuHatch extends RebarBlock implements
+    LogisticRebarBlock,
+    GuiRebarBlock,
+    VirtualInventoryRebarBlock,
+    DirectionalRebarBlock
+{
+    public final VirtualInventory inventory = new VirtualInventory(1);
     public NanobotOutpuHatch(@NotNull Block block, @NotNull BlockCreateContext context) {
         super(block, context);
+        setFacing(context.getFacing());
     }
     public NanobotOutpuHatch(@NotNull Block block, @NotNull PersistentDataContainer pdc) {
         super(block, pdc);
+    }
+    @Override
+    public void postInitialise() {
+        createLogisticGroup("output", LogisticGroupType.OUTPUT, inventory);
+    }
+    @Override
+    public @NotNull Gui createGui() {
+        return Gui.builder()
+                .setStructure("# # # # x # # # #")
+                .addIngredient('#', GuiItems.background())
+                .addIngredient('x', inventory)
+                .build();
+    }
+    @Override
+    public @NotNull Map<String, VirtualInventory> getVirtualInventories() {
+        return Map.of("inventory", inventory);
     }
 }

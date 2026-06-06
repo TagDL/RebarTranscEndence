@@ -20,16 +20,15 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3i;
 
 import io.github.pylonmc.rebar.block.RebarBlock;
-import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
-import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
-import io.github.pylonmc.rebar.block.base.RebarRecipeProcessor;
-import io.github.pylonmc.rebar.block.base.RebarSimpleMultiblock;
-import io.github.pylonmc.rebar.block.base.RebarVirtualInventoryBlock;
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.GuiRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.LogisticRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.RecipeProcessorRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.SimpleRebarMultiblock;
+import io.github.pylonmc.rebar.block.interfaces.VirtualInventoryRebarBlock;
 import io.github.pylonmc.rebar.block.context.BlockBreakContext;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
-import io.github.pylonmc.rebar.config.Config;
-import io.github.pylonmc.rebar.config.Settings;
+import io.github.pylonmc.rebar.config.ConfigSection;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.logistics.LogisticGroupType;
@@ -45,14 +44,14 @@ import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.inventory.VirtualInventory;
 
 public class NanobotCrafter extends RebarBlock implements
-        RebarDirectionalBlock,
-        RebarSimpleMultiblock,
-        RebarVirtualInventoryBlock,
-        RebarLogisticBlock,
-        RebarRecipeProcessor<NanobotCrafterRecipe>,
-        RebarInventoryBlock
+        DirectionalRebarBlock,
+        SimpleRebarMultiblock,
+        VirtualInventoryRebarBlock,
+        LogisticRebarBlock,
+        RecipeProcessorRebarBlock<NanobotCrafterRecipe>,
+        GuiRebarBlock
 {
-    private static final Config settings = Settings.get(RebarTranscEndenceKeys.NANOBOT_CRAFTER);
+    private static final ConfigSection settings = ConfigSection.fromSettings(RebarTranscEndenceKeys.NANOBOT_CRAFTER);
     public static final int timeconsume = Math.round(settings.getOrThrow("seconds-consume", ConfigAdapter.FLOAT) * 20);
     private final VirtualInventory inputInventory = new VirtualInventory(9);
     public NanobotCrafter(@NotNull Block block, @NotNull BlockCreateContext context) {
@@ -157,8 +156,8 @@ public class NanobotCrafter extends RebarBlock implements
         return Map.of("input", inputInventory);
     }
     @Override
-    public void onBreak(@NotNull List<@NotNull ItemStack> drops, @NotNull BlockBreakContext context) {
-        RebarVirtualInventoryBlock.super.onBreak(drops, context);
+    public void onBlockBreak(@NotNull List<@NotNull ItemStack> drops, @NotNull BlockBreakContext context) {
+        VirtualInventoryRebarBlock.super.onBlockBreak(drops, context);
     }
     @Override
     public void postLoad() {

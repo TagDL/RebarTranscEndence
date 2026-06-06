@@ -10,16 +10,16 @@ import org.jetbrains.annotations.NotNull;
 
 import io.github.pylonmc.rebar.block.BlockStorage;
 import io.github.pylonmc.rebar.block.RebarBlock;
-import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarInteractBlock;
-import io.github.pylonmc.rebar.block.base.RebarNoVanillaInventoryBlock;
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.InteractRebarBlockHandler;
+import io.github.pylonmc.rebar.block.interfaces.NoVanillaInventoryRebarBlock;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.tagdl.RebarTranscEndence.recipe.NanobotCrafterRecipe;
 
 public class NanobotLauncher extends RebarBlock implements
-        RebarDirectionalBlock,
-        RebarInteractBlock,
-        RebarNoVanillaInventoryBlock
+        DirectionalRebarBlock,
+        InteractRebarBlockHandler,
+        NoVanillaInventoryRebarBlock
 {
     public NanobotLauncher(@NotNull Block block, @NotNull BlockCreateContext context) {
         super(block, context);
@@ -29,7 +29,7 @@ public class NanobotLauncher extends RebarBlock implements
         super(block, pdc);
     }
     @Override
-    public void onInteract(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority) {
+    public void onInteractedWith(@NotNull PlayerInteractEvent event, @NotNull EventPriority priority) {
         if (event.getHand() != EquipmentSlot.HAND
                 || !event.getAction().isRightClick()
         ) return;

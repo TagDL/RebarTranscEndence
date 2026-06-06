@@ -15,8 +15,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-import io.github.pylonmc.rebar.config.Config;
-import io.github.pylonmc.rebar.config.Settings;
+import io.github.pylonmc.rebar.config.ConfigSection;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndence;
@@ -28,14 +27,14 @@ public class DaxiListener implements Listener {
     public static final NamespacedKey DAXI_FORTITUDE_KEY = new NamespacedKey(RebarTranscEndence.getInstance(), "daxi_fortitude_key");
     public static final NamespacedKey DAXI_SATURATION_KEY = new NamespacedKey(RebarTranscEndence.getInstance(), "daxi_saturation_key");
     public static final NamespacedKey DAXI_REGENERATION_KEY = new NamespacedKey(RebarTranscEndence.getInstance(), "daxi_regeneration_key");
-    private static final Config settings = Settings.get(new NamespacedKey(RebarTranscEndence.getInstance(), "daxi"));
+    private static final ConfigSection settings = ConfigSection.fromSettings(new NamespacedKey(RebarTranscEndence.getInstance(), "daxi"));
     public final int strength = settings.getOrThrow("strength-level", ConfigAdapter.INTEGER);
     public final int absorption = settings.getOrThrow("absorption-level", ConfigAdapter.INTEGER);
     public final int fortitude = settings.getOrThrow("resistance-level", ConfigAdapter.INTEGER);
     public final int saturation = settings.getOrThrow("saturation-level", ConfigAdapter.INTEGER);
     public final int regeneration = settings.getOrThrow("regeneration-level", ConfigAdapter.INTEGER);
     @EventHandler
-    public void onUsedToClick(@NotNull PlayerInteractEvent event) {
+    public void onInteract(@NotNull PlayerInteractEvent event) {
         if (event.getHand() != EquipmentSlot.HAND 
                 || event.useItemInHand() == Event.Result.DENY
                 || event.getAction().isLeftClick()) return;

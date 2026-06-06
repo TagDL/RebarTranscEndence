@@ -178,7 +178,7 @@ public final class RebarTranscEndenceItems {
         RebarItem.register(QuirpCycler.Item.class, QUIRP_CYCLER, RebarTranscEndenceKeys.QUIRP_CYCLER);
         RebarTranscEndencePages.MACHINES.addItem(QUIRP_CYCLER);
         RebarGuide.getOrCreateInfoPage(RebarTranscEndenceKeys.QUIRP_CYCLER)
-                .addButton(new MachineRecipesButton(QUIRP_CYCLER, QuirpCyclerRecipe.RECIPE_TYPE));
+                .addButton(new MachineRecipesButton(QuirpCyclerRecipe.RECIPE_TYPE));
         RebarItem.register(Stabilizer.Item.class, STABILIZER, RebarTranscEndenceKeys.STABILIZER);
         RebarTranscEndencePages.MACHINES.addItem(STABILIZER);
         RebarItem.register(ZotOverloader.Item.class, ZOT_OVERLOADER, RebarTranscEndenceKeys.ZOT_OVERLOADER);
@@ -186,7 +186,7 @@ public final class RebarTranscEndenceItems {
         RebarItem.register(RebarItem.class, NANOBOT_CRAFTER, RebarTranscEndenceKeys.NANOBOT_CRAFTER);
         RebarTranscEndencePages.MACHINES.addItem(NANOBOT_CRAFTER);
         RebarGuide.getOrCreateInfoPage(RebarTranscEndenceKeys.NANOBOT_CRAFTER)
-                .addButton(new MachineRecipesButton(NANOBOT_CRAFTER, NanobotCrafterRecipe.RECIPE_TYPE));
+                .addButton(new MachineRecipesButton(NanobotCrafterRecipe.RECIPE_TYPE));
         RebarItem.register(RebarItem.class, NANOBOT_LAUNCHER, RebarTranscEndenceKeys.NANOBOT_LAUNCHER);
         RebarTranscEndencePages.MACHINES.addItem(NANOBOT_LAUNCHER);
         RebarItem.register(RebarItem.class, NANOBOT_OUTPUT_HATCH, RebarTranscEndenceKeys.NANOBOT_OUTPUT_HATCH);

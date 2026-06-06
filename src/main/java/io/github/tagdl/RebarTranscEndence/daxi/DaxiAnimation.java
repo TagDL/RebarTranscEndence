@@ -18,8 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.joml.Matrix4f;
 
-import io.github.pylonmc.rebar.config.Config;
-import io.github.pylonmc.rebar.config.Settings;
+import io.github.pylonmc.rebar.config.ConfigSection;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.entity.display.ItemDisplayBuilder;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
@@ -27,7 +26,7 @@ import io.github.tagdl.RebarTranscEndence.RebarTranscEndence;
 import net.kyori.adventure.text.Component;
 
 public class DaxiAnimation {
-        private static final Config settings = Settings.get(new NamespacedKey(RebarTranscEndence.getInstance(), "daxi"));
+        private static final ConfigSection settings = ConfigSection.fromSettings(new NamespacedKey(RebarTranscEndence.getInstance(), "daxi"));
         public static void startAnimation(Player player, Type type) {
             player.sendMessage(Component.translatable("rebartranscendence.message.daxi-message-intro")
                     .color(colorToTextColor(Color.PURPLE)));

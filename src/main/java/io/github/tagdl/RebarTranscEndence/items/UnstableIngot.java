@@ -4,7 +4,7 @@ import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
-import io.github.pylonmc.rebar.item.base.RebarInventoryTicker;
+import io.github.pylonmc.rebar.item.interfaces.InventoryTickerRebarItem;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndence;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class UnstableIngot extends RebarItem implements
-    RebarInventoryTicker
+    InventoryTickerRebarItem
 {
     @Getter
     private final long deleteDelay = getSettings().getOrThrow("max_hold_seconds", ConfigAdapter.INTEGER) * 20;

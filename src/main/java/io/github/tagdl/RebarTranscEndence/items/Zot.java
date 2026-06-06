@@ -1,7 +1,6 @@
 package io.github.tagdl.RebarTranscEndence.items;
 
-import io.github.pylonmc.rebar.config.Config;
-import io.github.pylonmc.rebar.config.Settings;
+import io.github.pylonmc.rebar.config.ConfigSection;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
@@ -18,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Zot extends RebarItem {
     private static final NamespacedKey AMOUNT_KEY = new NamespacedKey(RebarTranscEndence.getInstance(), "zot_amount");
-    private static final Config settings = Settings.get(new NamespacedKey(RebarTranscEndence.getInstance(), "zot"));
+    private static final ConfigSection settings = ConfigSection.fromSettings(new NamespacedKey(RebarTranscEndence.getInstance(), "zot"));
     public final int maxAmount = settings.getOrThrow("max-amount", ConfigAdapter.INTEGER);
     public Zot(@NotNull ItemStack stack) {
         super(stack);

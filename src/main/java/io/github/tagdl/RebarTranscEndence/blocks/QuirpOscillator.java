@@ -3,13 +3,13 @@ package io.github.tagdl.RebarTranscEndence.blocks;
 import io.github.pylonmc.pylon.PylonFluids;
 import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
-import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock;
-import io.github.pylonmc.rebar.block.base.RebarFluidBufferBlock;
-import io.github.pylonmc.rebar.block.base.RebarInventoryBlock;
-import io.github.pylonmc.rebar.block.base.RebarLogisticBlock;
-import io.github.pylonmc.rebar.block.base.RebarProcessor;
-import io.github.pylonmc.rebar.block.base.RebarTickingBlock;
-import io.github.pylonmc.rebar.block.base.RebarVirtualInventoryBlock;
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.FluidBufferRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.GuiRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.LogisticRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.ProcessorRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.TickingRebarBlock;
+import io.github.pylonmc.rebar.block.interfaces.VirtualInventoryRebarBlock;
 import io.github.pylonmc.rebar.block.context.BlockBreakContext;
 import io.github.pylonmc.rebar.block.context.BlockCreateContext;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
@@ -49,13 +49,13 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class QuirpOscillator extends RebarBlock implements 
-        RebarDirectionalBlock,
-        RebarProcessor,
-        RebarLogisticBlock,
-        RebarVirtualInventoryBlock,
-        RebarInventoryBlock,
-        RebarFluidBufferBlock,
-        RebarTickingBlock
+        DirectionalRebarBlock,
+        ProcessorRebarBlock,
+        LogisticRebarBlock,
+        VirtualInventoryRebarBlock,
+        GuiRebarBlock,
+        FluidBufferRebarBlock,
+        TickingRebarBlock
 {
 
     public final double buffer = getSettings().getOrThrow("buffer", ConfigAdapter.INTEGER);
@@ -188,9 +188,9 @@ public class QuirpOscillator extends RebarBlock implements
         return Map.of("polarizer", polarizerInventory, "output", outputInventory);
     }
     @Override
-    public void onBreak(@NotNull List<@NotNull ItemStack> drops, @NotNull BlockBreakContext context) {
-        RebarVirtualInventoryBlock.super.onBreak(drops, context);
-        RebarFluidBufferBlock.super.onBreak(drops, context);
+    public void onBlockBreak(@NotNull List<@NotNull ItemStack> drops, @NotNull BlockBreakContext context) {
+        VirtualInventoryRebarBlock.super.onBlockBreak(drops, context);
+        FluidBufferRebarBlock.super.onBlockBreak(drops, context);
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
