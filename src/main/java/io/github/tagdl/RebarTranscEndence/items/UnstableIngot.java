@@ -5,11 +5,11 @@ import io.github.pylonmc.rebar.datatypes.RebarSerializers;
 import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.interfaces.InventoryTickerRebarItem;
+import io.github.pylonmc.rebar.util.RebarUtils;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndence;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
 
-import static io.github.pylonmc.pylon.util.PylonUtils.colorToTextColor;
 
 import java.util.List;
 
@@ -59,9 +59,9 @@ public class UnstableIngot extends RebarItem implements
             }
             Bukkit.getScheduler().runTask(RebarTranscEndence.getInstance(), () -> {
                 player.kill();
-                player.sendMessage(Component.text(player.getName()).color(colorToTextColor(Color.YELLOW))
+                player.sendMessage(Component.text(player.getName()).color(RebarUtils.colorToTextColor(Color.YELLOW))
                    .append(Component.translatable("rebartranscendence.message.unstable-death-message")
-                            .color(colorToTextColor(Color.RED))));
+                            .color(RebarUtils.colorToTextColor(Color.RED))));
             });
         }, deleteDelay);
     }

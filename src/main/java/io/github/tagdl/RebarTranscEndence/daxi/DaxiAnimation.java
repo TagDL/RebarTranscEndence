@@ -1,6 +1,5 @@
 package io.github.tagdl.RebarTranscEndence.daxi;
 
-import static io.github.pylonmc.pylon.util.PylonUtils.colorToTextColor;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -22,6 +21,7 @@ import io.github.pylonmc.rebar.config.ConfigSection;
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter;
 import io.github.pylonmc.rebar.entity.display.ItemDisplayBuilder;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
+import io.github.pylonmc.rebar.util.RebarUtils;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndence;
 import net.kyori.adventure.text.Component;
 
@@ -29,7 +29,7 @@ public class DaxiAnimation {
         private static final ConfigSection settings = ConfigSection.fromSettings(new NamespacedKey(RebarTranscEndence.getInstance(), "daxi"));
         public static void startAnimation(Player player, Type type) {
             player.sendMessage(Component.translatable("rebartranscendence.message.daxi-message-intro")
-                    .color(colorToTextColor(Color.PURPLE)));
+                    .color(RebarUtils.colorToTextColor(Color.PURPLE)));
             Location l = player.getLocation();
             int lasttick = 105;
             Location locas1 = l.clone().add(2, -0.5, 0);
@@ -107,27 +107,27 @@ public class DaxiAnimation {
     public enum Type {
         STRENGTH(new Material[]{Material.RED_CONCRETE, Material.RED_CONCRETE, Material.RED_CONCRETE, Material.RED_CONCRETE}, 
             PotionEffectType.STRENGTH, settings.getOrThrow("strength-level", ConfigAdapter.INTEGER),
-            Component.translatable("rebartranscendence.message.daxi-message-strength").color(colorToTextColor(Color.RED)),
+            Component.translatable("rebartranscendence.message.daxi-message-strength").color(RebarUtils.colorToTextColor(Color.RED)),
             new Color[]{Color.RED, Color.RED, Color.RED, Color.RED}
         ),
         ABSORPTION(new Material[]{Material.YELLOW_CONCRETE, Material.YELLOW_CONCRETE, Material.YELLOW_CONCRETE, Material.YELLOW_CONCRETE},
             PotionEffectType.ABSORPTION, settings.getOrThrow("absorption-level", ConfigAdapter.INTEGER),
-            Component.translatable("rebartranscendence.message.daxi-message-absorption").color(colorToTextColor(Color.YELLOW)),
+            Component.translatable("rebartranscendence.message.daxi-message-absorption").color(RebarUtils.colorToTextColor(Color.YELLOW)),
             new Color[]{Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW}
         ),
         FORTITUDE(new Material[]{Material.LIME_CONCRETE, Material.LIME_CONCRETE, Material.LIME_CONCRETE, Material.LIME_CONCRETE},
             PotionEffectType.RESISTANCE, settings.getOrThrow("resistance-level", ConfigAdapter.INTEGER),
-            Component.translatable("rebartranscendence.message.daxi-message-fortitude").color(colorToTextColor(Color.LIME)),
+            Component.translatable("rebartranscendence.message.daxi-message-fortitude").color(RebarUtils.colorToTextColor(Color.LIME)),
             new Color[]{Color.LIME, Color.LIME, Color.LIME, Color.LIME}
         ),
         SATURATION(new Material[]{Material.BLUE_CONCRETE, Material.BLUE_CONCRETE, Material.BLUE_CONCRETE, Material.BLUE_CONCRETE},
             PotionEffectType.SATURATION, settings.getOrThrow("saturation-level", ConfigAdapter.INTEGER),
-            Component.translatable("rebartranscendence.message.daxi-message-saturation").color(colorToTextColor(Color.BLUE)),
+            Component.translatable("rebartranscendence.message.daxi-message-saturation").color(RebarUtils.colorToTextColor(Color.BLUE)),
             new Color[]{Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE}
         ),
         REGENERATION(new Material[]{Material.RED_CONCRETE, Material.YELLOW_CONCRETE, Material.LIME_CONCRETE, Material.BLUE_CONCRETE},
             PotionEffectType.REGENERATION, settings.getOrThrow("regeneration-level", ConfigAdapter.INTEGER),
-            Component.translatable("rebartranscendence.message.daxi-message-regeneration").color(colorToTextColor(Color.ORANGE)),
+            Component.translatable("rebartranscendence.message.daxi-message-regeneration").color(RebarUtils.colorToTextColor(Color.ORANGE)),
             new Color[]{Color.RED, Color.YELLOW, Color.LIME, Color.BLUE}
         );
         private final Material[] materials;

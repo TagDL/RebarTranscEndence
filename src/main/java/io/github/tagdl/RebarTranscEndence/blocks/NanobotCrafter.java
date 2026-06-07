@@ -1,6 +1,5 @@
 package io.github.tagdl.RebarTranscEndence.blocks;
 
-import static io.github.pylonmc.pylon.util.PylonUtils.colorToTextColor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +33,7 @@ import io.github.pylonmc.rebar.i18n.RebarArgument;
 import io.github.pylonmc.rebar.logistics.LogisticGroupType;
 import io.github.pylonmc.rebar.recipe.RecipeInput;
 import io.github.pylonmc.rebar.util.MachineUpdateReason;
+import io.github.pylonmc.rebar.util.RebarUtils;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndence;
@@ -170,7 +170,7 @@ public class NanobotCrafter extends RebarBlock implements
         return new WailaDisplay(isProcessingRecipe() 
             ? Component.translatable("rebartranscendence.item.nanobot_crafter.waila.running")
                 .arguments(
-                    RebarArgument.of("result", getCurrentRecipe().result().effectiveName().color(colorToTextColor(Color.LIME))))
+                    RebarArgument.of("result", getCurrentRecipe().result().effectiveName().color(RebarUtils.colorToTextColor(Color.LIME))))
             : Component.translatable("rebartranscendence.item.nanobot_crafter.waila.not_running"));
     }
 }

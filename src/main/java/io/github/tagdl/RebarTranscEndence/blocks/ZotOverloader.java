@@ -1,6 +1,5 @@
 package io.github.tagdl.RebarTranscEndence.blocks;
 
-import static io.github.pylonmc.pylon.util.PylonUtils.colorToTextColor;
 import static java.lang.Math.max;
 
 import java.util.List;
@@ -18,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import io.github.pylonmc.pylon.PylonFluids;
-import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.FluidBufferRebarBlock;
@@ -36,6 +34,8 @@ import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.pylonmc.rebar.logistics.LogisticGroupType;
 import io.github.pylonmc.rebar.util.MachineUpdateReason;
+import io.github.pylonmc.rebar.util.ProgressBar;
+import io.github.pylonmc.rebar.util.RebarUtils;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
 import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
@@ -47,7 +47,6 @@ import io.github.tagdl.RebarTranscEndence.items.ZotLeft;
 import io.github.tagdl.RebarTranscEndence.items.ZotRight;
 import io.github.tagdl.RebarTranscEndence.items.ZotUp;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.inventory.VirtualInventory;
 import xyz.xenondevs.invui.inventory.event.ItemPreUpdateEvent;
@@ -231,7 +230,7 @@ public class ZotOverloader extends RebarBlock implements
         this.inner_amount = amount;
     }
     public Component getInner() {
-        return Component.text(this.inner_amount).color(colorToTextColor(this.color));
+        return Component.text(this.inner_amount).color(RebarUtils.colorToTextColor(this.color));
     }
     public boolean canRun() {
         boolean tempbool = false;
@@ -267,19 +266,17 @@ public class ZotOverloader extends RebarBlock implements
             ? Component.translatable("rebartranscendence.item.zot_overloader.waila.running")
                 .arguments(
                     RebarArgument.of("amount", getInner()),
-                    RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
-                        fluidAmount(PylonFluids.OBSCYRA),
-                        fluidCapacity(PylonFluids.OBSCYRA),
-                        20,
-                        TextColor.fromHexString("#000000")
-                )))
+                    RebarArgument.of("input-bar", ProgressBar.fluidContents(
+                                PylonFluids.OBSCYRA, 
+                                fluidCapacity(PylonFluids.OBSCYRA), 
+                                fluidAmount(PylonFluids.OBSCYRA)
+                            )))
             : Component.translatable("rebartranscendence.item.zot_overloader.waila.not_running")
-                .arguments(RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
-                        fluidAmount(PylonFluids.OBSCYRA),
-                        fluidCapacity(PylonFluids.OBSCYRA),
-                        20,
-                        TextColor.fromHexString("#000000")
-                )))
+                .arguments(RebarArgument.of("input-bar", ProgressBar.fluidContents(
+                                PylonFluids.OBSCYRA, 
+                                fluidCapacity(PylonFluids.OBSCYRA), 
+                                fluidAmount(PylonFluids.OBSCYRA)
+                            )))
         );
     }
 }

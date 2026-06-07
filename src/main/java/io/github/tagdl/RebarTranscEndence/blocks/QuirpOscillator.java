@@ -1,7 +1,6 @@
 package io.github.tagdl.RebarTranscEndence.blocks;
 
 import io.github.pylonmc.pylon.PylonFluids;
-import io.github.pylonmc.pylon.util.PylonUtils;
 import io.github.pylonmc.rebar.block.RebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock;
 import io.github.pylonmc.rebar.block.interfaces.FluidBufferRebarBlock;
@@ -19,19 +18,18 @@ import io.github.pylonmc.rebar.item.RebarItem;
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder;
 import io.github.pylonmc.rebar.logistics.LogisticGroupType;
 import io.github.pylonmc.rebar.util.MachineUpdateReason;
+import io.github.pylonmc.rebar.util.ProgressBar;
+import io.github.pylonmc.rebar.util.RebarUtils;
 import io.github.pylonmc.rebar.util.gui.GuiItems;
 import io.github.pylonmc.rebar.util.gui.ProgressItem;
 import io.github.pylonmc.rebar.util.gui.unit.UnitFormat;
 import io.github.pylonmc.rebar.waila.WailaDisplay;
 import io.github.tagdl.RebarTranscEndence.RebarTranscEndenceItems;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.inventory.VirtualInventory;
 import xyz.xenondevs.invui.inventory.event.ItemPostUpdateEvent;
 import xyz.xenondevs.invui.inventory.event.ItemPreUpdateEvent;
-
-import static io.github.pylonmc.pylon.util.PylonUtils.colorToTextColor;
 
 import java.util.List;
 import java.util.Map;
@@ -180,8 +178,8 @@ public class QuirpOscillator extends RebarBlock implements
     }
     public Component getOutput() {
         return this.itemStack == null || this.itemStack.isEmpty()
-            ? Component.translatable("rebartranscendence.item.quirp_oscillator.waila.none_item").color(colorToTextColor(Color.RED))
-            : this.itemStack.effectiveName().color(colorToTextColor(Color.LIME));
+            ? Component.translatable("rebartranscendence.item.quirp_oscillator.waila.none_item").color(RebarUtils.colorToTextColor(Color.RED))
+            : this.itemStack.effectiveName().color(RebarUtils.colorToTextColor(Color.LIME));
     }
     @Override
     public @NotNull Map<@NotNull String, @NotNull VirtualInventory> getVirtualInventories() {
@@ -199,21 +197,19 @@ public class QuirpOscillator extends RebarBlock implements
                 .arguments(
                     RebarArgument.of("time", UnitFormat.SECONDS.format(
                         Math.round(progressItem.getTotalTime().toSeconds() * (1.0 - progressItem.getProgress())))),
-                    RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
-                        fluidAmount(PylonFluids.OBSCYRA),
-                        fluidCapacity(PylonFluids.OBSCYRA),
-                        20,
-                        TextColor.fromHexString("#000000")
-                )))
+                    RebarArgument.of("input-bar", ProgressBar.fluidContents(
+                                PylonFluids.OBSCYRA, 
+                                fluidCapacity(PylonFluids.OBSCYRA), 
+                                fluidAmount(PylonFluids.OBSCYRA)
+                            )))
             : Component.translatable("rebartranscendence.item.quirp_oscillator.waila.not_running")
                 .arguments(
                     RebarArgument.of("output", getOutput()),
-                    RebarArgument.of("input-bar", PylonUtils.createFluidAmountBar(
-                        fluidAmount(PylonFluids.OBSCYRA),
-                        fluidCapacity(PylonFluids.OBSCYRA),
-                        20,
-                        TextColor.fromHexString("#000000")
-                )))
+                    RebarArgument.of("input-bar", ProgressBar.fluidContents(
+                                PylonFluids.OBSCYRA, 
+                                fluidCapacity(PylonFluids.OBSCYRA), 
+                                fluidAmount(PylonFluids.OBSCYRA)
+                            )))
         );
     }
 }
