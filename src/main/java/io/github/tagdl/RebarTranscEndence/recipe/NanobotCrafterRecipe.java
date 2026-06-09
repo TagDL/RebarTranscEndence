@@ -106,7 +106,7 @@ public record NanobotCrafterRecipe(
                 .addIngredient('6', ItemButton.of(inputs.get(6)))
                 .addIngredient('7', ItemButton.of(inputs.get(7)))
                 .addIngredient('8', ItemButton.of(inputs.get(8)))
-                .addIngredient('h', new ItemButton(RebarTranscEndenceItems.NANOBOT_CRAFTER))
+                .addIngredient('h', ItemButton.of(RebarTranscEndenceItems.NANOBOT_CRAFTER))
                 .addIngredient('o', ItemButton.of(result))
                 .build();
     }

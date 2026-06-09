@@ -66,7 +66,7 @@ public record QuirpCyclerRecipe(
                 )
                 .addIngredient('#', GuiItems.backgroundBlack())
                 .addIngredient('i', ItemButton.of(input))
-                .addIngredient('h', new ItemButton(RebarTranscEndenceItems.QUIRP_CYCLER))
+                .addIngredient('h', ItemButton.of(RebarTranscEndenceItems.QUIRP_CYCLER))
                 .addIngredient('o', ItemButton.of(result))
                 .addIngredient('p', GuiItems.progressCyclingItem(QuirpCycler.timeconsume,
                     ItemStackBuilder.of(Material.CLOCK)
@@ -75,7 +75,7 @@ public record QuirpCyclerRecipe(
                                     RebarArgument.of("time", UnitFormat.SECONDS.format(QuirpCycler.timeconsume / 20.0))
                             ))
                 ))
-                .addIngredient('l', new FluidButton(
+                .addIngredient('l', FluidButton.of(
                     QuirpCycler.fluidPerCraft * QuirpCycler.timeconsume / 20, PylonFluids.OBSCYRA))
                 .build();
     }

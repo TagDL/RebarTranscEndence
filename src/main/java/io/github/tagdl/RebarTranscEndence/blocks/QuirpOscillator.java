@@ -178,7 +178,7 @@ public class QuirpOscillator extends RebarBlock implements
     }
     public Component getOutput() {
         return this.itemStack == null || this.itemStack.isEmpty()
-            ? Component.translatable("rebartranscendence.item.quirp_oscillator.waila.none_item").color(RebarUtils.colorToTextColor(Color.RED))
+            ? Component.translatable("rebartranscendence.waila.quirp_oscillator.none_item").color(RebarUtils.colorToTextColor(Color.RED))
             : this.itemStack.effectiveName().color(RebarUtils.colorToTextColor(Color.LIME));
     }
     @Override
@@ -192,24 +192,20 @@ public class QuirpOscillator extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return new WailaDisplay(isProcessing()
-            ? Component.translatable("rebartranscendence.item.quirp_oscillator.waila.running")
-                .arguments(
-                    RebarArgument.of("time", UnitFormat.SECONDS.format(
-                        Math.round(progressItem.getTotalTime().toSeconds() * (1.0 - progressItem.getProgress())))),
-                    RebarArgument.of("input-bar", ProgressBar.fluidContents(
-                                PylonFluids.OBSCYRA, 
-                                fluidCapacity(PylonFluids.OBSCYRA), 
-                                fluidAmount(PylonFluids.OBSCYRA)
-                            )))
-            : Component.translatable("rebartranscendence.item.quirp_oscillator.waila.not_running")
-                .arguments(
-                    RebarArgument.of("output", getOutput()),
-                    RebarArgument.of("input-bar", ProgressBar.fluidContents(
-                                PylonFluids.OBSCYRA, 
-                                fluidCapacity(PylonFluids.OBSCYRA), 
-                                fluidAmount(PylonFluids.OBSCYRA)
-                            )))
-        );
+        WailaDisplay display = WailaDisplay.of(this, player);
+        if (isProcessing()) {
+            display.add(Component.translatable("rebartranscendence.waila.quirp_oscillator.running"));
+            display.add(Component.translatable("rebartranscendence.waila.quirp_oscillator.time_left")
+                .arguments(RebarArgument.of("time", UnitFormat.SECONDS.format(
+                    Math.round(progressItem.getTotalTime().toSeconds() * (1.0 - progressItem.getProgress()))))));
+        } else {
+            display.add(Component.translatable("rebartranscendence.waila.quirp_oscillator.not_running")
+                .arguments(RebarArgument.of("output", getOutput())));
+        }
+        return display.add(ProgressBar.fluidContents(
+                PylonFluids.OBSCYRA, 
+                fluidCapacity(PylonFluids.OBSCYRA), 
+                fluidAmount(PylonFluids.OBSCYRA)
+            ));
     }
 }

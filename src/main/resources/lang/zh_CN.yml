@@ -105,7 +105,6 @@ item:
     lore: |-
       <arrow> 增加水平粒子产出几率
       <arrow> 需要放入粒子生产机
-
   nanobot_crafter:
     name: "纳米工作台"
     lore: |-
@@ -115,9 +114,6 @@ item:
       <arrow> 1x 末地烛
       <arrow> 末地科技最基本制作
       <arrow> 右键 <attr><lang:rebartranscendence.item.nanobot_launcher.name></attr> 以开始制作
-    waila:
-      running: "纳米工作台 | 正在制作: %result%"
-      not_running: "纳米工作台 | <red>暂未运行"
   nanobot_launcher:
     name: "纳米工作台启动器"
     lore: |-
@@ -133,19 +129,12 @@ item:
       <arrow> <attr><lang:pylon.fluid.obscyra/> 每秒消耗:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
       <arrow> <red>需要在末地运行!
-    waila:
-      running: "粒子生产机 | <green>正在生产 <white>| 剩余时间: <yellow>%time%<white> | %input-bar%"
-      not_running: "粒子生产机 | 产出: %output% | %input-bar%"
-      none_item: "未产出粒子"
   quirp_cycler:
     name: "粒子转向机"
     lore: |-
       <arrow> 使粒子转向(顺时针)
       <arrow> <attr><lang:pylon.fluid.obscyra/> 每秒消耗:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
-    waila:
-      running: "粒子转向机 | 正在制作: %result% | 剩余时间: <yellow>%process%<white> | %input-bar%"
-      not_running: "粒子转向机 | <red>暂未运行 <white>| %input-bar%"
   quirp_annihilator:
     name: "粒子冷凝机"
     lore: |-
@@ -153,18 +142,12 @@ item:
       <arrow> 需要两种方向相反的粒子才能运行
       <arrow> <attr><lang:pylon.fluid.obscyra/> 每秒消耗:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
-    waila:
-      running: "粒子冷凝机 | 剩余时间: <yellow>%time%<white> | %input-bar%"
-      not_running: "粒子冷凝机 | <red>暂未运行 <white>| %input-bar%"
   stabilizer:
     name: "稳定器"
     lore: |-
       <arrow> 冷凝不稳定的锭
       <arrow> <attr><lang:pylon.fluid.obscyra/> 每秒消耗:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
-    waila:
-      running: "稳定器 | 剩余时间: <yellow>%time%<white> | %input-bar%"
-      not_running: "稳定器 | <red>暂未运行 <white>| %input-bar%"
   zot_overloader:
     name: "粒子过载机"
     lore: |-
@@ -173,9 +156,6 @@ item:
       <arrow> <attr><lang:pylon.fluid.obscyra/> 每秒消耗:</attr> %fluid-per-craft%
       <arrow> <attr>缓冲区:</attr> %buffer%
       <arrow> <red>需要在末地运行!
-    waila:
-      running: "粒子过载机 | 过载程度: <yellow>%amount% <white>| %input-bar%"
-      not_running: "粒子过载机 | <red>暂未运行 <white>| %input-bar%"
 gui:
   stabilizer:
     input: 放入<red>不稳定的锭<white>和冷凝粒子
@@ -208,3 +188,25 @@ message:
   daxi-message-fortitude: "敌人的攻击效果变弱了."
   daxi-message-saturation: "一段时间内你不再需要食物了."
   daxi-message-regeneration: "你获得了永久的自愈效果."
+waila:
+  nanobot_crafter:
+    running: "正在制作: %result%"
+    not_running: "<red>暂未运行"
+  quirp_annihilator:
+    running: "剩余时间: <yellow>%time%<white>"
+    not_running: "<red>暂未运行<white>"
+  quirp_cycler:
+    running: "正在制作: %result%"
+    time_left: "剩余时间: <yellow>%process%<white>"
+    not_running: "<red>暂未运行<white>"
+  quirp_oscillator:
+    running: "<green>正在收集<white>"
+    time_left: "剩余时间: <yellow>%time%<white>"
+    not_running: "产出: %output%"
+    none_item: "没有粒子产出"
+  stabilizer:
+    running: "剩余时间: <yellow>%time%<white>"
+    not_running: "<red>暂未运行<white>"
+  zot_overloader:
+    running: "过载程度: <yellow>%amount%<white>"
+    not_running: "<red>暂未运行<white>"

@@ -181,24 +181,18 @@ public class QuirpAnnihilator extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return new WailaDisplay(isProcessing()
-            ? Component.translatable("rebartranscendence.item.quirp_annihilator.waila.running")
+        WailaDisplay display = WailaDisplay.of(this, player);
+        display.add(isProcessing()
+            ? Component.translatable("rebartranscendence.waila.quirp_annihilator.running")
                 .arguments(
                     RebarArgument.of("time", UnitFormat.SECONDS.format(
-                        Math.round(progressItem.getTotalTime().toSeconds() * (1.0 - progressItem.getProgress())))),
-                    RebarArgument.of("input-bar", ProgressBar.fluidContents(
-                                PylonFluids.OBSCYRA, 
-                                fluidCapacity(PylonFluids.OBSCYRA), 
-                                fluidAmount(PylonFluids.OBSCYRA)
-                            )
-                        ))
-            : Component.translatable("rebartranscendence.item.quirp_annihilator.waila.not_running")
-                .arguments(RebarArgument.of("input-bar", ProgressBar.fluidContents(
-                                PylonFluids.OBSCYRA, 
-                                fluidCapacity(PylonFluids.OBSCYRA), 
-                                fluidAmount(PylonFluids.OBSCYRA)
-                            )
-                ))
-        );
+                        Math.round(progressItem.getTotalTime().toSeconds() * (1.0 - progressItem.getProgress())))))
+            : Component.translatable("rebartranscendence.waila.quirp_annihilator.not_running"));
+        display.add(ProgressBar.fluidContents(
+                PylonFluids.OBSCYRA, 
+                fluidCapacity(PylonFluids.OBSCYRA), 
+                fluidAmount(PylonFluids.OBSCYRA)
+            ));
+        return display;
     }
 }

@@ -188,22 +188,19 @@ public class QuirpCycler extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return new WailaDisplay(isProcessingRecipe()
-            ? Component.translatable("rebartranscendence.item.quirp_cycler.waila.running")
-                .arguments(
-                    RebarArgument.of("result", getCurrentRecipe().result().effectiveName()),
-                    RebarArgument.of("process", UnitFormat.SECONDS.format(getRecipeTicksRemaining() / 20)),
-                    RebarArgument.of("input-bar", ProgressBar.fluidContents(
-                                PylonFluids.OBSCYRA, 
-                                fluidCapacity(PylonFluids.OBSCYRA), 
-                                fluidAmount(PylonFluids.OBSCYRA)
-                            )))
-            : Component.translatable("rebartranscendence.item.quirp_cycler.waila.not_running")
-                .arguments(RebarArgument.of("input-bar", ProgressBar.fluidContents(
-                                PylonFluids.OBSCYRA, 
-                                fluidCapacity(PylonFluids.OBSCYRA), 
-                                fluidAmount(PylonFluids.OBSCYRA)
-                            )))
-        );
+        WailaDisplay display = WailaDisplay.of(this, player);
+        if (isProcessingRecipe()) {
+            display.add(Component.translatable("rebartranscendence.waila.quirp_cycler.running")
+                    .arguments(RebarArgument.of("result", getCurrentRecipe().result().effectiveName())));
+            display.add(Component.translatable("rebartranscendence.waila.quirp_cycler.time_left")
+                    .arguments(RebarArgument.of("process", UnitFormat.SECONDS.format(getRecipeTicksRemaining() / 20))));
+        } else {
+            display.add(Component.translatable("rebartranscendence.waila.quirp_cycler.not_running"));
+        }
+        return display.add(ProgressBar.fluidContents(
+                PylonFluids.OBSCYRA, 
+                fluidCapacity(PylonFluids.OBSCYRA), 
+                fluidAmount(PylonFluids.OBSCYRA)
+            ));
     }
 }

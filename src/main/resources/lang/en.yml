@@ -105,7 +105,6 @@ item:
     lore: |-
       <arrow> Focuses Oscillator on horizontal spins
       <arrow> Increased chance for horizontal spin zots
-
   nanobot_crafter:
     name: "Nanobot Crafter"
     lore: |-
@@ -115,9 +114,6 @@ item:
       <arrow> 1x End Rod
       <arrow> Allows particle manipulation
       <arrow> Right Click <attr><lang:rebartranscendence.item.nanobot_launcher.name></attr> to use
-    waila:
-      running: "Nanobot Crafter | Producing: %result%"
-      not_running: "Nanobot Crafter | <red>Not Running"
   nanobot_launcher:
     name: "Nanobot Launcher"
     lore: |-
@@ -143,9 +139,6 @@ item:
       <arrow> Rotates Quirps
       <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
-    waila:
-      running: "Quirp Cycler | Producing: %result% | Time left: <yellow>%process%<white> | %input-bar%"
-      not_running: "Quirp Cycler | <red>Not running <white>| %input-bar%"
   quirp_annihilator:
     name: "Quirp Annihilator"
     lore: |-
@@ -153,18 +146,12 @@ item:
       <arrow> Condesates opposite Quirps
       <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
-    waila:
-      running: "Quirp Annihilator | Time left: <yellow>%time%<white> | %input-bar%"
-      not_running: "Quirp Annihilator | <red>Not running <white>| %input-bar%"
   stabilizer:
     name: "Stabilizer"
     lore: |-
       <arrow> A controlled environment
       <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per seconds
       <arrow> <attr>Buffer:</attr> %buffer%
-    waila:
-      running: "Stabilizer | Time left: <yellow>%time%<white> | %input-bar%"
-      not_running: "Stabilizer | <red>Not running <white>| %input-bar%"
   zot_overloader:
     name: "Zot Overloader"
     lore: |-
@@ -173,9 +160,6 @@ item:
       <arrow> <attr><lang:pylon.fluid.obscyra/> usage:</attr> %fluid-per-craft% per works
       <arrow> <attr>Buffer:</attr> %buffer%
       <arrow> <red>Works only in the end!
-    waila:
-      running: "Zot Overloader | Charged: <yellow>%amount% <white>| %input-bar%"
-      not_running: "Zot Overloader | <red>Not running <white>| %input-bar%"
 gui:
   stabilizer:
     input: Put <red>Unstable Ingot <white>and Quirp Condensate
@@ -208,3 +192,25 @@ message:
   daxi-message-fortitude: "Enemy strikes are now less effective."
   daxi-message-saturation: "You won't need food for a while."
   daxi-message-regeneration: "You've acquired permanent self-healing."
+waila:
+  nanobot_crafter:
+    running: "Producing: %result%"
+    not_running: "<red>Not Running"
+  quirp_annihilator:
+    running: "Time left: <yellow>%time%<white>"
+    not_running: "<red>Not running<white>"
+  quirp_cycler:
+    running: "Producing: %result%"
+    time_left: "Time left: <yellow>%process%<white>"
+    not_running: "<red>Not running<white>"
+  quirp_oscillator:
+    running: "<green>Collecting<white>"
+    time_left: "Time left: <yellow>%time%<white>"
+    not_running: "Collected: %output%"
+    none_item: "No Quirp Collected"
+  stabilizer:
+    running: "Time left: <yellow>%time%<white>"
+    not_running: "<red>Not running<white>"
+  zot_overloader:
+    running: "Charged: <yellow>%amount%<white>"
+    not_running: "<red>Not running<white>"

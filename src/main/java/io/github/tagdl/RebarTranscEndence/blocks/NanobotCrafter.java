@@ -167,10 +167,10 @@ public class NanobotCrafter extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return new WailaDisplay(isProcessingRecipe() 
-            ? Component.translatable("rebartranscendence.item.nanobot_crafter.waila.running")
+        return WailaDisplay.of(this, player).add(isProcessingRecipe() 
+            ? Component.translatable("rebartranscendence.waila.nanobot_crafter.running")
                 .arguments(
                     RebarArgument.of("result", getCurrentRecipe().result().effectiveName().color(RebarUtils.colorToTextColor(Color.LIME))))
-            : Component.translatable("rebartranscendence.item.nanobot_crafter.waila.not_running"));
+            : Component.translatable("rebartranscendence.waila.nanobot_crafter.not_running"));
     }
 }

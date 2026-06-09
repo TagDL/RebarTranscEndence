@@ -262,21 +262,16 @@ public class ZotOverloader extends RebarBlock implements
     }
     @Override
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
-        return new WailaDisplay(outputInventory != null && !outputInventory.isEmpty() 
-            ? Component.translatable("rebartranscendence.item.zot_overloader.waila.running")
+        WailaDisplay display = WailaDisplay.of(this, player);
+        display.add(outputInventory != null && !outputInventory.isEmpty() 
+            ? Component.translatable("rebartranscendence.waila.zot_overloader.running")
                 .arguments(
-                    RebarArgument.of("amount", getInner()),
-                    RebarArgument.of("input-bar", ProgressBar.fluidContents(
-                                PylonFluids.OBSCYRA, 
-                                fluidCapacity(PylonFluids.OBSCYRA), 
-                                fluidAmount(PylonFluids.OBSCYRA)
-                            )))
-            : Component.translatable("rebartranscendence.item.zot_overloader.waila.not_running")
-                .arguments(RebarArgument.of("input-bar", ProgressBar.fluidContents(
-                                PylonFluids.OBSCYRA, 
-                                fluidCapacity(PylonFluids.OBSCYRA), 
-                                fluidAmount(PylonFluids.OBSCYRA)
-                            )))
-        );
+                    RebarArgument.of("amount", getInner()))
+            : Component.translatable("rebartranscendence.waila.zot_overloader.not_running"));
+        return display.add(ProgressBar.fluidContents(
+                PylonFluids.OBSCYRA, 
+                fluidCapacity(PylonFluids.OBSCYRA), 
+                fluidAmount(PylonFluids.OBSCYRA)
+            ));
     }
 }
