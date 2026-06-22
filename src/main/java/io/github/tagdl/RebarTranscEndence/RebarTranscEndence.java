@@ -61,6 +61,6 @@ public class RebarTranscEndence extends JavaPlugin implements RebarAddon {
 
     @Override
     public @NotNull Material getMaterial() {
-        return Material.DEAD_BUSH;
+        return Material.PURPUR_BLOCK;
     }
 }

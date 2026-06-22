@@ -30,49 +30,41 @@ public class DaxiAnimation {
         public static void startAnimation(Player player, Type type) {
             player.sendMessage(Component.translatable("rebartranscendence.message.daxi-message-intro")
                     .color(RebarUtils.colorToTextColor(Color.PURPLE)));
-            Location l = player.getLocation();
+            Location location = player.getLocation();
             int lasttick = 105;
-            Location locas1 = l.clone().add(2, -0.5, 0);
-            Location locas2 = l.clone().add(0, -0.5, 2);
-            Location locas3 = l.clone().add(-2, -0.5, 0);
-            Location locas4 = l.clone().add(0, -0.5, -2);
+            Location loc1 = location.clone().add(2, -0.5, 0);
+            Location loc2 = location.clone().add(0, -0.5, 2);
+            Location loc3 = location.clone().add(-2, -0.5, 0);
+            Location loc4 = location.clone().add(0, -0.5, -2);
             Material[] concreteTypes = type.materials;
-            ItemDisplay[] displays = new ItemDisplay[4];
-            displays[0] = createDisplay(locas1, concreteTypes[0]);
-            displays[1] = createDisplay(locas2, concreteTypes[1]);
-            displays[2] = createDisplay(locas3, concreteTypes[2]);
-            displays[3] = createDisplay(locas4, concreteTypes[3]);
-            Vector vas1 = locas1.toVector();
-            Vector vas2 = locas2.toVector();
-            Vector vas3 = locas3.toVector();
-            Vector vas4 = locas4.toVector();
-            Vector[] displayLocations = {vas1, vas2, vas3, vas4};
-            final Location centerLoc = l.clone();
+            ItemDisplay[] displays = new ItemDisplay[]{
+                createDisplay(loc1, concreteTypes[0]),
+                createDisplay(loc2, concreteTypes[1]),
+                createDisplay(loc3, concreteTypes[2]),
+                createDisplay(loc4, concreteTypes[3])
+            };
+            Vector[] displayLocations = {loc1.toVector(), loc2.toVector(), loc3.toVector(), loc4.toVector()};
+            Location centerLoc = location.clone();
             for (int i = 0; i < lasttick; i++) {
-                Bukkit.getScheduler().runTaskLater(RebarTranscEndence.getInstance(), () -> moveDisplays(displays, displayLocations, centerLoc), i);
+                Bukkit.getScheduler().runTaskLater(RebarTranscEndence.getInstance(), 
+                    () -> moveDisplays(displays, displayLocations, centerLoc), i);
             }
             ThreadLocalRandom random = ThreadLocalRandom.current();
             Bukkit.getScheduler().runTaskLater(RebarTranscEndence.getInstance(), () -> {
                 for (ItemDisplay display : displays) {
-                    if (display != null && display.isValid()) {
-                        display.remove();
-                    }
+                    if (display != null && display.isValid()) display.remove();
                 }
                 for (Color color : type.colors) {
                     for (int i = 0; i < 25; i++) {
-                        float xRand = (random.nextFloat() - 0.5F) * 3.2F;
-                        float yRand = (random.nextFloat() - 0.5F) * 3.2F;
-                        float zRand = (random.nextFloat() - 0.5F) * 3.2F;
-
                         player.getWorld().spawnParticle(Particle.DUST_COLOR_TRANSITION,
-                            l.getX() + (double) xRand,
-                            l.getY() + 2.0D + (double) yRand,
-                            l.getZ() + (double) zRand,
+                            location.getX() + (double) (random.nextFloat() - 0.5F) * 3.2F,
+                            location.getY() + 2.0D + (double) (random.nextFloat() - 0.5F) * 3.2F,
+                            location.getZ() + (double) (random.nextFloat() - 0.5F) * 3.2F,
                             i,
                             new Particle.DustTransition(color, color,1));
                     }
                 }
-                player.getWorld().playSound(l, Sound.ENTITY_ZOMBIE_VILLAGER_CURE, 1F, 1F);
+                player.getWorld().playSound(location, Sound.ENTITY_ZOMBIE_VILLAGER_CURE, 1F, 1F);
                 player.addPotionEffect(
                     new PotionEffect(type.effect, PotionEffect.INFINITE_DURATION, type.level - 1));
                 player.sendMessage(type.component);
@@ -85,21 +77,14 @@ public class DaxiAnimation {
                 .build(spawnLocation);
         }
         private static void moveDisplays(ItemDisplay[] displays, Vector[] asv, Location centerLoc) {
-            double rotateAngle = 100; 
-            double heightSpeed = 0.02;     
-            double radiusExpand = 1.0;     
-
             for (int i = 0; i < 4; i++) {
                 if (displays[i] == null || !displays[i].isValid()) continue;
                 Vector relative = asv[i].clone().subtract(centerLoc.toVector());
                 double currentY = relative.getY();
                 relative.setY(0); 
-                Vector nextRelativeXZ = relative.rotateAroundY(Math.toRadians(rotateAngle)).multiply(radiusExpand);
-                double nextY = currentY + heightSpeed;
-                Vector nextRelative = nextRelativeXZ.setY(nextY);
-                Vector v = nextRelative.clone().subtract(asv[i].clone().subtract(centerLoc.toVector()));
+                Vector nextRelative = relative.rotateAroundY(Math.toRadians(100)).multiply(1.0).setY(currentY + 0.02);
                 Location currentLoc = displays[i].getLocation();
-                displays[i].teleport(currentLoc.add(v));
+                displays[i].teleport(currentLoc.add(nextRelative.clone().subtract(asv[i].clone().subtract(centerLoc.toVector()))));
                 asv[i] = centerLoc.toVector().add(nextRelative);
             }
         }
